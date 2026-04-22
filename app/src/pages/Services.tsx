@@ -3,7 +3,7 @@ import { useScrollReveal } from '@/hooks/useScrollReveal';
 import {
   Shield, Briefcase, GraduationCap, MapPin, FlaskConical, Users,
   CreditCard, Fingerprint, Globe, Award, Monitor, Database, ArrowRight, CheckCircle,
-  Home, FileText, Building2, Search, Landmark, IndianRupee, Truck, BarChart3, UserCheck, Wallet
+  FileText, Building2, Search, Landmark, IndianRupee, UserCheck, Wallet
 } from 'lucide-react';
 
 const services = [
