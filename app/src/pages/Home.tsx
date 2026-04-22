@@ -81,19 +81,19 @@ function HeroSection() {
             onMouseLeave={handleMouseLeave}
           >
             <div
-              className="macbook-3d"
+              className="monitor-3d"
               style={{
                 transform: `rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
                 transition: 'transform 0.18s cubic-bezier(0.22, 1, 0.36, 1)',
                 transformStyle: 'preserve-3d',
               }}
             >
-              {/* Laptop Lid (Screen) */}
-              <div className="macbook-lid">
-                <div className="macbook-camera" />
-                <div className="macbook-screen">
+              {/* Monitor Screen Panel */}
+              <div className="monitor-bezel">
+                <div className="monitor-camera" />
+                <div className="monitor-screen">
                   <div
-                    className="macbook-glare"
+                    className="monitor-glare"
                     style={{
                       background: `radial-gradient(ellipse at ${tilt.glareX}% ${tilt.glareY}%, rgba(255,255,255,0.14) 0%, transparent 55%)`,
                     }}
@@ -135,11 +135,11 @@ function HeroSection() {
                     </div>
                   </div>
                 </div>
+                <div className="monitor-brand">INTEGRITY CHECK</div>
               </div>
-              {/* Laptop Base */}
-              <div className="macbook-base">
-                <div className="macbook-notch" />
-              </div>
+              {/* Monitor Stand */}
+              <div className="monitor-stand-neck" />
+              <div className="monitor-stand-base" />
             </div>
             {/* Floating badges */}
             <div className="absolute -top-4 -right-2 home-glass-badge rounded-xl px-4 py-3 home-float-card z-20">
