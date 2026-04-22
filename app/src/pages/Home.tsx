@@ -336,7 +336,7 @@ function HowItWorksSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
           <div className="hidden md:block absolute top-16 left-[20%] right-[20%] h-0.5 bg-gradient-to-r from-brand-red/50 via-brand-red to-brand-red/50" />
           {steps.map((s, i) => (
-            <div key={i} className={`relative text-center scroll-reveal ${isRevealed ? 'revealed' : ''}`} style={{ transitionDelay: `${i * 150}ms` }}>
+            <div key={i} className={`relative text-center step-3d-reveal ${isRevealed ? 'revealed' : ''}`} style={{ transitionDelay: `${i * 250}ms` }}>
               <div className="home-step-icon w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center relative z-10 shadow-lg shadow-red-500/30">
                 <s.icon size={28} className="text-white" />
               </div>
