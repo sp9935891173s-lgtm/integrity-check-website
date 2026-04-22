@@ -1,252 +1,260 @@
 import { Link } from 'react-router';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { useCountUp } from '@/hooks/useCountUp';
 import {
   Shield, Briefcase, GraduationCap, MapPin, FlaskConical, Users,
-  Zap, Lock, Headphones,
-  Star, ArrowRight, FileText, Search, CheckCircle
+  Zap, Lock, Headphones, Star, ArrowRight, FileText, Search, CheckCircle,
+  ChevronRight, Stethoscope, Laptop, Landmark, Factory, ShoppingCart,
+  School, UserSearch, Building2, Home as HomeIcon, Truck, Hotel, Wallet,
+  FlaskRound, Scale, Heart, ShieldCheck, Globe, Award, Clock, TrendingUp
 } from 'lucide-react';
 
-/* ───────── Hero Section ───────── */
 function HeroSection() {
   return (
-    <section className="relative min-h-[92vh] bg-brand-black overflow-hidden hero-pattern magnify-pattern flex items-center">
-      {/* Red accent line */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-red via-brand-red-light to-brand-red" />
-      
-      {/* Subtle grid pattern */}
-      <div className="absolute inset-0 opacity-5" style={{
-        backgroundImage: `linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)`,
-        backgroundSize: '50px 50px'
-      }} />
+    <section className="relative min-h-[92vh] home-hero overflow-hidden flex items-center">
+      <div className="absolute inset-0 home-hero-bg" />
+      <div className="absolute inset-0 home-hero-grid" />
+      <div className="home-orb home-orb-1" />
+      <div className="home-orb home-orb-2" />
+      <div className="home-orb home-orb-3" />
+      <div className="home-orb home-orb-4" />
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-red via-red-500 to-brand-red" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
-        <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full mb-8 animate-fade-in-up">
-            <Shield size={16} className="text-brand-red" />
-            <span className="text-gray-300 text-sm font-medium">Trusted by 5000+ Companies Across India</span>
-          </div>
-          
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-            India's Most Trusted{' '}
-            <span className="text-brand-red">Background Screening</span>{' '}
-            & Verification Services
-          </h1>
-          
-          <p className="text-lg sm:text-xl text-gray-400 mb-10 max-w-2xl leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            Helping businesses hire smarter with accurate, fast, and legally compliant background checks.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-red text-white font-semibold rounded-lg hover:bg-brand-red-dark transition-all duration-200 hover:shadow-xl hover:-translate-y-0.5"
-            >
-              Get Started
-              <ArrowRight size={18} />
-            </Link>
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 hover:border-white/50 transition-all duration-200"
-            >
-              Request Free Demo
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* Decorative elements */}
-      <div className="absolute right-0 top-1/4 w-96 h-96 bg-brand-red/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute left-1/4 bottom-0 w-64 h-64 bg-brand-red/5 rounded-full blur-3xl pointer-events-none" />
-    </section>
-  );
-}
-
-/* ───────── Stats Section ───────── */
-function StatsSection() {
-  const stats = [
-    { value: '5000+', label: 'Clients Served', icon: Briefcase },
-    { value: '99.9%', label: 'Accuracy Rate', icon: CheckCircle },
-    { value: '24 Hour', label: 'Turnaround Time', icon: Zap },
-    { value: '100%', label: 'Legally Compliant', icon: Shield },
-  ];
-
-  const { ref, isRevealed } = useScrollReveal();
-
-  return (
-    <section ref={ref} className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`grid grid-cols-2 lg:grid-cols-4 gap-8 transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          {stats.map((stat, i) => (
-            <div
-              key={i}
-              className="text-center p-6 rounded-xl bg-gray-50 hover:bg-red-50 transition-colors duration-300 group"
-              style={{ transitionDelay: `${i * 100}ms` }}
-            >
-              <div className="w-12 h-12 mx-auto mb-4 rounded-lg bg-red-100 flex items-center justify-center group-hover:bg-brand-red transition-colors duration-300">
-                <stat.icon size={24} className="text-brand-red group-hover:text-white transition-colors duration-300" />
-              </div>
-              <div className="text-3xl sm:text-4xl font-bold text-brand-black mb-1">{stat.value}</div>
-              <div className="text-sm text-gray-500 font-medium">{stat.label}</div>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 md:pt-44 pb-24 md:pb-32">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <div className="home-glass-badge inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 animate-fade-in-up">
+              <Shield size={16} className="text-brand-red" />
+              <span className="text-gray-300 text-sm font-medium">Trusted by 5000+ Companies Across India</span>
             </div>
-          ))}
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight mb-6 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+              India's Most{' '}
+              <span className="home-gradient-text">Trusted</span>{' '}
+              Background{' '}
+              <span className="home-gradient-text">Screening</span>{' '}
+              & Verification
+            </h1>
+            <p className="text-lg text-gray-400 mb-10 max-w-xl leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+              Helping businesses hire smarter with accurate, fast, and legally compliant background checks.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+              <Link to="/contact" className="home-cta-primary">Get Started <ArrowRight size={18} /></Link>
+              <Link to="/contact" className="home-cta-secondary">Request Free Demo</Link>
+            </div>
+            <div className="flex items-center gap-4 mt-8 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+              <div className="flex -space-x-2">
+                {['RS','PK','AK','MM'].map((i,idx) => (
+                  <div key={idx} className="w-8 h-8 rounded-full bg-gradient-to-br from-red-500 to-red-700 border-2 border-[#060612] flex items-center justify-center text-[10px] text-white font-bold">{i}</div>
+                ))}
+              </div>
+              <div>
+                <div className="flex gap-0.5">{[...Array(5)].map((_,i) => <Star key={i} size={12} className="text-yellow-400 fill-yellow-400" />)}</div>
+                <span className="text-gray-500 text-xs">4.9/5 from 2000+ reviews</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="hidden lg:block relative">
+            <div className="home-glass-card rounded-2xl p-6 relative">
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-3"><div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center"><Shield size={20} className="text-white" /></div><div><div className="text-white font-semibold text-sm">Verification Dashboard</div><div className="text-gray-500 text-xs">Real-time monitoring</div></div></div>
+                <div className="home-glass-badge px-3 py-1 rounded-full"><span className="text-green-400 text-xs font-medium">● Live</span></div>
+              </div>
+              <div className="grid grid-cols-2 gap-3 mb-4">
+                <div className="home-inner-card rounded-xl p-4"><div className="text-gray-500 text-xs mb-1">Verified Today</div><div className="text-white text-2xl font-bold">2,847</div><div className="text-green-400 text-xs flex items-center gap-1"><TrendingUp size={10} />+12.5%</div></div>
+                <div className="home-inner-card rounded-xl p-4"><div className="text-gray-500 text-xs mb-1">Avg. Time</div><div className="text-white text-2xl font-bold">4.2h</div><div className="text-green-400 text-xs flex items-center gap-1"><Clock size={10} />-18% faster</div></div>
+              </div>
+              <div className="space-y-3">
+                {[{l:'Criminal Check',w:'92%',c:'from-red-500 to-red-600'},{l:'Education',w:'87%',c:'from-indigo-500 to-purple-500'},{l:'Employment',w:'78%',c:'from-amber-500 to-orange-500'}].map((p,i) => (
+                  <div key={i}><div className="flex justify-between text-xs mb-1"><span className="text-gray-400">{p.l}</span><span className="text-gray-500">{p.w}</span></div><div className="h-1.5 bg-white/5 rounded-full overflow-hidden"><div className={`h-full bg-gradient-to-r ${p.c} rounded-full home-progress-bar`} style={{'--progress-width': p.w} as React.CSSProperties} /></div></div>
+                ))}
+              </div>
+            </div>
+            <div className="absolute -top-4 -right-4 home-glass-badge rounded-xl px-4 py-3 home-float-card"><div className="flex items-center gap-2"><CheckCircle size={16} className="text-green-400" /><div><div className="text-white text-xs font-medium">Verified ✓</div><div className="text-gray-500 text-[10px]">Rajesh S. — Just now</div></div></div></div>
+            <div className="absolute -bottom-3 -left-3 home-glass-badge rounded-xl px-4 py-3 home-float-card-2"><div className="flex items-center gap-2"><Shield size={16} className="text-brand-red" /><div><div className="text-white text-xs font-medium">99.9% Accuracy</div><div className="text-gray-500 text-[10px]">Industry Leading</div></div></div></div>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-/* ───────── Services Section ───────── */
+function CountUpStat({ end, suffix = '', prefix = '', label, icon: Icon, delay = 0 }: { end: number; suffix?: string; prefix?: string; label: string; icon: React.ComponentType<{size?:number;className?:string}>; delay?: number }) {
+  const { ref, value } = useCountUp({ end, duration: 2000, delay, suffix, prefix });
+  return (
+    <div ref={ref} className="text-center">
+      <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-gradient-to-br from-red-500/20 to-red-600/10 flex items-center justify-center">
+        <Icon size={22} className="text-brand-red" />
+      </div>
+      <div className="text-white text-3xl font-bold mb-1 tabular-nums">{value}</div>
+      <div className="text-gray-500 text-sm">{label}</div>
+    </div>
+  );
+}
+
+function StatsSection() {
+  return (
+    <section className="relative -mt-12 z-20 pb-8">
+      <div className="max-w-5xl mx-auto px-4">
+        <div className="home-stats-bar rounded-2xl p-8 grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <CountUpStat end={5000} suffix="+" label="Clients Served" icon={Briefcase} delay={0} />
+          <CountUpStat end={99.9} suffix="%" label="Accuracy Rate" icon={CheckCircle} delay={200} />
+          <CountUpStat end={24} suffix="h" label="Turnaround Time" icon={Zap} delay={400} />
+          <CountUpStat end={100} suffix="%" label="Legally Compliant" icon={Shield} delay={600} />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ServicesSection() {
   const services = [
-    { icon: Shield, title: 'Criminal Record Check', desc: 'Comprehensive court records and FIR verification across all jurisdictions.' },
-    { icon: Briefcase, title: 'Employment Verification', desc: 'Confirm past employment history, designations, and tenure details.' },
-    { icon: GraduationCap, title: 'Education Verification', desc: 'Validate degrees, certificates, and academic credentials with institutions.' },
-    { icon: MapPin, title: 'Address Verification', desc: 'Verify current and permanent addresses through physical or digital checks.' },
-    { icon: FlaskConical, title: 'Drug Testing', desc: 'Pre-employment drug and alcohol screening at certified laboratories.' },
-    { icon: Users, title: 'Reference Check', desc: 'Professional reference verification from former supervisors and colleagues.' },
+    { icon: Shield, title: 'Criminal Record Check', desc: 'Court records and FIR verification across all jurisdictions.', color: 'from-red-500 to-red-600' },
+    { icon: Briefcase, title: 'Employment Verification', desc: 'Confirm past employment history, designations, and tenure.', color: 'from-blue-500 to-indigo-600' },
+    { icon: GraduationCap, title: 'Education Verification', desc: 'Validate degrees and academic credentials with institutions.', color: 'from-purple-500 to-violet-600' },
+    { icon: MapPin, title: 'Address Verification', desc: 'Verify current and permanent addresses digitally or physically.', color: 'from-emerald-500 to-green-600' },
+    { icon: FlaskConical, title: 'Drug Testing', desc: 'Pre-employment screening at NABL-certified laboratories.', color: 'from-amber-500 to-orange-600' },
+    { icon: Users, title: 'Reference Check', desc: 'Professional reference verification from former supervisors.', color: 'from-cyan-500 to-teal-600' },
   ];
-
   const { ref, isRevealed } = useScrollReveal();
-
-  return (
-    <section ref={ref} className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`text-center mb-14 transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <span className="inline-block px-4 py-1.5 bg-red-100 text-brand-red text-sm font-semibold rounded-full mb-4">
-            Our Services
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-brand-black mb-4">
-            Comprehensive Verification Solutions
-          </h2>
-          <p className="text-gray-500 max-w-2xl mx-auto">
-            We offer end-to-end background screening services tailored to meet your hiring needs with speed and accuracy.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, i) => (
-            <Link
-              to="/services"
-              key={i}
-              className={`group bg-white rounded-xl p-8 border border-gray-100 hover:border-brand-red transition-all duration-300 hover:shadow-card-hover scroll-reveal ${isRevealed ? 'revealed' : ''}`}
-              style={{ transitionDelay: `${i * 100}ms` }}
-            >
-              <div className="w-14 h-14 rounded-xl bg-red-50 flex items-center justify-center mb-5 group-hover:bg-brand-red transition-colors duration-300">
-                <service.icon size={28} className="text-brand-red group-hover:text-white transition-colors duration-300" />
-              </div>
-              <h3 className="text-xl font-semibold text-brand-black mb-3 group-hover:text-brand-red transition-colors">
-                {service.title}
-              </h3>
-              <p className="text-gray-500 text-sm leading-relaxed mb-4">{service.desc}</p>
-              <span className="inline-flex items-center gap-1 text-brand-red text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                Learn More <ArrowRight size={14} />
-              </span>
-            </Link>
-          ))}
-        </div>
-
-        <div className={`text-center mt-12 transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <Link
-            to="/services"
-            className="inline-flex items-center gap-2 px-8 py-3.5 border-2 border-brand-red text-brand-red font-semibold rounded-lg hover:bg-brand-red hover:text-white transition-all duration-200"
-          >
-            View All Services
-            <ArrowRight size={18} />
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ───────── Why Choose Us Section ───────── */
-function WhyChooseUsSection() {
-  const features = [
-    { icon: Zap, title: 'Fast & Accurate Results', desc: 'Get verification reports within 24 hours with 99.9% accuracy guaranteed.' },
-    { icon: Shield, title: 'FCRA & Legal Compliant', desc: 'All checks follow Indian IT Act, labor laws, and international FCRA guidelines.' },
-    { icon: Lock, title: 'Secure & Encrypted Data', desc: 'Enterprise-grade encryption ensures candidate data remains confidential and safe.' },
-    { icon: Headphones, title: 'Dedicated Support Team', desc: 'Our experts are available to assist you at every step of the verification process.' },
-  ];
-
-  const { ref, isRevealed } = useScrollReveal();
-
   return (
     <section ref={ref} className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`text-center mb-14 transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <span className="inline-block px-4 py-1.5 bg-red-100 text-brand-red text-sm font-semibold rounded-full mb-4">
-            Why Choose Us
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-brand-black mb-4">
-            The Integrity Check Advantage
-          </h2>
-          <p className="text-gray-500 max-w-2xl mx-auto">
-            We combine cutting-edge technology with rigorous processes to deliver the most reliable background verification services.
-          </p>
+          <span className="inline-block px-4 py-1.5 bg-red-100 text-brand-red text-sm font-semibold rounded-full mb-4">Our Services</span>
+          <h2 className="text-3xl sm:text-4xl font-bold text-brand-black mb-4">Comprehensive Verification Solutions</h2>
+          <p className="text-gray-500 max-w-2xl mx-auto">End-to-end background screening services tailored to meet your hiring needs.</p>
         </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((feature, i) => (
-            <div
-              key={i}
-              className={`text-center p-8 rounded-xl bg-gray-50 hover:bg-white hover:shadow-card-hover border border-transparent hover:border-gray-100 transition-all duration-300 scroll-reveal ${isRevealed ? 'revealed' : ''}`}
-              style={{ transitionDelay: `${i * 100}ms` }}
-            >
-              <div className="w-16 h-16 mx-auto mb-5 rounded-full bg-red-100 flex items-center justify-center">
-                <feature.icon size={32} className="text-brand-red" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map((s, i) => (
+            <Link to="/services" key={i} className={`home-service-card group scroll-reveal ${isRevealed ? 'revealed' : ''}`} style={{ transitionDelay: `${i * 100}ms` }}>
+              <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${s.color} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}>
+                <s.icon size={26} className="text-white" />
               </div>
-              <h3 className="text-lg font-semibold text-brand-black mb-3">{feature.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{feature.desc}</p>
-            </div>
+              <h3 className="text-xl font-semibold text-brand-black mb-3 group-hover:text-brand-red transition-colors">{s.title}</h3>
+              <p className="text-gray-500 text-sm leading-relaxed mb-4">{s.desc}</p>
+              <span className="inline-flex items-center gap-1 text-brand-red text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity"><ChevronRight size={14} /> Learn More</span>
+            </Link>
           ))}
+        </div>
+        <div className={`text-center mt-12 transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <Link to="/services" className="inline-flex items-center gap-2 px-8 py-3.5 border-2 border-brand-red text-brand-red font-semibold rounded-lg hover:bg-brand-red hover:text-white transition-all duration-200">View All Services <ArrowRight size={18} /></Link>
         </div>
       </div>
     </section>
   );
 }
 
-/* ───────── How It Works Section ───────── */
+function WhyChooseUsSection() {
+  const features = [
+    { icon: Zap, title: 'Fast & Accurate', desc: 'Reports within 24h with 99.9% accuracy.', color: 'from-amber-500 to-orange-600' },
+    { icon: Shield, title: 'Legally Compliant', desc: 'IT Act, DPDP Act & FCRA compliant.', color: 'from-red-500 to-red-600' },
+    { icon: Lock, title: 'Secure & Encrypted', desc: 'AES-256 encryption, SOC 2 certified.', color: 'from-blue-500 to-indigo-600' },
+    { icon: Headphones, title: 'Dedicated Support', desc: 'Expert assistance at every step.', color: 'from-emerald-500 to-green-600' },
+  ];
+  const { ref, isRevealed } = useScrollReveal();
+  return (
+    <section ref={ref} className="py-20 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-14 items-center">
+          <div className={`transition-all duration-700 ${isRevealed ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
+            <span className="inline-block px-4 py-1.5 bg-red-100 text-brand-red text-sm font-semibold rounded-full mb-4">Why Choose Us</span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-brand-black mb-4">The Integrity Check Advantage</h2>
+            <p className="text-gray-500 mb-8 leading-relaxed">Cutting-edge technology with rigorous processes for the most reliable verification services.</p>
+            <Link to="/about" className="inline-flex items-center gap-2 text-brand-red font-semibold hover:gap-3 transition-all">Learn More About Us <ArrowRight size={16} /></Link>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {features.map((f, i) => (
+              <div key={i} className={`home-feature-card scroll-reveal ${isRevealed ? 'revealed' : ''}`} style={{ transitionDelay: `${i * 100}ms` }}>
+                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${f.color} flex items-center justify-center mb-4`}>
+                  <f.icon size={22} className="text-white" />
+                </div>
+                <h3 className="text-lg font-semibold text-brand-black mb-2">{f.title}</h3>
+                <p className="text-gray-500 text-sm">{f.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const topIndustries = [
+  { icon: Stethoscope, title: 'Healthcare', service: 'Degree & Criminal Check' },
+  { icon: Laptop, title: 'IT & Technology', service: 'Employment & Education' },
+  { icon: Landmark, title: 'Banking & Finance', service: 'CIBIL & Identity Check' },
+  { icon: Factory, title: 'Manufacturing', service: 'Address & Identity' },
+  { icon: ShoppingCart, title: 'Retail & E-commerce', service: 'Criminal & Address' },
+  { icon: School, title: 'Education', service: 'Degree & Criminal' },
+  { icon: UserSearch, title: 'Staffing & Recruitment', service: 'Fast Screening' },
+  { icon: Building2, title: 'Government & PSU', service: 'Police Verification' },
+  { icon: HomeIcon, title: 'Real Estate', service: 'Identity & Financial' },
+  { icon: Truck, title: 'Logistics', service: 'Criminal & License' },
+  { icon: Hotel, title: 'Hospitality', service: 'Address & Criminal' },
+  { icon: Wallet, title: 'NBFC & Insurance', service: 'KYC & CIBIL' },
+  { icon: FlaskRound, title: 'Pharma', service: 'Degree & Drug Test' },
+  { icon: Scale, title: 'Legal & Consulting', service: 'Education & Criminal' },
+  { icon: Heart, title: 'NGO & Non-Profit', service: 'Criminal & Reference' },
+  { icon: ShieldCheck, title: 'Security Services', service: 'Police & Criminal' },
+];
+
+function IndustriesSection() {
+  const { ref, isRevealed } = useScrollReveal();
+  return (
+    <section ref={ref} className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className={`text-center mb-14 transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <span className="inline-block px-4 py-1.5 bg-red-100 text-brand-red text-sm font-semibold rounded-full mb-4">Industries We Serve</span>
+          <h2 className="text-3xl sm:text-4xl font-bold text-brand-black mb-4">Trusted Across Every Sector</h2>
+          <p className="text-gray-500 max-w-2xl mx-auto">Background verification solutions for 16+ industries across India.</p>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          {topIndustries.map((ind, i) => (
+            <div key={i} className={`home-industry-card flex items-start gap-3 scroll-reveal ${isRevealed ? 'revealed' : ''}`} style={{ transitionDelay: `${i * 50}ms` }}>
+              <div className="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center shrink-0">
+                <ind.icon size={20} className="text-brand-red" />
+              </div>
+              <div><div className="font-semibold text-brand-black text-sm">{ind.title}</div><div className="text-gray-400 text-xs">{ind.service}</div></div>
+            </div>
+          ))}
+        </div>
+        <div className={`text-center mt-10 transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <Link to="/industries" className="inline-flex items-center gap-2 text-brand-red font-semibold hover:gap-3 transition-all">View All Industries <ArrowRight size={16} /></Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function HowItWorksSection() {
   const steps = [
-    { num: '01', title: 'Submit Request', desc: 'Upload candidate details securely through our portal or API integration.', icon: FileText },
-    { num: '02', title: 'We Verify', desc: 'Our experts conduct thorough checks using proprietary databases and field networks.', icon: Search },
-    { num: '03', title: 'Get Report', desc: 'Receive a comprehensive, tamper-proof verification report within 24 hours.', icon: CheckCircle },
+    { num: '01', title: 'Submit Request', desc: 'Upload candidate details via our portal or API.', icon: FileText },
+    { num: '02', title: 'We Verify', desc: 'Thorough checks using databases and field networks.', icon: Search },
+    { num: '03', title: 'Get Report', desc: 'Tamper-proof verification report within 24 hours.', icon: CheckCircle },
   ];
-
   const { ref, isRevealed } = useScrollReveal();
-
   return (
-    <section ref={ref} className="py-20 bg-brand-black relative overflow-hidden">
-      <div className="absolute inset-0 hero-pattern" />
+    <section ref={ref} className="py-20 home-works-section relative overflow-hidden">
+      <div className="absolute inset-0 home-hero-grid" />
+      <div className="home-orb home-orb-1" style={{opacity:0.5}} />
+      <div className="home-orb home-orb-2" style={{opacity:0.5}} />
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`text-center mb-16 transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <span className="inline-block px-4 py-1.5 bg-white/10 text-brand-red text-sm font-semibold rounded-full mb-4">
-            How It Works
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-            Simple 3-Step Process
-          </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            Getting started with background verification has never been easier.
-          </p>
+          <span className="inline-block px-4 py-1.5 bg-white/10 text-brand-red text-sm font-semibold rounded-full mb-4">How It Works</span>
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Simple 3-Step Process</h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">Getting started has never been easier.</p>
         </div>
-
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-          {/* Connecting line - desktop only */}
           <div className="hidden md:block absolute top-16 left-[20%] right-[20%] h-0.5 bg-gradient-to-r from-brand-red/50 via-brand-red to-brand-red/50" />
-
-          {steps.map((step, i) => (
-            <div
-              key={i}
-              className={`relative text-center scroll-reveal ${isRevealed ? 'revealed' : ''}`}
-              style={{ transitionDelay: `${i * 150}ms` }}
-            >
-              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-brand-red flex items-center justify-center relative z-10 shadow-lg shadow-brand-red/30">
-                <step.icon size={28} className="text-white" />
+          {steps.map((s, i) => (
+            <div key={i} className={`relative text-center scroll-reveal ${isRevealed ? 'revealed' : ''}`} style={{ transitionDelay: `${i * 150}ms` }}>
+              <div className="home-step-icon w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center relative z-10 shadow-lg shadow-red-500/30">
+                <s.icon size={28} className="text-white" />
               </div>
-              <div className="text-brand-red text-sm font-bold mb-2">Step {step.num}</div>
-              <h3 className="text-xl font-semibold text-white mb-3">{step.title}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed max-w-xs mx-auto">{step.desc}</p>
+              <div className="text-brand-red text-sm font-bold mb-2">Step {s.num}</div>
+              <h3 className="text-xl font-semibold text-white mb-3">{s.title}</h3>
+              <p className="text-gray-400 text-sm max-w-xs mx-auto">{s.desc}</p>
             </div>
           ))}
         </div>
@@ -255,54 +263,28 @@ function HowItWorksSection() {
   );
 }
 
-/* ───────── Testimonials Section ───────── */
 function TestimonialsSection() {
   const testimonials = [
-    { name: 'Rajesh Sharma', role: 'HR Director, Tech Solutions Pvt. Ltd.', text: 'Integrity Check Services has transformed our hiring process. Their turnaround time and accuracy are unmatched in the industry. Highly recommended!' },
-    { name: 'Priya Patel', role: 'CEO, StartupHub India', text: 'We have been using their services for over 3 years now. The detailed reports and excellent customer support make them our go-to verification partner.' },
-    { name: 'Amit Kumar', role: 'Head of Talent, Global Infotech', text: 'The level of detail in their verification reports is exceptional. They caught discrepancies that other agencies missed. Truly professional service.' },
+    { name: 'Rajesh Sharma', role: 'HR Director, Tech Solutions', text: 'Their turnaround time and accuracy are unmatched. Highly recommended!' },
+    { name: 'Priya Patel', role: 'CEO, StartupHub India', text: 'Using their services for 3+ years. Detailed reports and excellent support.' },
+    { name: 'Amit Kumar', role: 'Head of Talent, Global Infotech', text: 'Exceptional detail in reports. They caught discrepancies others missed.' },
   ];
-
   const { ref, isRevealed } = useScrollReveal();
-
   return (
     <section ref={ref} className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`text-center mb-14 transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <span className="inline-block px-4 py-1.5 bg-red-100 text-brand-red text-sm font-semibold rounded-full mb-4">
-            
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-brand-black mb-4">
-            What Our Clients Say
-          </h2>
-          <p className="text-gray-500 max-w-2xl mx-auto">
-            Trusted by leading companies across India for reliable background verification services.
-          </p>
+          <span className="inline-block px-4 py-1.5 bg-red-100 text-brand-red text-sm font-semibold rounded-full mb-4">Testimonials</span>
+          <h2 className="text-3xl sm:text-4xl font-bold text-brand-black mb-4">What Our Clients Say</h2>
         </div>
-
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((testimonial, i) => (
-            <div
-              key={i}
-              className={`bg-white rounded-xl p-8 shadow-card hover:shadow-card-hover transition-all duration-300 scroll-reveal ${isRevealed ? 'revealed' : ''}`}
-              style={{ transitionDelay: `${i * 100}ms` }}
-            >
-              <div className="flex gap-1 mb-4">
-                {[...Array(5)].map((_, j) => (
-                  <Star key={j} size={18} className="text-yellow-400 fill-yellow-400" />
-                ))}
-              </div>
-              <p className="text-gray-600 text-sm leading-relaxed mb-6 italic">"{testimonial.text}"</p>
+          {testimonials.map((t, i) => (
+            <div key={i} className={`home-testimonial-card scroll-reveal ${isRevealed ? 'revealed' : ''}`} style={{ transitionDelay: `${i * 100}ms` }}>
+              <div className="flex gap-1 mb-4">{[...Array(5)].map((_, j) => <Star key={j} size={16} className="text-yellow-400 fill-yellow-400" />)}</div>
+              <p className="text-gray-600 text-sm leading-relaxed mb-6 italic">"{t.text}"</p>
               <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-full bg-red-100 flex items-center justify-center">
-                  <span className="text-brand-red font-semibold text-sm">
-                    {testimonial.name.split(' ').map(n => n[0]).join('')}
-                  </span>
-                </div>
-                <div>
-                  <div className="font-semibold text-brand-black text-sm">{testimonial.name}</div>
-                  <div className="text-gray-500 text-xs">{testimonial.role}</div>
-                </div>
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center text-white text-xs font-bold">{t.name.split(' ').map(n=>n[0]).join('')}</div>
+                <div><div className="font-semibold text-brand-black text-sm">{t.name}</div><div className="text-gray-500 text-xs">{t.role}</div></div>
               </div>
             </div>
           ))}
@@ -312,43 +294,23 @@ function TestimonialsSection() {
   );
 }
 
-/* ───────── CTA Banner Section ───────── */
 function CTABanner() {
   const { ref, isRevealed } = useScrollReveal();
-
   return (
-    <section ref={ref} className="py-20 bg-brand-red relative overflow-hidden">
-      <div className="absolute inset-0 opacity-10" style={{
-        backgroundImage: `radial-gradient(circle at 20% 50%, rgba(255,255,255,0.2) 0%, transparent 50%)`
-      }} />
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className={`text-3xl sm:text-4xl font-bold text-white mb-6 transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          Start Background Verification Today
-        </h2>
-        <p className={`text-white/80 text-lg mb-8 transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '100ms' }}>
-          Get a free demo and see how we can help you hire with confidence.
-        </p>
+    <section ref={ref} className="py-20 home-cta-section relative overflow-hidden">
+      <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `radial-gradient(circle at 20% 50%, rgba(255,255,255,0.2) 0%, transparent 50%)` }} />
+      <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
+        <h2 className={`text-3xl sm:text-4xl font-bold text-white mb-6 transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>Start Background Verification Today</h2>
+        <p className={`text-white/80 text-lg mb-8 transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '100ms' }}>Get a free demo and see how we can help you hire with confidence.</p>
         <div className={`flex flex-col sm:flex-row gap-4 justify-center transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '200ms' }}>
-          <Link
-            to="/contact"
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-brand-red font-semibold rounded-lg hover:bg-gray-100 transition-all duration-200 hover:shadow-xl"
-          >
-            Get a Free Demo
-            <ArrowRight size={18} />
-          </Link>
-          <Link
-            to="/services"
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/40 text-white font-semibold rounded-lg hover:bg-white/10 transition-all duration-200"
-          >
-            Explore Services
-          </Link>
+          <Link to="/contact" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-brand-red font-semibold rounded-lg hover:bg-gray-100 transition-all hover:shadow-xl">Get a Free Demo <ArrowRight size={18} /></Link>
+          <Link to="/services" className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/40 text-white font-semibold rounded-lg hover:bg-white/10 transition-all">Explore Services</Link>
         </div>
       </div>
     </section>
   );
 }
 
-/* ───────── Home Page ───────── */
 export default function Home() {
   return (
     <>
@@ -356,6 +318,7 @@ export default function Home() {
       <StatsSection />
       <ServicesSection />
       <WhyChooseUsSection />
+      <IndustriesSection />
       <HowItWorksSection />
       <TestimonialsSection />
       <CTABanner />
