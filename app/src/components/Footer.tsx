@@ -32,7 +32,7 @@ export default function Footer() {
 </a>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed">
-              United Kingdom’s trusted background screening and HR compliance solutions provider. Helping businesses hire smarter and stay compliant since 2018
+              United Kingdom's trusted background screening and HR compliance solutions provider. Helping businesses hire smarter and stay compliant since 2018
             </p>
             <div className="flex gap-3">
               {[Linkedin, Twitter, Facebook, Instagram].map((Icon, i) => (
