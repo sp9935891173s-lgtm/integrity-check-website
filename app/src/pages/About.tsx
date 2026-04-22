@@ -89,52 +89,6 @@ function MissionVisionSection() {
   );
 }
 
-/* ───────── Team Section ───────── */
-function TeamSection() {
-  const team = [
-    { name: 'Manika', role:'Director', initials: 'M' },
-    { name: 'Rahul Tanwar', role:'Project Manager', initials: 'RT' },
-    { name: 'Rahul Nair', role: 'Head of Technology', initials: 'RN' },
-    { name: 'Priya Desai', role: 'Head of Compliance', initials: 'PD' },
-  ];
-
-  const { ref, isRevealed } = useScrollReveal();
-
-  return (
-    <section ref={ref} className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`text-center mb-14 transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <span className="inline-block px-4 py-1.5 bg-red-100 text-brand-red text-sm font-semibold rounded-full mb-4">
-            Leadership
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-brand-black mb-4">
-            Meet Our Team
-          </h2>
-          <p className="text-gray-500 max-w-2xl mx-auto">
-            Experienced professionals dedicated to delivering excellence in background verification.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {team.map((member, i) => (
-            <div
-              key={i}
-              className={`text-center p-8 rounded-xl bg-gray-50 hover:bg-white hover:shadow-card-hover border border-transparent hover:border-gray-100 transition-all duration-300 scroll-reveal ${isRevealed ? 'revealed' : ''}`}
-              style={{ transitionDelay: `${i * 100}ms` }}
-            >
-              <div className="w-24 h-24 mx-auto mb-5 rounded-full bg-red-100 flex items-center justify-center">
-                <span className="text-brand-red font-bold text-2xl">{member.initials}</span>
-              </div>
-              <h3 className="text-lg font-semibold text-brand-black mb-1">{member.name}</h3>
-              <p className="text-gray-500 text-sm">{member.role}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* ───────── Certifications Section ───────── */
 function CertificationsSection() {
   const certs = [
@@ -212,7 +166,7 @@ export default function About() {
       <HeroSection />
       <StorySection />
       <MissionVisionSection />
-      <TeamSection />
+    
       <CertificationsSection />
       <CTASection />
     </>
