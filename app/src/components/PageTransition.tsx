@@ -8,6 +8,7 @@ export default function PageTransition({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (children !== displayChildren) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setTransitionStage('page-exit');
     }
   }, [children, displayChildren]);
