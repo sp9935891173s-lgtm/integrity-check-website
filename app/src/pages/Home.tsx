@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { useCountUp } from '@/hooks/useCountUp';
+import { useRef, useState, useCallback } from 'react';
 import {
   Shield, Briefcase, GraduationCap, MapPin, FlaskConical, Users,
   Zap, Lock, Headphones, Star, ArrowRight, FileText, Search, CheckCircle,
@@ -10,6 +11,23 @@ import {
 } from 'lucide-react';
 
 function HeroSection() {
+  const laptopRef = useRef<HTMLDivElement>(null);
+  const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0, glareX: 50, glareY: 50 });
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (!laptopRef.current) return;
+    const rect = laptopRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;  // 0..1
+    const y = (e.clientY - rect.top) / rect.height;   // 0..1
+    const rotateY = (x - 0.5) * 20;  // -10 to +10 degrees
+    const rotateX = (0.5 - y) * 15;  // -7.5 to +7.5 degrees
+    setTilt({ rotateX, rotateY, glareX: x * 100, glareY: y * 100 });
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setTilt({ rotateX: 0, rotateY: 0, glareX: 50, glareY: 50 });
+  }, []);
+
   return (
     <section className="relative min-h-[92vh] home-hero overflow-hidden flex items-center">
       <div className="absolute inset-0 home-hero-bg" />
@@ -54,24 +72,125 @@ function HeroSection() {
             </div>
           </div>
 
-          <div className="hidden lg:block relative">
-            <div className="home-glass-card rounded-2xl p-6 relative">
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-3"><div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center"><Shield size={20} className="text-white" /></div><div><div className="text-white font-semibold text-sm">Verification Dashboard</div><div className="text-gray-500 text-xs">Real-time monitoring</div></div></div>
-                <div className="home-glass-badge px-3 py-1 rounded-full"><span className="text-green-400 text-xs font-medium">● Live</span></div>
+          {/* ===== 3D Laptop Mockup with cursor-following tilt ===== */}
+          <div className="hidden lg:block relative animate-fade-in-up" style={{ animationDelay: '0.3s', perspective: '1200px' }}>
+            <div
+              ref={laptopRef}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+              className="laptop-3d-wrapper"
+              style={{
+                transform: `rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
+                transition: 'transform 0.15s ease-out',
+                transformStyle: 'preserve-3d',
+              }}
+            >
+              {/* Laptop Screen */}
+              <div className="laptop-screen">
+                {/* Screen bezel */}
+                <div className="laptop-bezel">
+                  {/* Camera notch */}
+                  <div className="laptop-camera" />
+                  
+                  {/* Screen content area */}
+                  <div className="laptop-screen-content">
+                    {/* Glare overlay */}
+                    <div
+                      className="laptop-glare"
+                      style={{
+                        background: `radial-gradient(circle at ${tilt.glareX}% ${tilt.glareY}%, rgba(255,255,255,0.12) 0%, transparent 60%)`,
+                      }}
+                    />
+                    
+                    {/* Dashboard content inside screen */}
+                    <div className="home-glass-card rounded-xl p-5 relative" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                      <div className="flex items-center justify-between mb-5">
+                        <div className="flex items-center gap-3">
+                          <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center">
+                            <Shield size={18} className="text-white" />
+                          </div>
+                          <div>
+                            <div className="text-white font-semibold text-sm">Verification Dashboard</div>
+                            <div className="text-gray-500 text-xs">Real-time monitoring</div>
+                          </div>
+                        </div>
+                        <div className="home-glass-badge px-3 py-1 rounded-full">
+                          <span className="text-green-400 text-xs font-medium">● Live</span>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-3 mb-4">
+                        <div className="home-inner-card rounded-xl p-3">
+                          <div className="text-gray-500 text-xs mb-1">Verified Today</div>
+                          <div className="text-white text-xl font-bold">2,847</div>
+                          <div className="text-green-400 text-xs flex items-center gap-1"><TrendingUp size={10} />+12.5%</div>
+                        </div>
+                        <div className="home-inner-card rounded-xl p-3">
+                          <div className="text-gray-500 text-xs mb-1">Avg. Time</div>
+                          <div className="text-white text-xl font-bold">4.2h</div>
+                          <div className="text-green-400 text-xs flex items-center gap-1"><Clock size={10} />-18% faster</div>
+                        </div>
+                      </div>
+                      <div className="space-y-2.5">
+                        {[{l:'Criminal Check',w:'92%',c:'from-red-500 to-red-600'},{l:'Education',w:'87%',c:'from-indigo-500 to-purple-500'},{l:'Employment',w:'78%',c:'from-amber-500 to-orange-500'}].map((p,i) => (
+                          <div key={i}>
+                            <div className="flex justify-between text-xs mb-1"><span className="text-gray-400">{p.l}</span><span className="text-gray-500">{p.w}</span></div>
+                            <div className="h-1.5 bg-white/5 rounded-full overflow-hidden"><div className={`h-full bg-gradient-to-r ${p.c} rounded-full home-progress-bar`} style={{'--progress-width': p.w} as React.CSSProperties} /></div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="grid grid-cols-2 gap-3 mb-4">
-                <div className="home-inner-card rounded-xl p-4"><div className="text-gray-500 text-xs mb-1">Verified Today</div><div className="text-white text-2xl font-bold">2,847</div><div className="text-green-400 text-xs flex items-center gap-1"><TrendingUp size={10} />+12.5%</div></div>
-                <div className="home-inner-card rounded-xl p-4"><div className="text-gray-500 text-xs mb-1">Avg. Time</div><div className="text-white text-2xl font-bold">4.2h</div><div className="text-green-400 text-xs flex items-center gap-1"><Clock size={10} />-18% faster</div></div>
-              </div>
-              <div className="space-y-3">
-                {[{l:'Criminal Check',w:'92%',c:'from-red-500 to-red-600'},{l:'Education',w:'87%',c:'from-indigo-500 to-purple-500'},{l:'Employment',w:'78%',c:'from-amber-500 to-orange-500'}].map((p,i) => (
-                  <div key={i}><div className="flex justify-between text-xs mb-1"><span className="text-gray-400">{p.l}</span><span className="text-gray-500">{p.w}</span></div><div className="h-1.5 bg-white/5 rounded-full overflow-hidden"><div className={`h-full bg-gradient-to-r ${p.c} rounded-full home-progress-bar`} style={{'--progress-width': p.w} as React.CSSProperties} /></div></div>
-                ))}
+
+              {/* Laptop Base / Keyboard */}
+              <div className="laptop-base">
+                <div className="laptop-keyboard">
+                  {/* Keyboard rows */}
+                  <div className="keyboard-row">
+                    {Array.from({length: 14}).map((_,i) => <div key={i} className="key" />)}
+                  </div>
+                  <div className="keyboard-row">
+                    {Array.from({length: 13}).map((_,i) => <div key={i} className="key" />)}
+                  </div>
+                  <div className="keyboard-row">
+                    {Array.from({length: 12}).map((_,i) => <div key={i} className="key" />)}
+                  </div>
+                  <div className="keyboard-row">
+                    {Array.from({length: 11}).map((_,i) => <div key={i} className="key" />)}
+                  </div>
+                  <div className="keyboard-row keyboard-row-space">
+                    <div className="key" />
+                    <div className="key" />
+                    <div className="key spacebar" />
+                    <div className="key" />
+                    <div className="key" />
+                  </div>
+                </div>
+                {/* Trackpad */}
+                <div className="laptop-trackpad" />
               </div>
             </div>
-            <div className="absolute -top-4 -right-4 home-glass-badge rounded-xl px-4 py-3 home-float-card"><div className="flex items-center gap-2"><CheckCircle size={16} className="text-green-400" /><div><div className="text-white text-xs font-medium">Verified ✓</div><div className="text-gray-500 text-[10px]">Rajesh S. — Just now</div></div></div></div>
-            <div className="absolute -bottom-3 -left-3 home-glass-badge rounded-xl px-4 py-3 home-float-card-2"><div className="flex items-center gap-2"><Shield size={16} className="text-brand-red" /><div><div className="text-white text-xs font-medium">99.9% Accuracy</div><div className="text-gray-500 text-[10px]">Industry Leading</div></div></div></div>
+
+            {/* Floating badges around the laptop */}
+            <div className="absolute -top-6 -right-2 home-glass-badge rounded-xl px-4 py-3 home-float-card z-20">
+              <div className="flex items-center gap-2">
+                <CheckCircle size={16} className="text-green-400" />
+                <div>
+                  <div className="text-white text-xs font-medium">Verified ✓</div>
+                  <div className="text-gray-500 text-[10px]">Rajesh S. — Just now</div>
+                </div>
+              </div>
+            </div>
+            <div className="absolute -bottom-2 -left-4 home-glass-badge rounded-xl px-4 py-3 home-float-card-2 z-20">
+              <div className="flex items-center gap-2">
+                <Shield size={16} className="text-brand-red" />
+                <div>
+                  <div className="text-white text-xs font-medium">99.9% Accuracy</div>
+                  <div className="text-gray-500 text-[10px]">Industry Leading</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
