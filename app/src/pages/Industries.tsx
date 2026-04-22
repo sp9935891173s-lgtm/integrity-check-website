@@ -2,63 +2,112 @@ import { Link } from 'react-router';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import {
   Stethoscope, Laptop, Landmark, Factory,
-  ShoppingCart, School, UserSearch, Building2, ArrowRight
+  ShoppingCart, School, UserSearch, Building2, ArrowRight,
+  Home, Truck, Hotel, Wallet, FlaskConical, Scale, Heart, ShieldCheck
 } from 'lucide-react';
 
 const industries = [
   {
     icon: Stethoscope,
     title: 'Healthcare & Hospitals',
-    desc: 'Verify medical professionals, support staff, and administrative personnel. Ensure patient safety with thorough background checks for doctors, nurses, and healthcare workers.',
+    desc: 'Doctors, nurses, paramedics — fake degree aur criminal check zaroori hai patient safety ke liye.',
     services: ['License Verification', 'Education Check', 'Criminal Record', 'Employment History'],
   },
   {
     icon: Laptop,
     title: 'IT & Technology',
-    desc: 'Screen software engineers, project managers, and tech leadership. Protect intellectual property and ensure secure access to sensitive systems and data.',
-    services: ['Identity Verification', 'Employment Check', 'Reference Check', 'Global Screening'],
+    desc: 'Software engineers, developers — employment & education verification for secure access to systems.',
+    services: ['Identity Verification', 'Employment Check', 'Education Verify', 'Global Screening'],
   },
   {
     icon: Landmark,
-    title: 'Banking & Finance',
-    desc: 'Meet RBI compliance requirements with comprehensive financial background checks. Verify credentials for bankers, financial advisors, and insurance professionals.',
-    services: ['Credit History', 'Criminal Check', 'Education Verify', 'Database Screening'],
+    title: 'Banking & Financial Services',
+    desc: 'Bank employees, financial advisors — CIBIL, criminal, identity check for RBI compliance.',
+    services: ['CIBIL Check', 'Criminal Check', 'Identity Verify', 'Database Screening'],
   },
   {
     icon: Factory,
-    title: 'Manufacturing',
-    desc: 'Verify factory workers, supervisors, and plant managers. Ensure workplace safety and compliance with labor regulations across production facilities.',
-    services: ['Address Verification', 'Criminal Record', 'Drug Testing', 'Reference Check'],
+    title: 'Manufacturing & Engineering',
+    desc: 'Factory workers, engineers — address & identity verification for workplace safety.',
+    services: ['Address Verification', 'Identity Check', 'Criminal Record', 'Drug Testing'],
   },
   {
     icon: ShoppingCart,
     title: 'Retail & E-commerce',
-    desc: 'Screen store employees, delivery personnel, warehouse staff, and customer service representatives who interact directly with customers and handle products.',
-    services: ['Identity Check', 'Address Verify', 'Criminal Record', 'Employment History'],
+    desc: 'Sales staff, delivery agents — criminal & address check for customer-facing roles.',
+    services: ['Criminal Check', 'Address Verify', 'Identity Check', 'Reference Check'],
   },
   {
     icon: School,
     title: 'Education Institutions',
-    desc: 'Verify teachers, professors, administrative staff, and support personnel. Ensure student safety with thorough background screening for all educational staff.',
+    desc: 'Teachers, professors — degree & criminal background check for student safety.',
     services: ['Education Verify', 'Criminal Check', 'Reference Check', 'License Check'],
   },
   {
     icon: UserSearch,
-    title: 'Staffing & Recruitment',
-    desc: 'Partner with us to provide background verification as a value-added service to your clients. White-label solutions available for recruitment agencies.',
+    title: 'Staffing & Recruitment Agencies',
+    desc: 'Bulk hiring — fast background screening with API integration & custom reports.',
     services: ['Full Background Check', 'API Integration', 'Bulk Processing', 'Custom Reports'],
   },
   {
     icon: Building2,
     title: 'Government & PSU',
-    desc: 'Meet strict government compliance requirements with our certified verification processes. Screen contractors, employees, and vendors for public sector projects.',
-    services: ['Database Screening', 'Criminal Record', 'Education Verify', 'Watchlist Check'],
+    desc: 'Government employees — police verification, security clearance for public sector.',
+    services: ['Police Verification', 'Security Clearance', 'Education Verify', 'Watchlist Check'],
+  },
+  {
+    icon: Home,
+    title: 'Real Estate',
+    desc: 'Agents, brokers — identity & financial background check for property transactions.',
+    services: ['Identity Check', 'Financial Verify', 'Criminal Record', 'Address Check'],
+  },
+  {
+    icon: Truck,
+    title: 'Logistics & Transportation',
+    desc: 'Drivers, delivery staff — criminal & license verification for safe operations.',
+    services: ['License Verification', 'Criminal Check', 'Address Verify', 'Drug Testing'],
+  },
+  {
+    icon: Hotel,
+    title: 'Hospitality & Hotels',
+    desc: 'Hotel staff, housekeeping — address & criminal check for guest safety.',
+    services: ['Criminal Check', 'Address Verify', 'Identity Check', 'Reference Check'],
+  },
+  {
+    icon: Wallet,
+    title: 'NBFC & Insurance',
+    desc: 'Financial agents — CIBIL, criminal, identity check for financial compliance.',
+    services: ['CIBIL Check', 'Criminal Record', 'Identity Verify', 'Employment Check'],
+  },
+  {
+    icon: FlaskConical,
+    title: 'Pharma & Life Sciences',
+    desc: 'Lab technicians, researchers — education & license verification for quality assurance.',
+    services: ['Education Verify', 'License Check', 'Criminal Record', 'Employment History'],
+  },
+  {
+    icon: Scale,
+    title: 'Legal & Consulting Firms',
+    desc: 'Lawyers, consultants — professional license & criminal check for credibility.',
+    services: ['Professional License', 'Criminal Check', 'Education Verify', 'Reference Check'],
+  },
+  {
+    icon: Heart,
+    title: 'NGO & Non-Profit',
+    desc: 'Volunteers, staff — identity & criminal background check for community trust.',
+    services: ['Identity Check', 'Criminal Record', 'Address Verify', 'Reference Check'],
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Security Services',
+    desc: 'Security guards — police verification & criminal check for safety assurance.',
+    services: ['Police Verification', 'Criminal Check', 'Address Verify', 'Identity Check'],
   },
 ];
 
 function HeroSection() {
   return (
-    <section className="relative pt-32 pb-20 bg-gradient-to-br from-brand-red via-brand-red to-brand-red-dark overflow-hidden">
+    <section className="relative pt-44 pb-20 bg-gradient-to-br from-brand-red via-brand-red to-brand-red-dark overflow-hidden">
       <div className="absolute inset-0 opacity-10 magnify-pattern" />
       <div className="absolute top-0 left-0 w-full h-1 bg-white/20" />
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -69,7 +118,7 @@ function HeroSection() {
           Industries We Serve
         </h1>
         <p className="text-white/80 text-lg max-w-2xl mx-auto">
-          Specialized background screening solutions designed for the unique compliance and safety needs of each industry.
+          Specialized background screening solutions for 16+ industries across India — from Healthcare to Security Services.
         </p>
       </div>
     </section>
@@ -83,7 +132,7 @@ function IndustryCard({ industry, index }: { industry: typeof industries[0]; ind
     <div
       ref={ref}
       className={`group bg-white rounded-xl p-8 border border-gray-100 hover:border-brand-red transition-all duration-300 hover:shadow-card-hover scroll-reveal ${isRevealed ? 'revealed' : ''}`}
-      style={{ transitionDelay: `${index * 100}ms` }}
+      style={{ transitionDelay: `${(index % 4) * 100}ms` }}
     >
       <div className="w-16 h-16 rounded-xl bg-red-50 flex items-center justify-center mb-6 group-hover:bg-brand-red transition-colors duration-300">
         <industry.icon size={32} className="text-brand-red group-hover:text-white transition-colors duration-300" />

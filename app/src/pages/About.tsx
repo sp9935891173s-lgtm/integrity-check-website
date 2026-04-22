@@ -7,7 +7,7 @@ import {
 /* ───────── Hero ───────── */
 function HeroSection() {
   return (
-    <section className="relative pt-32 pb-20 bg-gradient-to-br from-brand-red via-brand-red to-brand-red-dark overflow-hidden">
+    <section className="relative pt-44 pb-20 bg-gradient-to-br from-brand-red via-brand-red to-brand-red-dark overflow-hidden">
       <div className="absolute inset-0 opacity-10 magnify-pattern" />
       <div className="absolute top-0 left-0 w-full h-1 bg-white/20" />
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

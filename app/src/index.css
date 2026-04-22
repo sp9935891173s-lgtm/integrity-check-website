@@ -140,3 +140,464 @@
 .magnify-pattern {
   background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
+
+/* ===== Top Info Bar ===== */
+.top-info-bar {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.top-info-bar::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(204, 0, 0, 0.4), transparent);
+}
+
+/* ===== Navbar Scroll Animations ===== */
+
+/* The nav element morphs between flat and pill */
+.navbar-morph {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Default flat state */
+.navbar-flat {
+  background: white;
+  border-radius: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Scrolled pill state — frosted glass blur */
+.navbar-pill {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    0 2px 6px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  animation: pillGlow 3.5s ease-in-out 1s infinite;
+  position: relative;
+}
+
+/* Breathing glow animation on pill shadow */
+@keyframes pillGlow {
+  0%, 100% {
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      0 2px 6px rgba(0, 0, 0, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+  50% {
+    box-shadow:
+      0 12px 44px rgba(0, 0, 0, 0.15),
+      0 4px 12px rgba(0, 0, 0, 0.08),
+      0 0 20px rgba(204, 0, 0, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+}
+
+/* Red accent line — slides in from center */
+.navbar-pill::before {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 35%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #CC0000, #E83333, #CC0000, transparent);
+  border-radius: 2px;
+  animation: accentSlide 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
+  pointer-events: none;
+}
+
+@keyframes accentSlide {
+  to { transform: translateX(-50%) scaleX(1); }
+}
+
+/* Shimmer light sweep across pill */
+.navbar-pill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.5),
+    transparent
+  );
+  border-radius: inherit;
+  animation: shimmer 0.9s ease-out 0.15s forwards;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes shimmer {
+  to {
+    left: 130%;
+    opacity: 0;
+  }
+}
+
+/* ===== Nav Link Pop-in Animation ===== */
+@keyframes linkPop {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.9);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(2px) scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.nav-link-pop {
+  animation: linkPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Nav link hover scale */
+.navbar-pill .nav-link-pop:hover {
+  transform: scale(1.06);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ===== CTA Button Pop-in ===== */
+@keyframes ctaPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+  70% {
+    transform: scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.cta-pop {
+  animation: ctaPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s both;
+  position: relative;
+  overflow: hidden;
+}
+
+/* CTA shimmer on hover */
+.cta-pop::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.4s ease;
+  border-radius: inherit;
+}
+
+.cta-pop:hover::after {
+  left: 100%;
+}
+
+/* ===== Page Transition Animations ===== */
+
+.page-transition {
+  will-change: opacity, transform;
+}
+
+/* Enter animation — fade in + slide up from below */
+.page-enter {
+  animation: pageEnter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes pageEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+    filter: blur(4px);
+  }
+  50% {
+    opacity: 0.7;
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+/* Exit animation — fade out + slide up */
+.page-exit {
+  animation: pageExit 0.3s cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+@keyframes pageExit {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.98);
+    filter: blur(3px);
+  }
+}
+
+/* ===== Home Page Premium Design ===== */
+
+.home-hero {
+  background: #060612;
+}
+
+.home-hero-bg {
+  background: linear-gradient(135deg, #060612 0%, #0c0c24 30%, #120a20 50%, #0a0a1a 100%);
+}
+
+.home-hero-grid {
+  opacity: 0.04;
+  background-image:
+    linear-gradient(rgba(255,255,255,.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.15) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Floating orbs */
+.home-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: orbDrift 12s ease-in-out infinite;
+}
+.home-orb-1 {
+  width: 400px; height: 400px;
+  top: -10%; right: -5%;
+  background: radial-gradient(circle, rgba(204,0,0,0.12) 0%, transparent 70%);
+  filter: blur(60px);
+}
+.home-orb-2 {
+  width: 300px; height: 300px;
+  bottom: 10%; left: -5%;
+  background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%);
+  filter: blur(50px);
+  animation-delay: -4s;
+}
+.home-orb-3 {
+  width: 200px; height: 200px;
+  top: 40%; left: 30%;
+  background: radial-gradient(circle, rgba(204,0,0,0.08) 0%, transparent 70%);
+  filter: blur(40px);
+  animation-delay: -8s;
+}
+.home-orb-4 {
+  width: 250px; height: 250px;
+  bottom: -5%; right: 30%;
+  background: radial-gradient(circle, rgba(168,85,247,0.08) 0%, transparent 70%);
+  filter: blur(50px);
+  animation-delay: -6s;
+}
+
+@keyframes orbDrift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.05); }
+  66% { transform: translate(-20px, 15px) scale(0.95); }
+}
+
+/* Gradient text */
+.home-gradient-text {
+  background: linear-gradient(135deg, #CC0000 0%, #E83333 40%, #ff6b6b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass badge */
+.home-glass-badge {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+}
+
+/* CTA buttons */
+.home-cta-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #CC0000 0%, #E83333 100%);
+  color: white;
+  font-weight: 700;
+  border-radius: 0.875rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 30px rgba(204,0,0,0.3);
+  position: relative;
+  overflow: hidden;
+}
+.home-cta-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(204,0,0,0.45);
+}
+.home-cta-primary::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+}
+.home-cta-primary:hover::after { left: 100%; }
+
+.home-cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: white;
+  font-weight: 600;
+  border-radius: 0.875rem;
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.03);
+  transition: all 0.3s ease;
+}
+.home-cta-secondary:hover {
+  border-color: rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.08);
+  transform: translateY(-2px);
+}
+
+/* Glass cards */
+.home-glass-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+}
+.home-inner-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* Floating card animations */
+.home-float-card {
+  animation: floatCard 5s ease-in-out infinite;
+}
+.home-float-card-2 {
+  animation: floatCard 6s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+/* Progress bar animation */
+.home-progress-bar {
+  width: 0;
+  animation: progressFill 1.2s ease-out forwards;
+}
+@keyframes progressFill {
+  to { width: var(--progress-width); }
+}
+
+/* Stats bar */
+.home-stats-bar {
+  background: linear-gradient(135deg, rgba(15,15,30,0.95), rgba(20,20,40,0.95));
+  border: 1px solid rgba(255,255,255,0.06);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+/* Service cards */
+.home-service-card {
+  background: white;
+  border-radius: 1.25rem;
+  padding: 2rem;
+  border: 1px solid #f1f1f1;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.home-service-card:hover {
+  border-color: rgba(204,0,0,0.2);
+  box-shadow: 0 20px 50px rgba(204,0,0,0.08);
+  transform: translateY(-4px);
+}
+
+/* Feature cards */
+.home-feature-card {
+  background: #fafafa;
+  border-radius: 1.25rem;
+  padding: 1.75rem;
+  border: 1px solid #f0f0f0;
+  transition: all 0.3s ease;
+}
+.home-feature-card:hover {
+  background: white;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+  transform: translateY(-3px);
+}
+
+/* How it works section */
+.home-works-section {
+  background: linear-gradient(135deg, #060612 0%, #0c0c24 50%, #0a0a1a 100%);
+}
+
+.home-step-icon {
+  transition: transform 0.3s ease;
+}
+.home-step-icon:hover {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+/* Testimonial cards */
+.home-testimonial-card {
+  background: white;
+  border-radius: 1.25rem;
+  padding: 2rem;
+  border: 1px solid #f1f1f1;
+  transition: all 0.35s ease;
+}
+.home-testimonial-card:hover {
+  box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+  transform: translateY(-3px);
+}
+
+/* CTA section */
+.home-cta-section {
+  background: linear-gradient(135deg, #CC0000 0%, #a00000 40%, #8b0000 100%);
+}
+
+/* Industry cards */
+.home-industry-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  border: 1px solid #f1f1f1;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: default;
+}
+.home-industry-card:hover {
+  border-color: rgba(204,0,0,0.15);
+  box-shadow: 0 10px 30px rgba(204,0,0,0.06);
+  transform: translateY(-3px);
+}
