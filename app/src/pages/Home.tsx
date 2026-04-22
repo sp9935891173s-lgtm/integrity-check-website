@@ -19,8 +19,8 @@ function HeroSection() {
     const rect = laptopRef.current.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width;  // 0..1
     const y = (e.clientY - rect.top) / rect.height;   // 0..1
-    const rotateY = (x - 0.5) * 20;  // -10 to +10 degrees
-    const rotateX = (0.5 - y) * 15;  // -7.5 to +7.5 degrees
+    const rotateY = (0.5 - x) * 25;  // +12.5 to -12.5 degrees (follows cursor)
+    const rotateX = (0.5 - y) * 15;  // +7.5 to -7.5 degrees (follows cursor)
     setTilt({ rotateX, rotateY, glareX: x * 100, glareY: y * 100 });
   }, []);
 
