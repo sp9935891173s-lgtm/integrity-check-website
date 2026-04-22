@@ -72,108 +72,77 @@ function HeroSection() {
             </div>
           </div>
 
-          {/* ===== 3D Laptop Mockup with cursor-following tilt ===== */}
-          <div className="hidden lg:block relative animate-fade-in-up" style={{ animationDelay: '0.3s', perspective: '1200px' }}>
+          {/* ===== 3D Laptop with cursor-following tilt ===== */}
+          <div
+            className="hidden lg:block relative animate-fade-in-up"
+            style={{ animationDelay: '0.3s', perspective: '1400px' }}
+            ref={laptopRef}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+          >
             <div
-              ref={laptopRef}
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
-              className="laptop-3d-wrapper"
+              className="macbook-3d"
               style={{
                 transform: `rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
-                transition: 'transform 0.15s ease-out',
+                transition: 'transform 0.18s cubic-bezier(0.22, 1, 0.36, 1)',
                 transformStyle: 'preserve-3d',
               }}
             >
-              {/* Laptop Screen */}
-              <div className="laptop-screen">
-                {/* Screen bezel */}
-                <div className="laptop-bezel">
-                  {/* Camera notch */}
-                  <div className="laptop-camera" />
-                  
-                  {/* Screen content area */}
-                  <div className="laptop-screen-content">
-                    {/* Glare overlay */}
-                    <div
-                      className="laptop-glare"
-                      style={{
-                        background: `radial-gradient(circle at ${tilt.glareX}% ${tilt.glareY}%, rgba(255,255,255,0.12) 0%, transparent 60%)`,
-                      }}
-                    />
-                    
-                    {/* Dashboard content inside screen */}
-                    <div className="home-glass-card rounded-xl p-5 relative" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
-                      <div className="flex items-center justify-between mb-5">
-                        <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center">
-                            <Shield size={18} className="text-white" />
-                          </div>
-                          <div>
-                            <div className="text-white font-semibold text-sm">Verification Dashboard</div>
-                            <div className="text-gray-500 text-xs">Real-time monitoring</div>
-                          </div>
+              {/* Laptop Lid (Screen) */}
+              <div className="macbook-lid">
+                <div className="macbook-camera" />
+                <div className="macbook-screen">
+                  <div
+                    className="macbook-glare"
+                    style={{
+                      background: `radial-gradient(ellipse at ${tilt.glareX}% ${tilt.glareY}%, rgba(255,255,255,0.14) 0%, transparent 55%)`,
+                    }}
+                  />
+                  <div className="p-4 relative h-full">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center">
+                          <Shield size={16} className="text-white" />
                         </div>
-                        <div className="home-glass-badge px-3 py-1 rounded-full">
-                          <span className="text-green-400 text-xs font-medium">● Live</span>
+                        <div>
+                          <div className="text-white font-semibold text-xs">Verification Dashboard</div>
+                          <div className="text-gray-500 text-[10px]">Real-time monitoring</div>
                         </div>
                       </div>
-                      <div className="grid grid-cols-2 gap-3 mb-4">
-                        <div className="home-inner-card rounded-xl p-3">
-                          <div className="text-gray-500 text-xs mb-1">Verified Today</div>
-                          <div className="text-white text-xl font-bold">2,847</div>
-                          <div className="text-green-400 text-xs flex items-center gap-1"><TrendingUp size={10} />+12.5%</div>
-                        </div>
-                        <div className="home-inner-card rounded-xl p-3">
-                          <div className="text-gray-500 text-xs mb-1">Avg. Time</div>
-                          <div className="text-white text-xl font-bold">4.2h</div>
-                          <div className="text-green-400 text-xs flex items-center gap-1"><Clock size={10} />-18% faster</div>
-                        </div>
+                      <div className="home-glass-badge px-2 py-0.5 rounded-full">
+                        <span className="text-green-400 text-[10px] font-medium">● Live</span>
                       </div>
-                      <div className="space-y-2.5">
-                        {[{l:'Criminal Check',w:'92%',c:'from-red-500 to-red-600'},{l:'Education',w:'87%',c:'from-indigo-500 to-purple-500'},{l:'Employment',w:'78%',c:'from-amber-500 to-orange-500'}].map((p,i) => (
-                          <div key={i}>
-                            <div className="flex justify-between text-xs mb-1"><span className="text-gray-400">{p.l}</span><span className="text-gray-500">{p.w}</span></div>
-                            <div className="h-1.5 bg-white/5 rounded-full overflow-hidden"><div className={`h-full bg-gradient-to-r ${p.c} rounded-full home-progress-bar`} style={{'--progress-width': p.w} as React.CSSProperties} /></div>
-                          </div>
-                        ))}
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 mb-3">
+                      <div className="home-inner-card rounded-lg p-2.5">
+                        <div className="text-gray-500 text-[10px] mb-0.5">Verified Today</div>
+                        <div className="text-white text-lg font-bold leading-tight">2,847</div>
+                        <div className="text-green-400 text-[10px] flex items-center gap-0.5"><TrendingUp size={9} />+12.5%</div>
                       </div>
+                      <div className="home-inner-card rounded-lg p-2.5">
+                        <div className="text-gray-500 text-[10px] mb-0.5">Avg. Time</div>
+                        <div className="text-white text-lg font-bold leading-tight">4.2h</div>
+                        <div className="text-green-400 text-[10px] flex items-center gap-0.5"><Clock size={9} />-18% faster</div>
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      {[{l:'Criminal Check',w:'92%',c:'from-red-500 to-red-600'},{l:'Education',w:'87%',c:'from-indigo-500 to-purple-500'},{l:'Employment',w:'78%',c:'from-amber-500 to-orange-500'}].map((p,i) => (
+                        <div key={i}>
+                          <div className="flex justify-between text-[10px] mb-0.5"><span className="text-gray-400">{p.l}</span><span className="text-gray-500">{p.w}</span></div>
+                          <div className="h-1 bg-white/5 rounded-full overflow-hidden"><div className={`h-full bg-gradient-to-r ${p.c} rounded-full home-progress-bar`} style={{'--progress-width': p.w} as React.CSSProperties} /></div>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
               </div>
-
-              {/* Laptop Base / Keyboard */}
-              <div className="laptop-base">
-                <div className="laptop-keyboard">
-                  {/* Keyboard rows */}
-                  <div className="keyboard-row">
-                    {Array.from({length: 14}).map((_,i) => <div key={i} className="key" />)}
-                  </div>
-                  <div className="keyboard-row">
-                    {Array.from({length: 13}).map((_,i) => <div key={i} className="key" />)}
-                  </div>
-                  <div className="keyboard-row">
-                    {Array.from({length: 12}).map((_,i) => <div key={i} className="key" />)}
-                  </div>
-                  <div className="keyboard-row">
-                    {Array.from({length: 11}).map((_,i) => <div key={i} className="key" />)}
-                  </div>
-                  <div className="keyboard-row keyboard-row-space">
-                    <div className="key" />
-                    <div className="key" />
-                    <div className="key spacebar" />
-                    <div className="key" />
-                    <div className="key" />
-                  </div>
-                </div>
-                {/* Trackpad */}
-                <div className="laptop-trackpad" />
+              {/* Laptop Base */}
+              <div className="macbook-base">
+                <div className="macbook-notch" />
               </div>
             </div>
-
-            {/* Floating badges around the laptop */}
-            <div className="absolute -top-6 -right-2 home-glass-badge rounded-xl px-4 py-3 home-float-card z-20">
+            {/* Floating badges */}
+            <div className="absolute -top-4 -right-2 home-glass-badge rounded-xl px-4 py-3 home-float-card z-20">
               <div className="flex items-center gap-2">
                 <CheckCircle size={16} className="text-green-400" />
                 <div>
@@ -182,7 +151,7 @@ function HeroSection() {
                 </div>
               </div>
             </div>
-            <div className="absolute -bottom-2 -left-4 home-glass-badge rounded-xl px-4 py-3 home-float-card-2 z-20">
+            <div className="absolute bottom-8 -left-6 home-glass-badge rounded-xl px-4 py-3 home-float-card-2 z-20">
               <div className="flex items-center gap-2">
                 <Shield size={16} className="text-brand-red" />
                 <div>
