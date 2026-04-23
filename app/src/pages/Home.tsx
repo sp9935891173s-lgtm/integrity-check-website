@@ -185,14 +185,12 @@ function PopularServicesSection() {
   
   return (
     <section ref={ref} className="py-16 bg-white border-b border-gray-100 overflow-hidden relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
-        <div className={`flex flex-col md:flex-row md:items-end justify-between gap-4 transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div>
-            <span className="inline-block px-4 py-1.5 bg-red-100 text-brand-red text-sm font-semibold rounded-full mb-3">India's Top Choices</span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-brand-black mb-2">Most Popular Services</h2>
-            <p className="text-gray-500 max-w-xl">Discover the top verification services trusted by leading Indian organizations.</p>
-          </div>
-          <Link to="/services" className="text-brand-red font-semibold hover:gap-2 transition-all flex items-center gap-1 text-sm pb-1">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+        <div className={`text-center flex flex-col items-center transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <span className="inline-block px-4 py-1.5 bg-red-100 text-brand-red text-sm font-semibold rounded-full mb-3">India's Top Choices</span>
+          <h2 className="text-3xl sm:text-4xl font-bold text-brand-black mb-4">Most Popular Services</h2>
+          <p className="text-gray-500 max-w-2xl text-center mb-6">Discover the top verification services trusted by leading Indian organizations.</p>
+          <Link to="/services" className="text-brand-red font-semibold hover:gap-2 transition-all flex items-center justify-center gap-1 text-sm pb-1">
             View All Services <ArrowRight size={16} />
           </Link>
         </div>
@@ -342,8 +340,8 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <PopularServicesSection />
       <WhyChooseUsSection />
+      <PopularServicesSection />
       <IndustriesSection />
 
       
