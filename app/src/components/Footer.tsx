@@ -182,7 +182,7 @@ export default function Footer() {
             </span>
             <span className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-green-400 inline-block"></span>
-              API LIVE
+            
             </span>
           </div>
         </div>
