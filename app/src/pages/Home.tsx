@@ -56,21 +56,17 @@ function HeroSection() {
 
           {/* ===== 3D Spline Robot ===== */}
           <div
-            className="hidden lg:block relative w-full h-[550px] animate-fade-in-up"
+            className="hidden lg:block relative w-full h-[650px] animate-fade-in-up"
             style={{ animationDelay: '0.3s' }}
           >
-            {/* Wrapper to push the watermark out of bounds */}
-            <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
-              <div className="absolute top-0 left-0 right-0 bottom-[-60px] pointer-events-auto">
-                <iframe 
-                  src="https://my.spline.design/genkubgreetingrobot-mxQGdsyCKCaVTkcprNOsvIVZ/" 
-                  frameBorder="0" 
-                  width="100%" 
-                  height="100%" 
-                  style={{ background: 'transparent' }}
-                  title="Spline 3D Robot"
-                ></iframe>
-              </div>
+            <div className="absolute top-1/2 left-1/2 w-[160%] h-[160%] -translate-x-1/2 -translate-y-1/2 pointer-events-auto flex justify-center items-center">
+              <iframe 
+                src="https://my.spline.design/genkubgreetingrobot-mxQGdsyCKCaVTkcprNOsvIVZ/" 
+                frameBorder="0" 
+                className="w-full h-full scale-[0.6] origin-center"
+                style={{ background: 'transparent' }}
+                title="Spline 3D Robot"
+              ></iframe>
             </div>
 
             {/* Floating badges */}
