@@ -59,17 +59,22 @@ function HeroSection() {
             className="hidden lg:block relative w-full h-[550px] animate-fade-in-up"
             style={{ animationDelay: '0.3s' }}
           >
-            <iframe 
-              src="https://my.spline.design/genkubgreetingrobot-mxQGdsyCKCaVTkcprNOsvIVZ/" 
-              frameBorder="0" 
-              width="100%" 
-              height="100%" 
-              style={{ background: 'transparent' }}
-              title="Spline 3D Robot"
-            ></iframe>
-            
+            {/* Wrapper to push the watermark out of bounds */}
+            <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
+              <div className="absolute top-0 left-0 right-0 bottom-[-60px] pointer-events-auto">
+                <iframe 
+                  src="https://my.spline.design/genkubgreetingrobot-mxQGdsyCKCaVTkcprNOsvIVZ/" 
+                  frameBorder="0" 
+                  width="100%" 
+                  height="100%" 
+                  style={{ background: 'transparent' }}
+                  title="Spline 3D Robot"
+                ></iframe>
+              </div>
+            </div>
+
             {/* Floating badges */}
-            <div className="absolute top-12 -left-4 home-glass-badge rounded-xl px-4 py-3 home-float-card z-20 pointer-events-none">
+            <div className="absolute top-8 -right-4 home-glass-badge rounded-xl px-4 py-3 home-float-card z-20 pointer-events-none">
               <div className="flex items-center gap-2">
                 <CheckCircle size={16} className="text-green-400" />
                 <div>
@@ -78,7 +83,7 @@ function HeroSection() {
                 </div>
               </div>
             </div>
-            <div className="absolute bottom-4 right-4 home-glass-badge bg-[#060612] rounded-xl px-4 py-3 home-float-card-2 z-20 pointer-events-none border border-white/10 shadow-2xl">
+            <div className="absolute bottom-12 -left-6 home-glass-badge rounded-xl px-4 py-3 home-float-card-2 z-20 pointer-events-none">
               <div className="flex items-center gap-2">
                 <Shield size={16} className="text-brand-red" />
                 <div>
