@@ -37,6 +37,24 @@ const industries = [
   { path: '/industries', label: 'Logistics' },
 ];
 
+const policyLinks = [
+  'Terms & Conditions',
+  'Privacy Policy',
+  'Applicant Privacy Policy',
+  'Client Privacy Policy',
+  'Conditions of Use',
+  'Cookies Policy',
+  'General Terms',
+  'Refund Policy',
+  'Recruitment of Ex-Offenders',
+  'Handling of DBS Certificate',
+  'Statement of Fair Processing',
+  'Credit Reference Agencies',
+  'Anti Slavery Policy Statement',
+  'Environmental Statement',
+  'Data Processing Agreement',
+];
+
 export default function Footer() {
   return (
     <footer style={{ background: '#0d1117' }} className="text-white">
@@ -170,6 +188,7 @@ export default function Footer() {
         </div>
       </div>
 
+      
       {/* Bottom Bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col md:flex-row items-center justify-between gap-3">
         <p className="text-gray-500 text-sm">
