@@ -60,11 +60,11 @@ export default function Navbar() {
               {/* Contact Info */}
               <div className="hidden sm:flex items-center gap-6 text-xs">
                 <a
-                  href="tel:+919876543210"
+                  href="tel:91-9350283562"
                   className="flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors duration-200 group"
                 >
                   <Phone size={13} className="text-brand-red group-hover:scale-110 transition-transform" />
-                  <span>+91 98765 43210</span>
+                  <span>+91-9350283562</span>
                 </a>
                 <span className="w-px h-3.5 bg-gray-600" />
                 <a
@@ -96,9 +96,9 @@ export default function Navbar() {
 
               {/* Mobile — just phone & email */}
               <div className="sm:hidden flex items-center gap-4 w-full justify-center text-xs">
-                <a href="tel:+919876543210" className="flex items-center gap-1.5 text-gray-300">
+                <a href="tel:91-9350283562" className="flex items-center gap-1.5 text-gray-300">
                   <Phone size={12} className="text-brand-red" />
-                  <span>+91 98765 43210</span>
+                  <span>+91-9350283562 </span>
                 </a>
                 <a href="mailto:info@integritycheckservices.com" className="flex items-center gap-1.5 text-gray-300">
                   <Mail size={12} className="text-brand-red" />
