@@ -250,36 +250,7 @@ function IndustriesSection() {
 
 
 
-function TestimonialsSection() {
-  const testimonials = [
-    { name: 'Rajesh Sharma', role: 'HR Director, Tech Solutions', text: 'Their turnaround time and accuracy are unmatched. Highly recommended!' },
-    { name: 'Priya Patel', role: 'CEO, StartupHub India', text: 'Using their services for 3+ years. Detailed reports and excellent support.' },
-    { name: 'Amit Kumar', role: 'Head of Talent, Global Infotech', text: 'Exceptional detail in reports. They caught discrepancies others missed.' },
-  ];
-  const { ref, isRevealed } = useScrollReveal();
-  return (
-    <section ref={ref} className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`text-center mb-14 transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <span className="inline-block px-4 py-1.5 bg-red-100 text-brand-red text-sm font-semibold rounded-full mb-4">Testimonials</span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-brand-black mb-4">What Our Clients Say</h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((t, i) => (
-            <div key={i} className={`home-testimonial-card scroll-reveal ${isRevealed ? 'revealed' : ''}`} style={{ transitionDelay: `${i * 100}ms` }}>
-              <div className="flex gap-1 mb-4">{[...Array(5)].map((_, j) => <Star key={j} size={16} className="text-yellow-400 fill-yellow-400" />)}</div>
-              <p className="text-gray-600 text-sm leading-relaxed mb-6 italic">"{t.text}"</p>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center text-white text-xs font-bold">{t.name.split(' ').map(n=>n[0]).join('')}</div>
-                <div><div className="font-semibold text-brand-black text-sm">{t.name}</div><div className="text-gray-500 text-xs">{t.role}</div></div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+
 
 function CTABanner() {
   const { ref, isRevealed } = useScrollReveal();
@@ -306,7 +277,7 @@ export default function Home() {
       <WhyChooseUsSection />
       <IndustriesSection />
 
-      <TestimonialsSection />
+      
       <CTABanner />
     </>
   );
