@@ -87,9 +87,9 @@ export default function Footer() {
               ))}
             </div>
             <div className="pt-2">
-              <p className="text-white text-xs font-semibold mb-2 uppercase tracking-wider">Powered by</p>
+              <p className="text-white text-lg font-bold mb-3 uppercase tracking-wider">Powered by</p>
               <a href="https://www.complygate.co.uk/" target="_blank" rel="noopener noreferrer">
-                <img src="/logo2.png" alt="ComplyGate" className="h-8 w-auto border border-white/20 rounded-md p-1" />
+              <img src="/logo2.png" alt="ComplyGate" className="h-16 w-auto rounded-md p-2" style={{background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(8px)'}} />
               </a>
             </div>
           </div>
