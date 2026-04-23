@@ -67,19 +67,20 @@ function HeroSection() {
   style={{ background: 'transparent' }}
   title="Spline 3D Robot"
 ></iframe>
-{/* Watermark hider */}
+{/* Watermark hider - covers bottom-right of scaled iframe */}
 <div
   style={{
     position: 'absolute',
-    bottom: '10px',
-    right: '10px',
-    width: '180px',
-    height: '40px',
-    background: '#060612',
-    borderRadius: '8px',
+    bottom: '18%',
+    right: '8%',
+    width: '200px',
+    height: '50px',
+    background: 'linear-gradient(135deg, #0d0d1f 0%, #0a0a1a 100%)',
     zIndex: 30,
+    borderRadius: '4px',
   }}
 />
+/
             </div>
 
             {/* Floating badges */}
