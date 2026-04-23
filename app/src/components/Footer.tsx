@@ -37,24 +37,6 @@ const industries = [
   { path: '/industries', label: 'Logistics' },
 ];
 
-const policyLinks = [
-  'Terms & Conditions',
-  'Privacy Policy',
-  'Applicant Privacy Policy',
-  'Client Privacy Policy',
-  'Conditions of Use',
-  'Cookies Policy',
-  'General Terms',
-  'Refund Policy',
-  'Recruitment of Ex-Offenders',
-  'Handling of DBS Certificate',
-  'Statement of Fair Processing',
-  'Credit Reference Agencies',
-  'Anti Slavery Policy Statement',
-  'Environmental Statement',
-  'Data Processing Agreement',
-];
-
 export default function Footer() {
   return (
     <footer style={{ background: '#0d1117' }} className="text-white">
@@ -184,25 +166,6 @@ export default function Footer() {
               <span className="w-2 h-2 rounded-full bg-green-400 inline-block"></span>
             
             </span>
-          </div>
-        </div>
-      </div>
-
-      {/* Policy Section */}
-      <div className="border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <h4 className="text-sm font-bold mb-5 text-white uppercase tracking-wider">Policy</h4>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-            {policyLinks.map((item) => (
-              <a
-                key={item}
-                href="#"
-                className="flex items-center gap-2 text-gray-400 text-xs hover:text-white transition-colors duration-200"
-              >
-                <span className="text-brand-red">›</span>
-                {item}
-              </a>
-            ))}
           </div>
         </div>
       </div>
