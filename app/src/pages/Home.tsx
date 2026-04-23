@@ -180,58 +180,6 @@ function CountUpStat({ end, suffix = '', prefix = '', label, icon: Icon, delay =
   );
 }
 
-function StatsSection() {
-  return (
-    <section className="relative -mt-12 z-20 pb-8">
-      <div className="max-w-5xl mx-auto px-4">
-        <div className="home-stats-bar rounded-2xl p-8 grid grid-cols-2 lg:grid-cols-4 gap-8">
-          <CountUpStat end={5000} suffix="+" label="Clients Served" icon={Briefcase} delay={0} />
-          <CountUpStat end={99.9} suffix="%" label="Accuracy Rate" icon={CheckCircle} delay={200} />
-          <CountUpStat end={24} suffix="h" label="Turnaround Time" icon={Zap} delay={400} />
-          <CountUpStat end={100} suffix="%" label="Legally Compliant" icon={Shield} delay={600} />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ServicesSection() {
-  const services = [
-    { icon: Shield, title: 'Criminal Record Check', desc: 'Court records and FIR verification across all jurisdictions.', color: 'from-red-500 to-red-600' },
-    { icon: Briefcase, title: 'Employment Verification', desc: 'Confirm past employment history, designations, and tenure.', color: 'from-blue-500 to-indigo-600' },
-    { icon: GraduationCap, title: 'Education Verification', desc: 'Validate degrees and academic credentials with institutions.', color: 'from-purple-500 to-violet-600' },
-    { icon: MapPin, title: 'Address Verification', desc: 'Verify current and permanent addresses digitally or physically.', color: 'from-emerald-500 to-green-600' },
-    { icon: FlaskConical, title: 'Drug Testing', desc: 'Pre-employment screening at NABL-certified laboratories.', color: 'from-amber-500 to-orange-600' },
-    { icon: Users, title: 'Reference Check', desc: 'Professional reference verification from former supervisors.', color: 'from-cyan-500 to-teal-600' },
-  ];
-  const { ref, isRevealed } = useScrollReveal();
-  return (
-    <section ref={ref} className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`text-center mb-14 transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <span className="inline-block px-4 py-1.5 bg-red-100 text-brand-red text-sm font-semibold rounded-full mb-4">Our Services</span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-brand-black mb-4">Comprehensive Verification Solutions</h2>
-          <p className="text-gray-500 max-w-2xl mx-auto">End-to-end background screening services tailored to meet your hiring needs.</p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((s, i) => (
-            <Link to="/services" key={i} className={`home-service-card group scroll-reveal ${isRevealed ? 'revealed' : ''}`} style={{ transitionDelay: `${i * 100}ms` }}>
-              <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${s.color} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}>
-                <s.icon size={26} className="text-white" />
-              </div>
-              <h3 className="text-xl font-semibold text-brand-black mb-3 group-hover:text-brand-red transition-colors">{s.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed mb-4">{s.desc}</p>
-              <span className="inline-flex items-center gap-1 text-brand-red text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity"><ChevronRight size={14} /> Learn More</span>
-            </Link>
-          ))}
-        </div>
-        <div className={`text-center mt-12 transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <Link to="/services" className="inline-flex items-center gap-2 px-8 py-3.5 border-2 border-brand-red text-brand-red font-semibold rounded-lg hover:bg-brand-red hover:text-white transition-all duration-200">View All Services <ArrowRight size={18} /></Link>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 function WhyChooseUsSection() {
   const features = [
@@ -369,8 +317,7 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <StatsSection />
-      <ServicesSection />
+      
       <WhyChooseUsSection />
       <IndustriesSection />
     
