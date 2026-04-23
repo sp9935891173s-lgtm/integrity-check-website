@@ -315,41 +315,7 @@ function IndustriesSection() {
   );
 }
 
-function HowItWorksSection() {
-  const steps = [
-    { num: '01', title: 'Submit Request', desc: 'Upload candidate details via our portal or API.', icon: FileText },
-    { num: '02', title: 'We Verify', desc: 'Thorough checks using databases and field networks.', icon: Search },
-    { num: '03', title: 'Get Report', desc: 'Tamper-proof verification report within 24 hours.', icon: CheckCircle },
-  ];
-  const { ref, isRevealed } = useScrollReveal();
-  return (
-    <section ref={ref} className="py-20 home-works-section relative overflow-hidden">
-      <div className="absolute inset-0 home-hero-grid" />
-      <div className="home-orb home-orb-1" style={{opacity:0.5}} />
-      <div className="home-orb home-orb-2" style={{opacity:0.5}} />
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`text-center mb-16 transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <span className="inline-block px-4 py-1.5 bg-white/10 text-brand-red text-sm font-semibold rounded-full mb-4">How It Works</span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Simple 3-Step Process</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">Getting started has never been easier.</p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-          <div className="hidden md:block absolute top-16 left-[20%] right-[20%] h-0.5 bg-gradient-to-r from-brand-red/50 via-brand-red to-brand-red/50" />
-          {steps.map((s, i) => (
-            <div key={i} className={`relative text-center step-3d-reveal ${isRevealed ? 'revealed' : ''}`} style={{ transitionDelay: `${i * 250}ms` }}>
-              <div className="home-step-icon w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center relative z-10 shadow-lg shadow-red-500/30">
-                <s.icon size={28} className="text-white" />
-              </div>
-              <div className="text-brand-red text-sm font-bold mb-2">Step {s.num}</div>
-              <h3 className="text-xl font-semibold text-white mb-3">{s.title}</h3>
-              <p className="text-gray-400 text-sm max-w-xs mx-auto">{s.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+
 
 function TestimonialsSection() {
   const testimonials = [
@@ -407,7 +373,7 @@ export default function Home() {
       <ServicesSection />
       <WhyChooseUsSection />
       <IndustriesSection />
-      <HowItWorksSection />
+    
       <TestimonialsSection />
       <CTABanner />
     </>
