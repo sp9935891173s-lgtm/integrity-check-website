@@ -305,7 +305,7 @@ export default function Home() {
       
       <WhyChooseUsSection />
       <IndustriesSection />
-    
+
       <TestimonialsSection />
       <CTABanner />
     </>
