@@ -821,3 +821,41 @@
   opacity: 1;
   transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1) translateY(0);
 }
+
+/* ===== Marquee Animation ===== */
+.marquee-content {
+  display: flex;
+  min-width: max-content;
+  animation: marquee 35s linear infinite;
+  padding-right: 1.5rem;
+  gap: 1.5rem;
+}
+
+.group:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+.marquee-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid #f1f1f1;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: max-content;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.marquee-card:hover {
+  border-color: rgba(204, 0, 0, 0.2);
+  box-shadow: 0 10px 30px rgba(204, 0, 0, 0.08);
+  transform: translateY(-3px);
+}

@@ -5,7 +5,8 @@ import {
   Shield, Zap, Lock, Headphones, Star, ArrowRight, CheckCircle,
   Stethoscope, Laptop, Landmark, Factory, ShoppingCart,
   School, UserSearch, Building2, Home as HomeIcon, Truck, Hotel, Wallet,
-  FlaskRound, Scale, Heart, ShieldCheck, Clock, TrendingUp
+  FlaskRound, Scale, Heart, ShieldCheck, Clock, TrendingUp,
+  FileText, MapPin, Briefcase, GraduationCap
 } from 'lucide-react';
 
 function HeroSection() {
@@ -166,6 +167,74 @@ function HeroSection() {
 }
 
 
+const popularServices = [
+  { icon: ShieldCheck, title: 'Comprehensive Background Check', desc: 'Full profile verification' },
+  { icon: MapPin, title: 'Address Verification', desc: 'Physical & digital checks' },
+  { icon: Landmark, title: 'CIBIL & Financial Check', desc: 'Credit history analysis' },
+  { icon: Scale, title: 'Criminal Record Check', desc: 'Court & police records' },
+  { icon: GraduationCap, title: 'Education Verification', desc: 'Degree & certificate validation' },
+  { icon: Briefcase, title: 'Employment History', desc: 'Past experience & tenure' },
+  { icon: FlaskRound, title: 'Drug Testing', desc: 'Pre-employment screening' },
+  { icon: UserSearch, title: 'Identity Verification', desc: 'Aadhaar, PAN & Voter ID' },
+  { icon: CheckCircle, title: 'Reference Check', desc: 'Professional & personal' },
+  { icon: FileText, title: 'Court Record Check', desc: 'Civil & criminal cases' }
+];
+
+function PopularServicesSection() {
+  const { ref, isRevealed } = useScrollReveal();
+  
+  return (
+    <section ref={ref} className="py-16 bg-white border-b border-gray-100 overflow-hidden relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
+        <div className={`flex flex-col md:flex-row md:items-end justify-between gap-4 transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div>
+            <span className="inline-block px-4 py-1.5 bg-red-100 text-brand-red text-sm font-semibold rounded-full mb-3">India's Top Choices</span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-brand-black mb-2">Most Popular Services</h2>
+            <p className="text-gray-500 max-w-xl">Discover the top verification services trusted by leading Indian organizations.</p>
+          </div>
+          <Link to="/services" className="text-brand-red font-semibold hover:gap-2 transition-all flex items-center gap-1 text-sm pb-1">
+            View All Services <ArrowRight size={16} />
+          </Link>
+        </div>
+      </div>
+
+      <div className="relative w-full flex overflow-hidden group py-4">
+        {/* Left and Right Gradients for smooth fade effect */}
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+
+        <div className="marquee-content group-hover:pause">
+          {popularServices.map((service, idx) => (
+            <div key={`marquee-1-${idx}`} className="marquee-card">
+               <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center shrink-0 border border-red-100">
+                  <service.icon size={22} className="text-brand-red" />
+               </div>
+               <div>
+                 <h3 className="font-semibold text-brand-black">{service.title}</h3>
+                 <p className="text-xs text-gray-500">{service.desc}</p>
+               </div>
+            </div>
+          ))}
+        </div>
+        <div className="marquee-content group-hover:pause" aria-hidden="true">
+          {popularServices.map((service, idx) => (
+            <div key={`marquee-2-${idx}`} className="marquee-card">
+               <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center shrink-0 border border-red-100">
+                  <service.icon size={22} className="text-brand-red" />
+               </div>
+               <div>
+                 <h3 className="font-semibold text-brand-black">{service.title}</h3>
+                 <p className="text-xs text-gray-500">{service.desc}</p>
+               </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
 function WhyChooseUsSection() {
   const features = [
     { icon: Zap, title: 'Fast & Accurate', desc: 'Reports within 24h with 99.9% accuracy.', color: 'from-amber-500 to-orange-600' },
@@ -273,7 +342,7 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      
+      <PopularServicesSection />
       <WhyChooseUsSection />
       <IndustriesSection />
 
