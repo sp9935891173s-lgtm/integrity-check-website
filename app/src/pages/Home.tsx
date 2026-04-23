@@ -4,12 +4,11 @@ import {
   Shield, Zap, Lock, Headphones, Star, ArrowRight, CheckCircle,
   Stethoscope, Laptop, Landmark, Factory, ShoppingCart,
   School, UserSearch, Building2, Home as HomeIcon, Truck, Hotel, Wallet,
-  FlaskRound, Scale, Heart, ShieldCheck, Clock, TrendingUp,
+  FlaskRound, Scale, Heart, ShieldCheck,
   FileText, MapPin, Briefcase, GraduationCap
 } from 'lucide-react';
 
 function HeroSection() {
-
   return (
     <section className="relative min-h-[92vh] home-hero overflow-hidden flex items-center">
       <div className="absolute inset-0 home-hero-bg" />
@@ -60,55 +59,61 @@ function HeroSection() {
             style={{ animationDelay: '0.3s' }}
           >
             <div className="absolute top-1/2 left-1/2 w-[160%] h-[160%] -translate-x-1/2 -translate-y-1/2 pointer-events-auto flex justify-center items-center">
-              <iframe 
-  src="https://my.spline.design/genkubgreetingrobot-mxQGdsyCKCaVTkcprNOsvIVZ/" 
-  frameBorder="0" 
-  className="w-full h-full scale-[0.6] origin-center"
-  style={{ background: 'transparent' }}
-  title="Spline 3D Robot"
-></iframe>
-{/* Watermark hider - covers bottom-right of scaled iframe */}
-<div
-  style={{
-    position: 'absolute',
-    bottom: '18%',
-    right: '8%',
-    width: '200px',
-    height: '50px',
-    background: 'linear-gradient(135deg, #0d0d1f 0%, #0a0a1a 100%)',
-    zIndex: 30,
-    borderRadius: '4px',
-  }}
-/>
-/
+              <iframe
+                src="https://my.spline.design/genkubgreetingrobot-mxQGdsyCKCaVTkcprNOsvIVZ/"
+                frameBorder="0"
+                className="w-full h-full scale-[0.6] origin-center"
+                style={{ background: 'transparent' }}
+                title="Spline 3D Robot"
+              />
+              {/* Watermark hider */}
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: '18%',
+                  right: '4%',
+                  width: '260px',
+                  height: '55px',
+                  background: '#07071a',
+                  zIndex: 30,
+                  borderRadius: '10px',
+                  pointerEvents: 'none',
+                }}
+              />
             </div>
 
-            {/* Floating badges */}
-            <div className="absolute top-8 -right-4 home-glass-badge rounded-xl px-4 py-3 home-float-card z-20 pointer-events-none">
-              <div className="flex items-center gap-2">
-                <CheckCircle size={16} className="text-green-400" />
+            {/* Verified badge - top LEFT */}
+            <div className="absolute top-6 left-4 home-glass-badge rounded-2xl px-5 py-3 home-float-card z-20 pointer-events-none">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center">
+                  <CheckCircle size={18} className="text-green-400" />
+                </div>
                 <div>
-                  <div className="text-white text-xs font-medium">Verified ✓</div>
-                  <div className="text-gray-500 text-[10px]">Rajesh S. — Just now</div>
+                  <div className="text-white text-sm font-semibold">Background Verified ✓</div>
+                  <div className="text-gray-400 text-[11px]">Sunil P. — Just now</div>
                 </div>
               </div>
             </div>
-            <div className="absolute bottom-12 -left-6 home-glass-badge rounded-xl px-4 py-3 home-float-card-2 z-20 pointer-events-none">
-              <div className="flex items-center gap-2">
-                <Shield size={16} className="text-brand-red" />
+
+            {/* Accuracy badge - bottom right, lower */}
+            <div className="absolute bottom-3 right-4 home-glass-badge rounded-2xl px-5 py-3 home-float-card-2 z-20 pointer-events-none">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-brand-red/20 flex items-center justify-center">
+                  <Shield size={18} className="text-brand-red" />
+                </div>
                 <div>
-                  <div className="text-white text-xs font-medium">99.9% Accuracy</div>
-                  <div className="text-gray-500 text-[10px]">Industry Leading</div>
+                  <div className="text-white text-sm font-semibold">99.9% Accuracy</div>
+                  <div className="text-gray-400 text-[11px]">Industry Leading</div>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>
     </section>
   );
 }
-
 
 const popularServices = [
   { icon: ShieldCheck, title: 'Comprehensive Background Check', desc: 'Full profile verification' },
@@ -125,7 +130,6 @@ const popularServices = [
 
 function PopularServicesSection() {
   const { ref, isRevealed } = useScrollReveal();
-  
   return (
     <section ref={ref} className="py-16 bg-white border-b border-gray-100 overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
@@ -140,33 +144,31 @@ function PopularServicesSection() {
       </div>
 
       <div className="relative w-full flex overflow-hidden group py-4">
-        {/* Left and Right Gradients for smooth fade effect */}
         <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
-
         <div className="marquee-content group-hover:pause">
           {popularServices.map((service, idx) => (
             <div key={`marquee-1-${idx}`} className="marquee-card">
-               <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center shrink-0 border border-red-100">
-                  <service.icon size={22} className="text-brand-red" />
-               </div>
-               <div>
-                 <h3 className="font-semibold text-brand-black">{service.title}</h3>
-                 <p className="text-xs text-gray-500">{service.desc}</p>
-               </div>
+              <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center shrink-0 border border-red-100">
+                <service.icon size={22} className="text-brand-red" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-brand-black">{service.title}</h3>
+                <p className="text-xs text-gray-500">{service.desc}</p>
+              </div>
             </div>
           ))}
         </div>
         <div className="marquee-content group-hover:pause" aria-hidden="true">
           {popularServices.map((service, idx) => (
             <div key={`marquee-2-${idx}`} className="marquee-card">
-               <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center shrink-0 border border-red-100">
-                  <service.icon size={22} className="text-brand-red" />
-               </div>
-               <div>
-                 <h3 className="font-semibold text-brand-black">{service.title}</h3>
-                 <p className="text-xs text-gray-500">{service.desc}</p>
-               </div>
+              <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center shrink-0 border border-red-100">
+                <service.icon size={22} className="text-brand-red" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-brand-black">{service.title}</h3>
+                <p className="text-xs text-gray-500">{service.desc}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -174,7 +176,6 @@ function PopularServicesSection() {
     </section>
   );
 }
-
 
 function WhyChooseUsSection() {
   const features = [
@@ -246,7 +247,10 @@ function IndustriesSection() {
               <div className="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center shrink-0">
                 <ind.icon size={20} className="text-brand-red" />
               </div>
-              <div><div className="font-semibold text-brand-black text-sm">{ind.title}</div><div className="text-gray-400 text-xs">{ind.service}</div></div>
+              <div>
+                <div className="font-semibold text-brand-black text-sm">{ind.title}</div>
+                <div className="text-gray-400 text-xs">{ind.service}</div>
+              </div>
             </div>
           ))}
         </div>
@@ -257,10 +261,6 @@ function IndustriesSection() {
     </section>
   );
 }
-
-
-
-
 
 function CTABanner() {
   const { ref, isRevealed } = useScrollReveal();
@@ -286,8 +286,6 @@ export default function Home() {
       <WhyChooseUsSection />
       <PopularServicesSection />
       <IndustriesSection />
-
-      
       <CTABanner />
     </>
   );
