@@ -1,6 +1,5 @@
 import { Link } from 'react-router';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-import { useRef, useState, useCallback } from 'react';
 import {
   Shield, Zap, Lock, Headphones, Star, ArrowRight, CheckCircle,
   Stethoscope, Laptop, Landmark, Factory, ShoppingCart,
@@ -10,22 +9,6 @@ import {
 } from 'lucide-react';
 
 function HeroSection() {
-  const laptopRef = useRef<HTMLDivElement>(null);
-  const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0, glareX: 50, glareY: 50 });
-
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (!laptopRef.current) return;
-    const rect = laptopRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width;  // 0..1
-    const y = (e.clientY - rect.top) / rect.height;   // 0..1
-    const rotateY = (0.5 - x) * 25;  // +12.5 to -12.5 degrees (follows cursor)
-    const rotateX = (0.5 - y) * 15;  // +7.5 to -7.5 degrees (follows cursor)
-    setTilt({ rotateX, rotateY, glareX: x * 100, glareY: y * 100 });
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    setTilt({ rotateX: 0, rotateY: 0, glareX: 50, glareY: 50 });
-  }, []);
 
   return (
     <section className="relative min-h-[92vh] home-hero overflow-hidden flex items-center">
@@ -71,77 +54,22 @@ function HeroSection() {
             </div>
           </div>
 
-          {/* ===== 3D Laptop with cursor-following tilt ===== */}
+          {/* ===== 3D Spline Robot ===== */}
           <div
-            className="hidden lg:block relative animate-fade-in-up"
-            style={{ animationDelay: '0.3s', perspective: '1400px' }}
-            ref={laptopRef}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
+            className="hidden lg:block relative w-full h-[550px] animate-fade-in-up"
+            style={{ animationDelay: '0.3s' }}
           >
-            <div
-              className="monitor-3d"
-              style={{
-                transform: `rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
-                transition: 'transform 0.18s cubic-bezier(0.22, 1, 0.36, 1)',
-                transformStyle: 'preserve-3d',
-              }}
-            >
-              {/* Monitor Screen Panel */}
-              <div className="monitor-bezel">
-                <div className="monitor-camera" />
-                <div className="monitor-screen">
-                  <div
-                    className="monitor-glare"
-                    style={{
-                      background: `radial-gradient(ellipse at ${tilt.glareX}% ${tilt.glareY}%, rgba(255,255,255,0.14) 0%, transparent 55%)`,
-                    }}
-                  />
-                  <div className="p-4 relative h-full">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center">
-                          <Shield size={16} className="text-white" />
-                        </div>
-                        <div>
-                          <div className="text-white font-semibold text-xs">Verification Dashboard</div>
-                          <div className="text-gray-500 text-[10px]">Real-time monitoring</div>
-                        </div>
-                      </div>
-                      <div className="home-glass-badge px-2 py-0.5 rounded-full">
-                        <span className="text-green-400 text-[10px] font-medium">● Live</span>
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-2 mb-3">
-                      <div className="home-inner-card rounded-lg p-2.5">
-                        <div className="text-gray-500 text-[10px] mb-0.5">Verified Today</div>
-                        <div className="text-white text-lg font-bold leading-tight">2,847</div>
-                        <div className="text-green-400 text-[10px] flex items-center gap-0.5"><TrendingUp size={9} />+12.5%</div>
-                      </div>
-                      <div className="home-inner-card rounded-lg p-2.5">
-                        <div className="text-gray-500 text-[10px] mb-0.5">Avg. Time</div>
-                        <div className="text-white text-lg font-bold leading-tight">4.2h</div>
-                        <div className="text-green-400 text-[10px] flex items-center gap-0.5"><Clock size={9} />-18% faster</div>
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      {[{l:'Criminal Check',w:'92%',c:'from-red-500 to-red-600'},{l:'Education',w:'87%',c:'from-indigo-500 to-purple-500'},{l:'Employment',w:'78%',c:'from-amber-500 to-orange-500'}].map((p,i) => (
-                        <div key={i}>
-                          <div className="flex justify-between text-[10px] mb-0.5"><span className="text-gray-400">{p.l}</span><span className="text-gray-500">{p.w}</span></div>
-                          <div className="h-1 bg-white/5 rounded-full overflow-hidden"><div className={`h-full bg-gradient-to-r ${p.c} rounded-full home-progress-bar`} style={{'--progress-width': p.w} as React.CSSProperties} /></div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <div className="monitor-brand">INTEGRITY CHECK</div>
-              </div>
-              {/* Monitor Stand */}
-              <div className="monitor-stand-neck" />
-              <div className="monitor-stand-base" />
-            </div>
+            <iframe 
+              src="https://my.spline.design/genkubgreetingrobot-mxQGdsyCKCaVTkcprNOsvIVZ/" 
+              frameBorder="0" 
+              width="100%" 
+              height="100%" 
+              style={{ background: 'transparent' }}
+              title="Spline 3D Robot"
+            ></iframe>
+            
             {/* Floating badges */}
-            <div className="absolute -top-4 -right-2 home-glass-badge rounded-xl px-4 py-3 home-float-card z-20">
+            <div className="absolute top-12 -left-4 home-glass-badge rounded-xl px-4 py-3 home-float-card z-20 pointer-events-none">
               <div className="flex items-center gap-2">
                 <CheckCircle size={16} className="text-green-400" />
                 <div>
@@ -150,7 +78,7 @@ function HeroSection() {
                 </div>
               </div>
             </div>
-            <div className="absolute bottom-8 -left-6 home-glass-badge rounded-xl px-4 py-3 home-float-card-2 z-20">
+            <div className="absolute bottom-4 right-4 home-glass-badge bg-[#060612] rounded-xl px-4 py-3 home-float-card-2 z-20 pointer-events-none border border-white/10 shadow-2xl">
               <div className="flex items-center gap-2">
                 <Shield size={16} className="text-brand-red" />
                 <div>
