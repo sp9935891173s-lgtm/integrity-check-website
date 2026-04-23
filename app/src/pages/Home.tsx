@@ -1,11 +1,9 @@
 import { Link } from 'react-router';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-import { useCountUp } from '@/hooks/useCountUp';
 import { useRef, useState, useCallback } from 'react';
 import {
-  Shield, Briefcase, GraduationCap, MapPin, FlaskConical, Users,
-  Zap, Lock, Headphones, Star, ArrowRight, FileText, Search, CheckCircle,
-  ChevronRight, Stethoscope, Laptop, Landmark, Factory, ShoppingCart,
+  Shield, Zap, Lock, Headphones, Star, ArrowRight, CheckCircle,
+  Stethoscope, Laptop, Landmark, Factory, ShoppingCart,
   School, UserSearch, Building2, Home as HomeIcon, Truck, Hotel, Wallet,
   FlaskRound, Scale, Heart, ShieldCheck, Clock, TrendingUp
 } from 'lucide-react';
@@ -164,19 +162,6 @@ function HeroSection() {
         </div>
       </div>
     </section>
-  );
-}
-
-function CountUpStat({ end, suffix = '', prefix = '', label, icon: Icon, delay = 0 }: { end: number; suffix?: string; prefix?: string; label: string; icon: React.ComponentType<{size?:number;className?:string}>; delay?: number }) {
-  const { ref, display } = useCountUp({ end, duration: 2000, delay, suffix, prefix });
-  return (
-    <div ref={ref} className="text-center">
-      <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-gradient-to-br from-red-500/20 to-red-600/10 flex items-center justify-center">
-        <Icon size={22} className="text-brand-red" />
-      </div>
-      <div className="text-white text-3xl font-bold mb-1 tabular-nums">{display}</div>
-      <div className="text-gray-500 text-sm">{label}</div>
-    </div>
   );
 }
 
