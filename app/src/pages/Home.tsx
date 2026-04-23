@@ -61,12 +61,25 @@ function HeroSection() {
           >
             <div className="absolute top-1/2 left-1/2 w-[160%] h-[160%] -translate-x-1/2 -translate-y-1/2 pointer-events-auto flex justify-center items-center">
               <iframe 
-                src="https://my.spline.design/genkubgreetingrobot-mxQGdsyCKCaVTkcprNOsvIVZ/" 
-                frameBorder="0" 
-                className="w-full h-full scale-[0.6] origin-center"
-                style={{ background: 'transparent' }}
-                title="Spline 3D Robot"
-              ></iframe>
+  src="https://my.spline.design/genkubgreetingrobot-mxQGdsyCKCaVTkcprNOsvIVZ/" 
+  frameBorder="0" 
+  className="w-full h-full scale-[0.6] origin-center"
+  style={{ background: 'transparent' }}
+  title="Spline 3D Robot"
+></iframe>
+{/* Watermark hider */}
+<div
+  style={{
+    position: 'absolute',
+    bottom: '10px',
+    right: '10px',
+    width: '180px',
+    height: '40px',
+    background: '#060612',
+    borderRadius: '8px',
+    zIndex: 30,
+  }}
+/>
             </div>
 
             {/* Floating badges */}
