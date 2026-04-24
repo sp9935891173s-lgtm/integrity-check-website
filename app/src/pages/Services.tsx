@@ -42,9 +42,6 @@ function HeroSection() {
       <div className="home-orb home-orb-2" style={{ bottom: '10%', left: '5%' }} />
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-red via-red-400 to-brand-red" />
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <span className="inline-block px-4 py-1.5 bg-white/10 text-white text-sm font-medium rounded-full mb-6 border border-white/20">
-          20+ Verification Services
-        </span>
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
           India's Most{' '}
           <span className="home-gradient-text">Comprehensive</span>{' '}
@@ -53,14 +50,6 @@ function HeroSection() {
         <p className="text-white/70 text-lg max-w-2xl mx-auto mb-10">
           From criminal records to global screening — we cover every aspect of background verification to help you hire with confidence.
         </p>
-        <div className="grid grid-cols-3 gap-6 max-w-lg mx-auto">
-          {[{ value: '20+', label: 'Services' }, { value: '99.9%', label: 'Accuracy' }, { value: '24hr', label: 'Turnaround' }].map((stat, i) => (
-            <div key={i} className="text-center p-4 rounded-xl bg-white/5 border border-white/10">
-              <div className="text-2xl font-bold text-brand-red">{stat.value}</div>
-              <div className="text-gray-400 text-sm">{stat.label}</div>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );
@@ -293,9 +282,8 @@ export default function Services() {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`shrink-0 px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
-                  activeCategory === cat ? 'bg-brand-red text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                }`}
+                className={`shrink-0 px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${activeCategory === cat ? 'bg-brand-red text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  }`}
               >
                 {cat}
                 {cat !== 'All' && (
