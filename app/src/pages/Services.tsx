@@ -32,6 +32,7 @@ const services = [
 
 const categories = ['All', 'Identity', 'Criminal', 'Employment', 'Financial', 'Digital', 'Health', 'Global'];
 
+/* ───────── Hero ───────── */
 function HeroSection() {
   return (
     <section className="relative pt-44 pb-24 bg-brand-black overflow-hidden">
@@ -63,6 +64,7 @@ function HeroSection() {
   );
 }
 
+/* ───────── Service Card ───────── */
 function ServiceCard({ service, index, onClick }: { service: typeof services[0]; index: number; onClick: () => void }) {
   const { ref, isRevealed } = useScrollReveal();
   return (
@@ -93,12 +95,21 @@ function ServiceCard({ service, index, onClick }: { service: typeof services[0];
   );
 }
 
+/* ───────── Modal — FIXED: instant open, close only on backdrop click ───────── */
 function ServiceModal({ service, onClose }: { service: typeof services[0]; onClose: () => void }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-      <div className="relative bg-white rounded-2xl p-8 max-w-lg w-full shadow-2xl" onClick={(e) => e.stopPropagation()}>
-        <button onClick={onClose} className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 transition-colors">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      {/* Backdrop — click to close */}
+      <div
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        onClick={onClose}
+      />
+      {/* Modal box — clicks here do NOT close */}
+      <div className="relative bg-white rounded-2xl p-8 max-w-lg w-full shadow-2xl z-10">
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 transition-colors"
+        >
           <X size={20} className="text-gray-500" />
         </button>
         <div className="flex items-center gap-4 mb-6">
@@ -124,7 +135,10 @@ function ServiceModal({ service, onClose }: { service: typeof services[0]; onClo
             ))}
           </ul>
         </div>
-        <Link to="/contact" className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-brand-red text-white font-semibold rounded-xl hover:bg-brand-red-dark transition-all duration-200 hover:shadow-lg">
+        <Link
+          to="/contact"
+          className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-brand-red text-white font-semibold rounded-xl hover:bg-brand-red-dark transition-all duration-200 hover:shadow-lg"
+        >
           Get Started with {service.title} <ArrowRight size={16} />
         </Link>
       </div>
@@ -132,6 +146,7 @@ function ServiceModal({ service, onClose }: { service: typeof services[0]; onClo
   );
 }
 
+/* ───────── CTA ───────── */
 function CTASection() {
   const { ref, isRevealed } = useScrollReveal();
   return (
@@ -153,6 +168,7 @@ function CTASection() {
   );
 }
 
+/* ───────── Main ───────── */
 export default function Services() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
@@ -187,13 +203,25 @@ export default function Services() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {filtered.map((service, i) => (
-              <ServiceCard key={i} service={service} index={i} onClick={() => setSelectedService(service)} />
+              <ServiceCard
+                key={i}
+                service={service}
+                index={i}
+                onClick={() => setSelectedService(service)}
+              />
             ))}
           </div>
         </div>
       </section>
+
       <CTASection />
-      {selectedService && <ServiceModal service={selectedService} onClose={() => setSelectedService(null)} />}
+
+      {selectedService && (
+        <ServiceModal
+          service={selectedService}
+          onClose={() => setSelectedService(null)}
+        />
+      )}
     </>
   );
 }
