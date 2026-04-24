@@ -221,12 +221,7 @@ const industries = [
   },
 ];
 
-const stats = [
-  { icon: Users, value: '16+', label: 'Industries Served' },
-  { icon: CheckCircle, value: '2M+', label: 'Verifications Done' },
-  { icon: Clock, value: '24 Hrs', label: 'Avg Turnaround' },
-  { icon: Award, value: '99.9%', label: 'Accuracy Rate' },
-];
+
 
 /* ───────── Hero ───────── */
 function HeroSection() {
@@ -249,16 +244,7 @@ function HeroSection() {
           Specialized background screening solutions for 16+ industries across India — from Healthcare to Security Services.
         </p>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
-          {stats.map((s, i) => (
-            <div key={i} className="rounded-2xl border border-white/10 p-5 text-center" style={{ background: 'rgba(255,255,255,0.05)' }}>
-              <s.icon size={24} className="text-brand-red mx-auto mb-2" />
-              <div className="text-2xl font-bold text-white">{s.value}</div>
-              <div className="text-gray-400 text-xs mt-1">{s.label}</div>
-            </div>
-          ))}
-        </div>
+
       </div>
     </section>
   );
