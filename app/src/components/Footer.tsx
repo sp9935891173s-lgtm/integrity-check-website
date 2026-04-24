@@ -37,23 +37,8 @@ const industries = [
   { path: '/industries', label: 'Logistics' },
 ];
 
-const policyLinks = [
-  'Terms & Conditions',
-  'Privacy Policy',
-  'Applicant Privacy Policy',
-  'Client Privacy Policy',
-  'Conditions of Use',
-  'Cookies Policy',
-  'General Terms',
-  'Refund Policy',
-  'Recruitment of Ex-Offenders',
-  'Handling of DBS Certificate',
-  'Statement of Fair Processing',
-  'Credit Reference Agencies',
-  'Anti Slavery Policy Statement',
-  'Environmental Statement',
-  'Data Processing Agreement',
-];
+
+
 
 export default function Footer() {
   return (

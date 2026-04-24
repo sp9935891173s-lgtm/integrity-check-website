@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import {
-  Shield, FileCheck, Globe, ChevronDown, ArrowRight, BookOpen, Server, UserCheck,
+  Shield, Globe, ChevronDown, ArrowRight, BookOpen, Server, UserCheck,
   Building2, CreditCard, GraduationCap, Landmark, IndianRupee, FileText, Scale, Lock,
-  X, CheckCircle, Award, Users, Clock
+  X, CheckCircle
 } from 'lucide-react';
 
 /* ───────── Data ───────── */
