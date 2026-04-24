@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Shield, Briefcase, GraduationCap, MapPin, FlaskConical, Users,
   CreditCard, Fingerprint, Globe, Award, Monitor, Database, ArrowRight, CheckCircle,
@@ -61,19 +62,24 @@ function HeroSection() {
 function ServiceCard({ service, index, onClick }: { service: typeof services[0]; index: number; onClick: () => void }) {
   const { ref, isRevealed } = useScrollReveal();
   return (
-    <div
+    <motion.div
       ref={ref}
+      layoutId={`card-${service.title}`}
       onClick={onClick}
-      className={`group bg-white rounded-2xl p-6 border border-gray-100 hover:border-brand-red cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 scroll-reveal ${isRevealed ? 'revealed' : ''}`}
+      className={`group bg-white rounded-2xl p-6 border border-gray-100 hover:border-brand-red cursor-pointer scroll-reveal ${isRevealed ? 'revealed' : ''}`}
+      whileHover={{ y: -5, transition: { duration: 0.2 } }}
       style={{ transitionDelay: `${index * 60}ms` }}
     >
       <div className="flex items-start justify-between mb-4">
-        <div className="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center group-hover:bg-brand-red transition-colors duration-300">
+        <motion.div 
+          layoutId={`icon-${service.title}`}
+          className="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center group-hover:bg-brand-red transition-colors duration-300"
+        >
           <service.icon size={24} className="text-brand-red group-hover:text-white transition-colors duration-300" />
-        </div>
+        </motion.div>
         <span className="text-xs font-medium px-2 py-1 bg-red-50 text-brand-red rounded-full">{service.category}</span>
       </div>
-      <h3 className="text-base font-bold text-brand-black mb-2 group-hover:text-brand-red transition-colors">{service.title}</h3>
+      <motion.h3 layoutId={`title-${service.title}`} className="text-base font-bold text-brand-black mb-2 group-hover:text-brand-red transition-colors">{service.title}</motion.h3>
       <p className="text-gray-500 text-sm leading-relaxed mb-4 line-clamp-2">{service.desc}</p>
       <div className="flex flex-wrap gap-1.5 mb-4">
         {service.features.slice(0, 2).map((f, i) => (
@@ -84,7 +90,7 @@ function ServiceCard({ service, index, onClick }: { service: typeof services[0];
       <span className="inline-flex items-center gap-1 text-brand-red text-sm font-semibold group-hover:gap-2 transition-all duration-200">
         View Details <ArrowRight size={14} />
       </span>
-    </div>
+    </motion.div>
   );
 }
 
@@ -92,49 +98,66 @@ function ServiceCard({ service, index, onClick }: { service: typeof services[0];
 function ServiceModal({ service, onClose }: { service: typeof services[0]; onClose: () => void }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      {/* Backdrop — click to close */}
-      <div
+      {/* Backdrop */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
         onClick={onClose}
       />
-      {/* Modal box — clicks here do NOT close */}
-      <div className="relative bg-white rounded-2xl p-8 max-w-lg w-full shadow-2xl z-10">
+      {/* Modal box */}
+      <motion.div 
+        layoutId={`card-${service.title}`}
+        className="relative bg-white rounded-2xl p-8 max-w-lg w-full shadow-2xl z-10 overflow-hidden"
+      >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 transition-colors"
+          className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 transition-colors z-20"
         >
           <X size={20} className="text-gray-500" />
         </button>
+        
         <div className="flex items-center gap-4 mb-6">
-          <div className="w-16 h-16 rounded-2xl bg-brand-red flex items-center justify-center shadow-lg shadow-brand-red/30">
+          <motion.div 
+            layoutId={`icon-${service.title}`}
+            className="w-16 h-16 rounded-2xl bg-brand-red flex items-center justify-center shadow-lg shadow-brand-red/30"
+          >
             <service.icon size={32} className="text-white" />
-          </div>
+          </motion.div>
           <div>
             <span className="text-xs font-medium px-2 py-1 bg-red-50 text-brand-red rounded-full">{service.category}</span>
-            <h3 className="text-xl font-bold text-brand-black mt-1">{service.title}</h3>
+            <motion.h3 layoutId={`title-${service.title}`} className="text-xl font-bold text-brand-black mt-1">{service.title}</motion.h3>
           </div>
         </div>
-        <p className="text-gray-600 text-sm leading-relaxed mb-6">{service.desc}</p>
-        <div className="mb-6">
-          <h4 className="text-sm font-bold text-brand-black mb-3 uppercase tracking-wider">What's Included</h4>
-          <ul className="space-y-2.5">
-            {service.features.map((feature, i) => (
-              <li key={i} className="flex items-center gap-3 text-sm text-gray-600">
-                <div className="w-5 h-5 rounded-full bg-red-50 flex items-center justify-center shrink-0">
-                  <CheckCircle size={12} className="text-brand-red" />
-                </div>
-                {feature}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <Link
-          to="/contact"
-          className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-brand-red text-white font-semibold rounded-xl hover:bg-brand-red-dark transition-all duration-200 hover:shadow-lg"
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
         >
-          Get Started with {service.title} <ArrowRight size={16} />
-        </Link>
-      </div>
+          <p className="text-gray-600 text-sm leading-relaxed mb-6">{service.desc}</p>
+          <div className="mb-6">
+            <h4 className="text-sm font-bold text-brand-black mb-3 uppercase tracking-wider">What's Included</h4>
+            <ul className="space-y-2.5">
+              {service.features.map((feature, i) => (
+                <li key={i} className="flex items-center gap-3 text-sm text-gray-600">
+                  <div className="w-5 h-5 rounded-full bg-red-50 flex items-center justify-center shrink-0">
+                    <CheckCircle size={12} className="text-brand-red" />
+                  </div>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <Link
+            to="/contact"
+            className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-brand-red text-white font-semibold rounded-xl hover:bg-brand-red-dark transition-all duration-200 hover:shadow-lg"
+          >
+            Get Started with {service.title} <ArrowRight size={16} />
+          </Link>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }
@@ -209,12 +232,14 @@ export default function Services() {
 
       <CTASection />
 
-      {selectedService && (
-        <ServiceModal
-          service={selectedService}
-          onClose={() => setSelectedService(null)}
-        />
-      )}
+      <AnimatePresence>
+        {selectedService && (
+          <ServiceModal
+            service={selectedService}
+            onClose={() => setSelectedService(null)}
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 }
