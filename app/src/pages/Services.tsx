@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-import { motion, AnimatePresence } from 'framer-motion';
 import {
   Shield, Briefcase, GraduationCap, MapPin, FlaskConical, Users,
   CreditCard, Fingerprint, Globe, Award, Monitor, Database, ArrowRight, CheckCircle,
@@ -41,7 +40,6 @@ function HeroSection() {
       <div className="home-orb home-orb-1" style={{ top: '10%', right: '10%' }} />
       <div className="home-orb home-orb-2" style={{ bottom: '10%', left: '5%' }} />
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-red via-red-400 to-brand-red" />
-
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <span className="inline-block px-4 py-1.5 bg-white/10 text-white text-sm font-medium rounded-full mb-6 border border-white/20">
           20+ Verification Services
@@ -54,6 +52,14 @@ function HeroSection() {
         <p className="text-white/70 text-lg max-w-2xl mx-auto mb-10">
           From criminal records to global screening — we cover every aspect of background verification to help you hire with confidence.
         </p>
+        <div className="grid grid-cols-3 gap-6 max-w-lg mx-auto">
+          {[{ value: '20+', label: 'Services' }, { value: '99.9%', label: 'Accuracy' }, { value: '24hr', label: 'Turnaround' }].map((stat, i) => (
+            <div key={i} className="text-center p-4 rounded-xl bg-white/5 border border-white/10">
+              <div className="text-2xl font-bold text-brand-red">{stat.value}</div>
+              <div className="text-gray-400 text-sm">{stat.label}</div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -63,24 +69,27 @@ function HeroSection() {
 function ServiceCard({ service, index, onClick }: { service: typeof services[0]; index: number; onClick: () => void }) {
   const { ref, isRevealed } = useScrollReveal();
   return (
-    <motion.div
+    <div
       ref={ref}
-      layoutId={`card-${service.title}`}
       onClick={onClick}
       className={`group bg-white rounded-2xl p-6 border border-gray-100 hover:border-brand-red cursor-pointer scroll-reveal ${isRevealed ? 'revealed' : ''}`}
-      whileHover={{ y: -5, transition: { duration: 0.2 } }}
-      style={{ transitionDelay: `${index * 60}ms` }}
+      style={{ transitionDelay: `${index * 60}ms`, transition: 'transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease' }}
+      onMouseEnter={e => {
+        (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-6px)';
+        (e.currentTarget as HTMLDivElement).style.boxShadow = '0 16px 40px rgba(0,0,0,0.12)';
+      }}
+      onMouseLeave={e => {
+        (e.currentTarget as HTMLDivElement).style.transform = 'translateY(0)';
+        (e.currentTarget as HTMLDivElement).style.boxShadow = 'none';
+      }}
     >
       <div className="flex items-start justify-between mb-4">
-        <motion.div 
-          layoutId={`icon-${service.title}`}
-          className="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center group-hover:bg-brand-red transition-colors duration-300"
-        >
+        <div className="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center group-hover:bg-brand-red transition-colors duration-300">
           <service.icon size={24} className="text-brand-red group-hover:text-white transition-colors duration-300" />
-        </motion.div>
+        </div>
         <span className="text-xs font-medium px-2 py-1 bg-red-50 text-brand-red rounded-full">{service.category}</span>
       </div>
-      <motion.h3 layoutId={`title-${service.title}`} className="text-base font-bold text-brand-black mb-2 group-hover:text-brand-red transition-colors">{service.title}</motion.h3>
+      <h3 className="text-base font-bold text-brand-black mb-2 group-hover:text-brand-red transition-colors">{service.title}</h3>
       <p className="text-gray-500 text-sm leading-relaxed mb-4 line-clamp-2">{service.desc}</p>
       <div className="flex flex-wrap gap-1.5 mb-4">
         {service.features.slice(0, 2).map((f, i) => (
@@ -91,75 +100,142 @@ function ServiceCard({ service, index, onClick }: { service: typeof services[0];
       <span className="inline-flex items-center gap-1 text-brand-red text-sm font-semibold group-hover:gap-2 transition-all duration-200">
         View Details <ArrowRight size={14} />
       </span>
-    </motion.div>
+    </div>
   );
 }
 
-/* ───────── Modal — Centered Popup ───────── */
+/* ───────── Modal ───────── */
 function ServiceModal({ service, onClose }: { service: typeof services[0]; onClose: () => void }) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [onClose]);
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      {/* Backdrop */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+    <>
+      <style>{`
+        @keyframes modalPop {
+          from { opacity: 0; transform: translate(-50%, -48%) scale(0.94); }
+          to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+      `}</style>
+
+      {/* Full screen dark overlay */}
+      <div
         onClick={onClose}
+        style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 9998,
+          background: 'rgba(0,0,0,0.65)',
+          backdropFilter: 'blur(4px)',
+        }}
       />
-      {/* Modal box */}
-      <motion.div 
-        layoutId={`card-${service.title}`}
-        className="relative bg-white rounded-2xl p-8 max-w-lg w-full shadow-2xl z-10 overflow-hidden"
+
+      {/* Modal — always at screen center using transform trick */}
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          zIndex: 9999,
+          width: '100%',
+          maxWidth: '520px',
+          maxHeight: '90vh',
+          overflowY: 'auto',
+          background: '#ffffff',
+          borderRadius: '20px',
+          boxShadow: '0 32px 80px rgba(0,0,0,0.35)',
+          animation: 'modalPop 0.2s cubic-bezier(0.34,1.4,0.64,1) both',
+        }}
       >
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 transition-colors z-20"
-        >
-          <X size={20} className="text-gray-500" />
-        </button>
-        
-        <div className="flex items-center gap-4 mb-6">
-          <motion.div 
-            layoutId={`icon-${service.title}`}
-            className="w-16 h-16 rounded-2xl bg-brand-red flex items-center justify-center shadow-lg shadow-brand-red/30"
+        {/* Header */}
+        <div style={{ padding: '32px 32px 0' }}>
+          <button
+            onClick={onClose}
+            style={{
+              position: 'absolute',
+              top: '16px',
+              right: '16px',
+              width: '32px',
+              height: '32px',
+              borderRadius: '50%',
+              background: '#f3f4f6',
+              border: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              zIndex: 10,
+            }}
           >
-            <service.icon size={32} className="text-white" />
-          </motion.div>
-          <div>
-            <span className="text-xs font-medium px-2 py-1 bg-red-50 text-brand-red rounded-full">{service.category}</span>
-            <motion.h3 layoutId={`title-${service.title}`} className="text-xl font-bold text-brand-black mt-1">{service.title}</motion.h3>
+            <X size={16} color="#6b7280" />
+          </button>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
+            <div style={{
+              width: '64px', height: '64px', borderRadius: '16px',
+              background: '#e53935', display: 'flex', alignItems: 'center',
+              justifyContent: 'center', flexShrink: 0,
+              boxShadow: '0 8px 24px rgba(229,57,53,0.35)',
+            }}>
+              <service.icon size={32} color="white" />
+            </div>
+            <div>
+              <span style={{
+                fontSize: '11px', fontWeight: 600, padding: '4px 10px',
+                background: '#fff1f0', color: '#e53935', borderRadius: '999px',
+              }}>{service.category}</span>
+              <h3 style={{ fontSize: '20px', fontWeight: 700, color: '#111827', marginTop: '6px' }}>{service.title}</h3>
+            </div>
           </div>
+
+          <p style={{ color: '#6b7280', fontSize: '14px', lineHeight: 1.7, marginBottom: '24px' }}>{service.desc}</p>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-        >
-          <p className="text-gray-600 text-sm leading-relaxed mb-6">{service.desc}</p>
-          <div className="mb-6">
-            <h4 className="text-sm font-bold text-brand-black mb-3 uppercase tracking-wider">What's Included</h4>
-            <ul className="space-y-2.5">
-              {service.features.map((feature, i) => (
-                <li key={i} className="flex items-center gap-3 text-sm text-gray-600">
-                  <div className="w-5 h-5 rounded-full bg-red-50 flex items-center justify-center shrink-0">
-                    <CheckCircle size={12} className="text-brand-red" />
-                  </div>
-                  {feature}
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* Body */}
+        <div style={{ padding: '0 32px 32px' }}>
+          <h4 style={{ fontSize: '11px', fontWeight: 700, color: '#111827', letterSpacing: '2px', marginBottom: '14px', textTransform: 'uppercase' }}>
+            What's Included
+          </h4>
+          <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px' }}>
+            {service.features.map((feature, i) => (
+              <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '10px 0', borderBottom: i < service.features.length - 1 ? '1px solid #f3f4f6' : 'none' }}>
+                <div style={{
+                  width: '22px', height: '22px', borderRadius: '50%',
+                  background: '#fff1f0', display: 'flex', alignItems: 'center',
+                  justifyContent: 'center', flexShrink: 0,
+                }}>
+                  <CheckCircle size={13} color="#e53935" />
+                </div>
+                <span style={{ color: '#374151', fontSize: '14px' }}>{feature}</span>
+              </li>
+            ))}
+          </ul>
+
           <Link
             to="/contact"
-            className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-brand-red text-white font-semibold rounded-xl hover:bg-brand-red-dark transition-all duration-200 hover:shadow-lg"
+            onClick={onClose}
+            style={{
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              gap: '8px', width: '100%', padding: '16px',
+              background: '#e53935', color: 'white', fontWeight: 600,
+              fontSize: '15px', borderRadius: '12px', textDecoration: 'none',
+              boxShadow: '0 4px 16px rgba(229,57,53,0.4)',
+            }}
           >
             Get Started with {service.title} <ArrowRight size={16} />
           </Link>
-        </motion.div>
-      </motion.div>
-    </div>
+        </div>
+      </div>
+    </>
   );
 }
 
@@ -195,7 +271,7 @@ export default function Services() {
     <>
       <HeroSection />
 
-      {/* Category Filter */}
+      {/* Sticky Category Filter */}
       <div className="sticky top-16 z-30 bg-white border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex gap-2 overflow-x-auto pb-1">
@@ -204,28 +280,23 @@ export default function Services() {
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
                 className={`shrink-0 px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
-                  activeCategory === cat
-                    ? 'bg-brand-red text-white shadow-md'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  activeCategory === cat ? 'bg-brand-red text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
                 {cat}
-                {cat !== 'All' && (
-                  <span className="ml-1.5 text-[10px] opacity-70">
-                    ({services.filter(s => s.category === cat).length})
-                  </span>
-                )}
+                {cat !== 'All' && <span className="ml-1.5 text-[10px] opacity-70">({services.filter(s => s.category === cat).length})</span>}
               </button>
             ))}
           </div>
         </div>
       </div>
 
+      {/* Grid */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-12">
-            <div className="text-left">
-              <span className="inline-block px-4 py-1.5 bg-red-100 text-brand-red text-sm font-semibold rounded-full mb-4">All Services</span>
+          <div className="flex items-center justify-between mb-10">
+            <div>
+              <span className="inline-block px-4 py-1.5 bg-red-100 text-brand-red text-sm font-semibold rounded-full mb-3">All Services</span>
               <h2 className="text-3xl font-bold text-brand-black">Complete Verification Solutions</h2>
             </div>
             <div className="hidden sm:block text-right">
@@ -233,7 +304,7 @@ export default function Services() {
                 Showing <span className="font-semibold text-brand-black">{filtered.length}</span> services
                 {activeCategory !== 'All' && <> in <span className="text-brand-red font-semibold">{activeCategory}</span></>}
               </p>
-              <p className="text-xs text-gray-400 mt-1">Click on any service to learn more</p>
+              <p className="text-xs text-gray-400 mt-1">Click any card for details</p>
             </div>
           </div>
 
@@ -252,14 +323,12 @@ export default function Services() {
 
       <CTASection />
 
-      <AnimatePresence>
-        {selectedService && (
-          <ServiceModal
-            service={selectedService}
-            onClose={() => setSelectedService(null)}
-          />
-        )}
-      </AnimatePresence>
+      {selectedService && (
+        <ServiceModal
+          service={selectedService}
+          onClose={() => setSelectedService(null)}
+        />
+      )}
     </>
   );
 }

@@ -19,8 +19,9 @@ export default function PageTransition({ children }: { children: ReactNode }) {
 
   return (
     <div
-      className={`page-transition ${transitionStage}`}
-      onAnimationEnd={() => {
+  className={`page-transition ${transitionStage}`}
+  style={{ position: 'relative', zIndex: 0 }}
+  onAnimationEnd={() => {
         if (transitionStage === 'page-exit') {
           setDisplayChildren(children);
           setTransitionStage('page-enter');
