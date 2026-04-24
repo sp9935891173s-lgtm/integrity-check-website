@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Link } from 'react-router';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import {
@@ -73,7 +74,10 @@ function ServiceCard({ service, index, onClick }: { service: typeof services[0];
       ref={ref}
       onClick={onClick}
       className={`group bg-white rounded-2xl p-6 border border-gray-100 hover:border-brand-red cursor-pointer scroll-reveal ${isRevealed ? 'revealed' : ''}`}
-      style={{ transitionDelay: `${index * 60}ms`, transition: 'transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease' }}
+      style={{
+        transitionDelay: `${index * 60}ms`,
+        transition: 'transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease',
+      }}
       onMouseEnter={e => {
         (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-6px)';
         (e.currentTarget as HTMLDivElement).style.boxShadow = '0 16px 40px rgba(0,0,0,0.12)';
@@ -104,7 +108,7 @@ function ServiceCard({ service, index, onClick }: { service: typeof services[0];
   );
 }
 
-/* ───────── Modal ───────── */
+/* ───────── Modal — React Portal se directly body mein render ───────── */
 function ServiceModal({ service, onClose }: { service: typeof services[0]; onClose: () => void }) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
@@ -116,127 +120,137 @@ function ServiceModal({ service, onClose }: { service: typeof services[0]; onClo
     };
   }, [onClose]);
 
-  return (
+  const modalContent = (
     <>
       <style>{`
-        @keyframes modalPop {
-          from { opacity: 0; transform: translate(-50%, -48%) scale(0.94); }
-          to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        @keyframes svcModalPop {
+          0%   { opacity: 0; transform: scale(0.92); }
+          100% { opacity: 1; transform: scale(1); }
         }
       `}</style>
 
-      {/* Full screen dark overlay */}
+      {/* Full screen overlay — directly on body */}
       <div
-        onClick={onClose}
         style={{
           position: 'fixed',
           inset: 0,
-          zIndex: 9998,
-          background: 'rgba(0,0,0,0.65)',
-          backdropFilter: 'blur(4px)',
+          zIndex: 99999,
+          background: 'rgba(0,0,0,0.72)',
+          backdropFilter: 'blur(6px)',
+          WebkitBackdropFilter: 'blur(6px)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '16px',
         }}
-      />
-
-      {/* Modal — always at screen center using transform trick */}
-      <div
-        onClick={e => e.stopPropagation()}
-        style={{
-          position: 'fixed',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          zIndex: 9999,
-          width: '100%',
-          maxWidth: '520px',
-          maxHeight: '90vh',
-          overflowY: 'auto',
-          background: '#ffffff',
-          borderRadius: '20px',
-          boxShadow: '0 32px 80px rgba(0,0,0,0.35)',
-          animation: 'modalPop 0.2s cubic-bezier(0.34,1.4,0.64,1) both',
-        }}
+        onClick={onClose}
       >
-        {/* Header */}
-        <div style={{ padding: '32px 32px 0' }}>
-          <button
-            onClick={onClose}
-            style={{
-              position: 'absolute',
-              top: '16px',
-              right: '16px',
-              width: '32px',
-              height: '32px',
-              borderRadius: '50%',
-              background: '#f3f4f6',
-              border: 'none',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              zIndex: 10,
-            }}
-          >
-            <X size={16} color="#6b7280" />
-          </button>
+        {/* Modal box — stopPropagation so clicks inside don't close */}
+        <div
+          onClick={e => e.stopPropagation()}
+          style={{
+            background: '#fff',
+            borderRadius: '20px',
+            width: '100%',
+            maxWidth: '520px',
+            maxHeight: '88vh',
+            overflowY: 'auto',
+            boxShadow: '0 40px 100px rgba(0,0,0,0.45)',
+            animation: 'svcModalPop 0.18s cubic-bezier(0.34,1.4,0.64,1) both',
+            position: 'relative',
+          }}
+        >
+          {/* Header */}
+          <div style={{ padding: '28px 28px 0' }}>
+            <button
+              onClick={onClose}
+              style={{
+                position: 'absolute', top: '14px', right: '14px',
+                width: '32px', height: '32px', borderRadius: '50%',
+                background: '#f3f4f6', border: 'none', cursor: 'pointer',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}
+            >
+              <X size={16} color="#6b7280" />
+            </button>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
-            <div style={{
-              width: '64px', height: '64px', borderRadius: '16px',
-              background: '#e53935', display: 'flex', alignItems: 'center',
-              justifyContent: 'center', flexShrink: 0,
-              boxShadow: '0 8px 24px rgba(229,57,53,0.35)',
-            }}>
-              <service.icon size={32} color="white" />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px' }}>
+              <div style={{
+                width: '60px', height: '60px', borderRadius: '16px',
+                background: '#e53935', display: 'flex', alignItems: 'center',
+                justifyContent: 'center', flexShrink: 0,
+                boxShadow: '0 8px 24px rgba(229,57,53,0.3)',
+              }}>
+                <service.icon size={30} color="white" />
+              </div>
+              <div>
+                <span style={{
+                  display: 'inline-block', fontSize: '11px', fontWeight: 600,
+                  padding: '3px 10px', background: '#fff1f0', color: '#e53935',
+                  borderRadius: '999px', marginBottom: '6px',
+                }}>
+                  {service.category}
+                </span>
+                <h3 style={{ fontSize: '19px', fontWeight: 700, color: '#111827', margin: 0 }}>
+                  {service.title}
+                </h3>
+              </div>
             </div>
-            <div>
-              <span style={{
-                fontSize: '11px', fontWeight: 600, padding: '4px 10px',
-                background: '#fff1f0', color: '#e53935', borderRadius: '999px',
-              }}>{service.category}</span>
-              <h3 style={{ fontSize: '20px', fontWeight: 700, color: '#111827', marginTop: '6px' }}>{service.title}</h3>
-            </div>
+
+            <p style={{ color: '#6b7280', fontSize: '14px', lineHeight: 1.7, marginBottom: '20px' }}>
+              {service.desc}
+            </p>
           </div>
 
-          <p style={{ color: '#6b7280', fontSize: '14px', lineHeight: 1.7, marginBottom: '24px' }}>{service.desc}</p>
-        </div>
+          {/* Body */}
+          <div style={{ padding: '0 28px 28px' }}>
+            <h4 style={{
+              fontSize: '11px', fontWeight: 700, color: '#111827',
+              letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '12px',
+            }}>
+              What's Included
+            </h4>
 
-        {/* Body */}
-        <div style={{ padding: '0 32px 32px' }}>
-          <h4 style={{ fontSize: '11px', fontWeight: 700, color: '#111827', letterSpacing: '2px', marginBottom: '14px', textTransform: 'uppercase' }}>
-            What's Included
-          </h4>
-          <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px' }}>
-            {service.features.map((feature, i) => (
-              <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '10px 0', borderBottom: i < service.features.length - 1 ? '1px solid #f3f4f6' : 'none' }}>
-                <div style={{
-                  width: '22px', height: '22px', borderRadius: '50%',
-                  background: '#fff1f0', display: 'flex', alignItems: 'center',
-                  justifyContent: 'center', flexShrink: 0,
+            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px' }}>
+              {service.features.map((feature, i) => (
+                <li key={i} style={{
+                  display: 'flex', alignItems: 'center', gap: '12px',
+                  padding: '10px 0',
+                  borderBottom: i < service.features.length - 1 ? '1px solid #f3f4f6' : 'none',
                 }}>
-                  <CheckCircle size={13} color="#e53935" />
-                </div>
-                <span style={{ color: '#374151', fontSize: '14px' }}>{feature}</span>
-              </li>
-            ))}
-          </ul>
+                  <div style={{
+                    width: '22px', height: '22px', borderRadius: '50%',
+                    background: '#fff1f0', display: 'flex', alignItems: 'center',
+                    justifyContent: 'center', flexShrink: 0,
+                  }}>
+                    <CheckCircle size={13} color="#e53935" />
+                  </div>
+                  <span style={{ color: '#374151', fontSize: '14px' }}>{feature}</span>
+                </li>
+              ))}
+            </ul>
 
-          <Link
-            to="/contact"
-            onClick={onClose}
-            style={{
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              gap: '8px', width: '100%', padding: '16px',
-              background: '#e53935', color: 'white', fontWeight: 600,
-              fontSize: '15px', borderRadius: '12px', textDecoration: 'none',
-              boxShadow: '0 4px 16px rgba(229,57,53,0.4)',
-            }}
-          >
-            Get Started with {service.title} <ArrowRight size={16} />
-          </Link>
+            <Link
+              to="/contact"
+              onClick={onClose}
+              style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                gap: '8px', width: '100%', padding: '15px',
+                background: '#e53935', color: 'white', fontWeight: 700,
+                fontSize: '15px', borderRadius: '12px', textDecoration: 'none',
+                boxShadow: '0 4px 16px rgba(229,57,53,0.35)',
+              }}
+            >
+              Get Started with {service.title} <ArrowRight size={16} />
+            </Link>
+          </div>
         </div>
       </div>
     </>
   );
+
+  // Portal — renders directly into document.body, bypasses ALL parent transforms
+  return createPortal(modalContent, document.body);
 }
 
 /* ───────── CTA ───────── */
@@ -284,7 +298,9 @@ export default function Services() {
                 }`}
               >
                 {cat}
-                {cat !== 'All' && <span className="ml-1.5 text-[10px] opacity-70">({services.filter(s => s.category === cat).length})</span>}
+                {cat !== 'All' && (
+                  <span className="ml-1.5 text-[10px] opacity-70">({services.filter(s => s.category === cat).length})</span>
+                )}
               </button>
             ))}
           </div>
