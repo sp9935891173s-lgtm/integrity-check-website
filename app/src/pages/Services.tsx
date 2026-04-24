@@ -38,7 +38,7 @@ function HeroSection() {
     <section className="relative pt-44 pb-24 bg-brand-black overflow-hidden">
       <div className="absolute inset-0 opacity-10 magnify-pattern" />
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-red via-red-400 to-brand-red" />
-      <div className="absolute right-0 top-0 w-1/2 h-full opacity-5" style={{ backgroundImage: 'radial-gradient(circle at 70% 50%, #cc0000 0%, transparent 60%)' }} />
+      <div className="absolute right-0 top-0 w-1/2 h-full opacity-5" style={{ backgroundImage: 'radial-gradient(circle at 70% 50%, #410505 0%, transparent 60%)' }} />
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <span className="inline-block px-4 py-1.5 bg-brand-red/20 text-brand-red text-sm font-semibold rounded-full mb-6 border border-brand-red/30">
           20+ Verification Services
@@ -51,7 +51,14 @@ function HeroSection() {
         <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-10">
           From criminal records to global screening — we cover every aspect of background verification to help you hire with confidence.
         </p>
-
+        <div className="grid grid-cols-3 gap-6 max-w-lg mx-auto">
+          {[{ value: '20+', label: 'Services' }, { value: '99.9%', label: 'Accuracy' }, { value: '24hr', label: 'Turnaround' }].map((stat, i) => (
+            <div key={i} className="text-center p-4 rounded-xl bg-white/5 border border-white/10">
+              <div className="text-2xl font-bold text-brand-red">{stat.value}</div>
+              <div className="text-gray-400 text-sm">{stat.label}</div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
