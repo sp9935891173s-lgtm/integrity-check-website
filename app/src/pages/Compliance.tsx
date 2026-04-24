@@ -169,12 +169,7 @@ const areas = [
   },
 ];
 
-const stats = [
-  { icon: Shield, value: '12+', label: 'Compliance Frameworks' },
-  { icon: Award, value: 'ISO 27001', label: 'Certified Security' },
-  { icon: Users, value: '100%', label: 'Consent-based' },
-  { icon: Clock, value: '24/7', label: 'Secure Processing' },
-];
+
 
 /* ───────── Hero ───────── */
 function HeroSection() {
@@ -198,16 +193,7 @@ function HeroSection() {
           We adhere to the highest standards of Indian legal compliance and data protection to ensure every verification is conducted lawfully and securely.
         </p>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
-          {stats.map((s, i) => (
-            <div key={i} className="rounded-2xl border border-white/10 p-5 text-center" style={{ background: 'rgba(255,255,255,0.05)' }}>
-              <s.icon size={24} className="text-brand-red mx-auto mb-2" />
-              <div className="text-2xl font-bold text-white">{s.value}</div>
-              <div className="text-gray-400 text-xs mt-1">{s.label}</div>
-            </div>
-          ))}
-        </div>
+
       </div>
     </section>
   );
