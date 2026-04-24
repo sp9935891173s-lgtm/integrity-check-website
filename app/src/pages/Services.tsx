@@ -51,14 +51,7 @@ function HeroSection() {
         <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-10">
           From criminal records to global screening — we cover every aspect of background verification to help you hire with confidence.
         </p>
-        <div className="grid grid-cols-3 gap-6 max-w-lg mx-auto">
-          {[{ value: '20+', label: 'Services' }, { value: '99.9%', label: 'Accuracy' }, { value: '24hr', label: 'Turnaround' }].map((stat, i) => (
-            <div key={i} className="text-center p-4 rounded-xl bg-white/5 border border-white/10">
-              <div className="text-2xl font-bold text-brand-red">{stat.value}</div>
-              <div className="text-gray-400 text-sm">{stat.label}</div>
-            </div>
-          ))}
-        </div>
+
       </div>
     </section>
   );
