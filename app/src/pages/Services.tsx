@@ -36,20 +36,22 @@ const categories = ['All', 'Identity', 'Criminal', 'Employment', 'Financial', 'D
 /* ───────── Hero ───────── */
 function HeroSection() {
   return (
-    <section className="relative pt-44 pb-24 bg-brand-black overflow-hidden">
-      <div className="absolute inset-0 opacity-10 magnify-pattern" />
+    <section style={{ background: 'linear-gradient(135deg, #060612 0%, #0d0d2b 60%, #0a1a0a 100%)' }} className="relative pt-44 pb-20 overflow-hidden">
+      <div className="absolute inset-0 home-hero-grid opacity-30" />
+      <div className="home-orb home-orb-1" style={{ top: '10%', right: '10%' }} />
+      <div className="home-orb home-orb-2" style={{ bottom: '10%', left: '5%' }} />
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-red via-red-400 to-brand-red" />
-      <div className="absolute right-0 top-0 w-1/2 h-full opacity-5" style={{ backgroundImage: 'radial-gradient(circle at 70% 50%, #410505 0%, transparent 60%)' }} />
+
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <span className="inline-block px-4 py-1.5 bg-brand-red/20 text-brand-red text-sm font-semibold rounded-full mb-6 border border-brand-red/30">
+        <span className="inline-block px-4 py-1.5 bg-white/10 text-white text-sm font-medium rounded-full mb-6 border border-white/20">
           20+ Verification Services
         </span>
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
           India's Most{' '}
-          <span className="text-brand-red">Comprehensive</span>{' '}
+          <span className="home-gradient-text">Comprehensive</span>{' '}
           Screening Platform
         </h1>
-        <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-10">
+        <p className="text-white/70 text-lg max-w-2xl mx-auto mb-10">
           From criminal records to global screening — we cover every aspect of background verification to help you hire with confidence.
         </p>
       </div>
@@ -192,29 +194,48 @@ export default function Services() {
   return (
     <>
       <HeroSection />
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="inline-block px-4 py-1.5 bg-red-100 text-brand-red text-sm font-semibold rounded-full mb-4">All Services</span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-brand-black mb-4">Complete Verification Solutions</h2>
-            <p className="text-gray-500 max-w-2xl mx-auto">Click on any service to learn more about what's included.</p>
-          </div>
 
-          {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-2 mb-8">
-            {categories.map((cat) => (
+      {/* Category Filter */}
+      <div className="sticky top-16 z-30 bg-white border-b border-gray-100 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex gap-2 overflow-x-auto pb-1">
+            {categories.map(cat => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${activeCategory === cat ? 'bg-brand-red text-white shadow-lg shadow-brand-red/30' : 'bg-white text-gray-600 hover:text-brand-red border border-gray-200 hover:border-brand-red'}`}
+                className={`shrink-0 px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+                  activeCategory === cat
+                    ? 'bg-brand-red text-white shadow-md'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                }`}
               >
                 {cat}
-                {cat !== 'All' && <span className="ml-1.5 text-xs opacity-70">({services.filter(s => s.category === cat).length})</span>}
+                {cat !== 'All' && (
+                  <span className="ml-1.5 text-[10px] opacity-70">
+                    ({services.filter(s => s.category === cat).length})
+                  </span>
+                )}
               </button>
             ))}
           </div>
+        </div>
+      </div>
 
-          <p className="text-center text-gray-400 text-sm mb-8">Showing {filtered.length} of {services.length} services</p>
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between mb-12">
+            <div className="text-left">
+              <span className="inline-block px-4 py-1.5 bg-red-100 text-brand-red text-sm font-semibold rounded-full mb-4">All Services</span>
+              <h2 className="text-3xl font-bold text-brand-black">Complete Verification Solutions</h2>
+            </div>
+            <div className="hidden sm:block text-right">
+              <p className="text-gray-400 text-sm">
+                Showing <span className="font-semibold text-brand-black">{filtered.length}</span> services
+                {activeCategory !== 'All' && <> in <span className="text-brand-red font-semibold">{activeCategory}</span></>}
+              </p>
+              <p className="text-xs text-gray-400 mt-1">Click on any service to learn more</p>
+            </div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {filtered.map((service, i) => (
