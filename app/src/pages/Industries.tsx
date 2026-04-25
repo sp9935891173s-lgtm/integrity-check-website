@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Link } from 'react-router';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import {
   Stethoscope, Laptop, Landmark, Factory,
   ShoppingCart, School, UserSearch, Building2, ArrowRight,
   Home, Truck, Hotel, Wallet, FlaskConical, Scale, Heart, ShieldCheck,
-  X, CheckCircle
+  X, CheckCircle, Users, Clock, Award, Shield
 } from 'lucide-react';
 
 const categories = ['All', 'Healthcare', 'Technology', 'Finance', 'Government', 'Retail', 'Legal', 'Other'];
@@ -221,7 +222,12 @@ const industries = [
   },
 ];
 
-
+const stats = [
+  { icon: Users, value: '16+', label: 'Industries Served' },
+  { icon: CheckCircle, value: '2M+', label: 'Verifications Done' },
+  { icon: Clock, value: '24 Hrs', label: 'Avg Turnaround' },
+  { icon: Award, value: '99.9%', label: 'Accuracy Rate' },
+];
 
 /* ───────── Hero ───────── */
 function HeroSection() {
@@ -231,7 +237,6 @@ function HeroSection() {
       <div className="home-orb home-orb-1" style={{ top: '10%', right: '10%' }} />
       <div className="home-orb home-orb-2" style={{ bottom: '10%', left: '5%' }} />
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-red via-red-400 to-brand-red" />
-
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <span className="inline-block px-4 py-1.5 bg-white/10 text-white text-sm font-medium rounded-full mb-6 border border-white/20">
           Who We Serve
@@ -243,70 +248,162 @@ function HeroSection() {
         <p className="text-white/70 text-lg max-w-2xl mx-auto mb-14">
           Specialized background screening solutions for 16+ industries across India — from Healthcare to Security Services.
         </p>
-
-
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
+          {stats.map((s, i) => (
+            <div key={i} className="rounded-2xl border border-white/10 p-5 text-center" style={{ background: 'rgba(255,255,255,0.05)' }}>
+              <s.icon size={24} className="text-brand-red mx-auto mb-2" />
+              <div className="text-2xl font-bold text-white">{s.value}</div>
+              <div className="text-gray-400 text-xs mt-1">{s.label}</div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
 }
 
-/* ───────── Modal ───────── */
+/* ───────── Modal — React Portal ───────── */
 function IndustryModal({ industry, onClose }: { industry: typeof industries[0]; onClose: () => void }) {
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(4px)' }} onClick={onClose}>
-      <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl" onClick={e => e.stopPropagation()}>
-        {/* Modal Header */}
-        <div style={{ background: 'linear-gradient(135deg, #060612 0%, #1a0520 100%)' }} className="p-8 rounded-t-2xl relative">
-          <button onClick={onClose} className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">
-            <X size={16} className="text-white" />
-          </button>
-          <div className="flex items-center gap-4">
-            <div className="w-16 h-16 rounded-2xl bg-brand-red/20 border border-brand-red/30 flex items-center justify-center">
-              <industry.icon size={32} className="text-brand-red" />
-            </div>
-            <div>
-              <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold mb-2 ${industry.badgeColor}`}>{industry.badge}</span>
-              <h2 className="text-2xl font-bold text-white">{industry.title}</h2>
-            </div>
-          </div>
-          <div className="flex gap-6 mt-6">
-            <div className="text-center">
-              <div className="text-white font-bold">{industry.turnaround}</div>
-              <div className="text-gray-400 text-xs">Turnaround</div>
-            </div>
-            <div className="w-px bg-white/10" />
-            <div className="text-center">
-              <div className="text-white font-bold">{industry.compliance}</div>
-              <div className="text-gray-400 text-xs">Compliance</div>
-            </div>
-          </div>
-        </div>
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [onClose]);
 
-        {/* Modal Body */}
-        <div className="p-8">
-          <p className="text-gray-600 leading-relaxed mb-8">{industry.fullDesc}</p>
+  const modalContent = (
+    <>
+      <style>{`
+        @keyframes indModalPop {
+          0%   { opacity: 0; transform: scale(0.92); }
+          100% { opacity: 1; transform: scale(1); }
+        }
+      `}</style>
 
-          <h3 className="font-bold text-brand-black mb-4 text-lg">Verification Checks Included</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
-            {industry.checks.map((check, i) => (
-              <div key={i} className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
-                <CheckCircle size={16} className="text-green-500 shrink-0" />
-                <span className="text-gray-700 text-sm">{check}</span>
+      {/* Full screen overlay — flex center */}
+      <div
+        style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 99999,
+          background: 'rgba(0,0,0,0.72)',
+          backdropFilter: 'blur(6px)',
+          WebkitBackdropFilter: 'blur(6px)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '16px',
+        }}
+        onClick={onClose}
+      >
+        {/* Modal box */}
+        <div
+          onClick={e => e.stopPropagation()}
+          style={{
+            background: '#fff',
+            borderRadius: '20px',
+            width: '100%',
+            maxWidth: '640px',
+            maxHeight: '88vh',
+            overflowY: 'auto',
+            boxShadow: '0 40px 100px rgba(0,0,0,0.45)',
+            animation: 'indModalPop 0.18s cubic-bezier(0.34,1.4,0.64,1) both',
+            position: 'relative',
+          }}
+        >
+          {/* Dark Header */}
+          <div style={{ background: 'linear-gradient(135deg, #060612 0%, #1a0520 100%)', borderRadius: '20px 20px 0 0', padding: '28px' }}>
+            <button
+              onClick={onClose}
+              style={{
+                position: 'absolute', top: '14px', right: '14px',
+                width: '32px', height: '32px', borderRadius: '50%',
+                background: 'rgba(255,255,255,0.1)', border: 'none',
+                cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}
+            >
+              <X size={16} color="white" />
+            </button>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
+              <div style={{
+                width: '64px', height: '64px', borderRadius: '16px',
+                background: 'rgba(229,57,53,0.2)', border: '1px solid rgba(229,57,53,0.3)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+              }}>
+                <industry.icon size={32} color="#e53935" />
               </div>
-            ))}
+              <div>
+                <span style={{
+                  display: 'inline-block', fontSize: '11px', fontWeight: 600,
+                  padding: '3px 10px', background: 'rgba(255,255,255,0.1)',
+                  color: 'white', borderRadius: '999px', marginBottom: '8px',
+                }}>
+                  {industry.badge}
+                </span>
+                <h2 style={{ fontSize: '22px', fontWeight: 700, color: 'white', margin: 0 }}>
+                  {industry.title}
+                </h2>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', gap: '24px' }}>
+              <div>
+                <div style={{ color: 'white', fontWeight: 700, fontSize: '14px' }}>{industry.turnaround}</div>
+                <div style={{ color: '#9ca3af', fontSize: '11px' }}>Turnaround</div>
+              </div>
+              <div style={{ width: '1px', background: 'rgba(255,255,255,0.1)' }} />
+              <div>
+                <div style={{ color: 'white', fontWeight: 700, fontSize: '14px' }}>{industry.compliance}</div>
+                <div style={{ color: '#9ca3af', fontSize: '11px' }}>Compliance</div>
+              </div>
+            </div>
           </div>
 
-          <Link
-            to="/contact"
-            className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-red text-white font-semibold rounded-xl hover:bg-brand-red-dark transition-all shadow-lg"
-            onClick={onClose}
-          >
-            Get Started for {industry.title} <ArrowRight size={18} />
-          </Link>
+          {/* Body */}
+          <div style={{ padding: '28px' }}>
+            <p style={{ color: '#6b7280', fontSize: '14px', lineHeight: 1.7, marginBottom: '24px' }}>
+              {industry.fullDesc}
+            </p>
+
+            <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#111827', marginBottom: '16px' }}>
+              Verification Checks Included
+            </h3>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '24px' }}>
+              {industry.checks.map((check, i) => (
+                <div key={i} style={{
+                  display: 'flex', alignItems: 'center', gap: '10px',
+                  padding: '10px 12px', background: '#f9fafb', borderRadius: '10px',
+                }}>
+                  <CheckCircle size={15} color="#22c55e" style={{ flexShrink: 0 }} />
+                  <span style={{ color: '#374151', fontSize: '13px' }}>{check}</span>
+                </div>
+              ))}
+            </div>
+
+            <Link
+              to="/contact"
+              onClick={onClose}
+              style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                gap: '8px', width: '100%', padding: '15px',
+                background: '#e53935', color: 'white', fontWeight: 700,
+                fontSize: '15px', borderRadius: '12px', textDecoration: 'none',
+                boxShadow: '0 4px 16px rgba(229,57,53,0.35)',
+              }}
+            >
+              Get Started for {industry.title} <ArrowRight size={16} />
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
+
+  return createPortal(modalContent, document.body);
 }
 
 /* ───────── Industry Card ───────── */
@@ -317,10 +414,7 @@ function IndustryCard({ industry, index, onClick }: { industry: typeof industrie
       ref={ref}
       onClick={onClick}
       className={`group bg-white rounded-2xl p-6 border border-gray-100 cursor-pointer scroll-reveal ${isRevealed ? 'revealed' : ''}`}
-      style={{
-        transitionDelay: `${(index % 4) * 80}ms`,
-        transition: 'all 0.3s ease',
-      }}
+      style={{ transitionDelay: `${(index % 4) * 80}ms`, transition: 'all 0.3s ease' }}
       onMouseEnter={e => {
         (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-8px)';
         (e.currentTarget as HTMLDivElement).style.boxShadow = '0 20px 40px rgba(0,0,0,0.12)';
@@ -332,23 +426,16 @@ function IndustryCard({ industry, index, onClick }: { industry: typeof industrie
         (e.currentTarget as HTMLDivElement).style.borderColor = '#f3f4f6';
       }}
     >
-      {/* Category Badge */}
       <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold mb-4 ${industry.badgeColor}`}>
         {industry.badge}
       </span>
-
-      {/* Icon */}
       <div className="w-14 h-14 rounded-xl bg-red-50 flex items-center justify-center mb-4 group-hover:bg-brand-red transition-colors duration-300">
         <industry.icon size={28} className="text-brand-red group-hover:text-white transition-colors duration-300" />
       </div>
-
-      {/* Title & Desc */}
       <h3 className="text-base font-bold text-brand-black mb-2 group-hover:text-brand-red transition-colors">
         {industry.title}
       </h3>
       <p className="text-gray-500 text-xs leading-relaxed mb-4 line-clamp-2">{industry.desc}</p>
-
-      {/* Service Tags */}
       <div className="flex flex-wrap gap-1.5 mb-4">
         {industry.services.slice(0, 3).map((s, i) => (
           <span key={i} className="px-2 py-1 bg-gray-100 text-gray-500 text-[10px] font-medium rounded-full">{s}</span>
@@ -357,8 +444,6 @@ function IndustryCard({ industry, index, onClick }: { industry: typeof industrie
           <span className="px-2 py-1 bg-red-50 text-brand-red text-[10px] font-medium rounded-full">+{industry.services.length - 3} more</span>
         )}
       </div>
-
-      {/* CTA */}
       <div className="flex items-center justify-between">
         <span className="text-brand-red text-xs font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
           View Details <ArrowRight size={12} />
@@ -385,7 +470,7 @@ function CTASection() {
   );
 }
 
-/* ───────── Main Page ───────── */
+/* ───────── Main ───────── */
 export default function Industries() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [selectedIndustry, setSelectedIndustry] = useState<typeof industries[0] | null>(null);
@@ -401,22 +486,18 @@ export default function Industries() {
       {/* Category Filter */}
       <div className="sticky top-16 z-30 bg-white border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
+          <div className="flex gap-2 overflow-x-auto pb-1">
             {categories.map(cat => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
                 className={`shrink-0 px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
-                  activeCategory === cat
-                    ? 'bg-brand-red text-white shadow-md'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  activeCategory === cat ? 'bg-brand-red text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
                 {cat}
                 {cat !== 'All' && (
-                  <span className="ml-1.5 text-[10px] opacity-70">
-                    ({industries.filter(i => i.category === cat).length})
-                  </span>
+                  <span className="ml-1.5 text-[10px] opacity-70">({industries.filter(i => i.category === cat).length})</span>
                 )}
               </button>
             ))}
@@ -446,7 +527,6 @@ export default function Industries() {
 
       <CTASection />
 
-      {/* Modal */}
       {selectedIndustry && (
         <IndustryModal
           industry={selectedIndustry}

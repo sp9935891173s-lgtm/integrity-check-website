@@ -1,13 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Link } from 'react-router';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import {
   Shield, Globe, ChevronDown, ArrowRight, BookOpen, Server, UserCheck,
   Building2, CreditCard, GraduationCap, Landmark, IndianRupee, FileText, Scale, Lock,
-  X, CheckCircle
+  X, CheckCircle, Award, Users, Clock
 } from 'lucide-react';
 
-/* ───────── Data ───────── */
 const complianceCategories = ['All', 'Data Privacy', 'Employment', 'Finance', 'Education', 'International'];
 
 const areas = [
@@ -169,7 +169,12 @@ const areas = [
   },
 ];
 
-
+const stats = [
+  { icon: Shield, value: '12+', label: 'Compliance Frameworks' },
+  { icon: Award, value: 'ISO 27001', label: 'Certified Security' },
+  { icon: Users, value: '100%', label: 'Consent-based' },
+  { icon: Clock, value: '24/7', label: 'Secure Processing' },
+];
 
 /* ───────── Hero ───────── */
 function HeroSection() {
@@ -179,7 +184,6 @@ function HeroSection() {
       <div className="home-orb home-orb-1" style={{ top: '10%', right: '10%' }} />
       <div className="home-orb home-orb-2" style={{ bottom: '10%', left: '5%' }} />
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-red via-red-400 to-brand-red" />
-
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <span className="inline-block px-4 py-1.5 bg-white/10 text-white text-sm font-medium rounded-full mb-6 border border-white/20">
           Trust & Security
@@ -192,77 +196,177 @@ function HeroSection() {
         <p className="text-white/70 text-lg max-w-2xl mx-auto mb-14">
           We adhere to the highest standards of Indian legal compliance and data protection to ensure every verification is conducted lawfully and securely.
         </p>
-
-
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
+          {stats.map((s, i) => (
+            <div key={i} className="rounded-2xl border border-white/10 p-5 text-center" style={{ background: 'rgba(255,255,255,0.05)' }}>
+              <s.icon size={24} className="text-brand-red mx-auto mb-2" />
+              <div className="text-2xl font-bold text-white">{s.value}</div>
+              <div className="text-gray-400 text-xs mt-1">{s.label}</div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
 }
 
-/* ───────── Modal ───────── */
+/* ───────── Modal — React Portal ───────── */
 function ComplianceModal({ area, onClose }: { area: typeof areas[0]; onClose: () => void }) {
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(4px)' }} onClick={onClose}>
-      <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl" onClick={e => e.stopPropagation()}>
-        {/* Header */}
-        <div style={{ background: 'linear-gradient(135deg, #060612 0%, #0d0d2b 100%)' }} className="p-8 rounded-t-2xl relative">
-          <button onClick={onClose} className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">
-            <X size={16} className="text-white" />
-          </button>
-          <div className="flex items-center gap-4 mb-4">
-            <div className="w-14 h-14 rounded-2xl bg-brand-red/20 border border-brand-red/30 flex items-center justify-center">
-              <area.icon size={28} className="text-brand-red" />
-            </div>
-            <div>
-              <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold mb-2 ${area.badgeColor}`}>{area.badge}</span>
-              <h2 className="text-xl font-bold text-white">{area.title}</h2>
-            </div>
-          </div>
-          <div className="flex gap-6">
-            <div>
-              <div className="text-white font-bold text-sm">{area.authority}</div>
-              <div className="text-gray-400 text-xs">Governing Authority</div>
-            </div>
-            <div className="w-px bg-white/10" />
-            <div>
-              <div className="text-white font-bold text-sm">{area.year}</div>
-              <div className="text-gray-400 text-xs">Effective Since</div>
-            </div>
-          </div>
-        </div>
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [onClose]);
 
-        {/* Body */}
-        <div className="p-8">
-          <p className="text-gray-600 leading-relaxed mb-8">{area.fullDesc}</p>
+  const modalContent = (
+    <>
+      <style>{`
+        @keyframes cmpModalPop {
+          0%   { opacity: 0; transform: scale(0.92); }
+          100% { opacity: 1; transform: scale(1); }
+        }
+      `}</style>
 
-          <h3 className="font-bold text-brand-black mb-4">Key Compliance Points</h3>
-          <div className="space-y-3 mb-8">
-            {area.keyPoints.map((point, i) => (
-              <div key={i} className="flex items-start gap-3 p-3 bg-gray-50 rounded-xl">
-                <CheckCircle size={16} className="text-green-500 shrink-0 mt-0.5" />
-                <span className="text-gray-700 text-sm">{point}</span>
+      {/* Full screen overlay — flex center */}
+      <div
+        style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 99999,
+          background: 'rgba(0,0,0,0.72)',
+          backdropFilter: 'blur(6px)',
+          WebkitBackdropFilter: 'blur(6px)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '16px',
+        }}
+        onClick={onClose}
+      >
+        {/* Modal box */}
+        <div
+          onClick={e => e.stopPropagation()}
+          style={{
+            background: '#fff',
+            borderRadius: '20px',
+            width: '100%',
+            maxWidth: '640px',
+            maxHeight: '88vh',
+            overflowY: 'auto',
+            boxShadow: '0 40px 100px rgba(0,0,0,0.45)',
+            animation: 'cmpModalPop 0.18s cubic-bezier(0.34,1.4,0.64,1) both',
+            position: 'relative',
+          }}
+        >
+          {/* Dark Header */}
+          <div style={{ background: 'linear-gradient(135deg, #060612 0%, #0d0d2b 100%)', borderRadius: '20px 20px 0 0', padding: '28px' }}>
+            <button
+              onClick={onClose}
+              style={{
+                position: 'absolute', top: '14px', right: '14px',
+                width: '32px', height: '32px', borderRadius: '50%',
+                background: 'rgba(255,255,255,0.1)', border: 'none',
+                cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}
+            >
+              <X size={16} color="white" />
+            </button>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
+              <div style={{
+                width: '56px', height: '56px', borderRadius: '14px',
+                background: 'rgba(229,57,53,0.2)', border: '1px solid rgba(229,57,53,0.3)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+              }}>
+                <area.icon size={28} color="#e53935" />
               </div>
-            ))}
+              <div>
+                <span style={{
+                  display: 'inline-block', fontSize: '11px', fontWeight: 600,
+                  padding: '3px 10px', background: 'rgba(255,255,255,0.1)',
+                  color: 'white', borderRadius: '999px', marginBottom: '8px',
+                }}>
+                  {area.badge}
+                </span>
+                <h2 style={{ fontSize: '20px', fontWeight: 700, color: 'white', margin: 0 }}>
+                  {area.title}
+                </h2>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', gap: '24px' }}>
+              <div>
+                <div style={{ color: 'white', fontWeight: 700, fontSize: '14px' }}>{area.authority}</div>
+                <div style={{ color: '#9ca3af', fontSize: '11px' }}>Governing Authority</div>
+              </div>
+              <div style={{ width: '1px', background: 'rgba(255,255,255,0.1)' }} />
+              <div>
+                <div style={{ color: 'white', fontWeight: 700, fontSize: '14px' }}>{area.year}</div>
+                <div style={{ color: '#9ca3af', fontSize: '11px' }}>Effective Since</div>
+              </div>
+            </div>
           </div>
 
-          <h3 className="font-bold text-brand-black mb-4">Included Checks</h3>
-          <div className="flex flex-wrap gap-2 mb-8">
-            {area.items.map((item, i) => (
-              <span key={i} className="px-3 py-1.5 bg-red-50 text-brand-red text-xs font-medium rounded-full border border-red-100">{item}</span>
-            ))}
-          </div>
+          {/* Body */}
+          <div style={{ padding: '28px' }}>
+            <p style={{ color: '#6b7280', fontSize: '14px', lineHeight: 1.7, marginBottom: '24px' }}>
+              {area.fullDesc}
+            </p>
 
-          <Link
-            to="/contact"
-            className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-red text-white font-semibold rounded-xl hover:bg-brand-red-dark transition-all shadow-lg"
-            onClick={onClose}
-          >
-            Get Compliant Today <ArrowRight size={18} />
-          </Link>
+            <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#111827', marginBottom: '14px' }}>
+              Key Compliance Points
+            </h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px' }}>
+              {area.keyPoints.map((point, i) => (
+                <div key={i} style={{
+                  display: 'flex', alignItems: 'flex-start', gap: '10px',
+                  padding: '10px 12px', background: '#f9fafb', borderRadius: '10px',
+                }}>
+                  <CheckCircle size={15} color="#22c55e" style={{ flexShrink: 0, marginTop: '1px' }} />
+                  <span style={{ color: '#374151', fontSize: '13px' }}>{point}</span>
+                </div>
+              ))}
+            </div>
+
+            <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#111827', marginBottom: '14px' }}>
+              Included Checks
+            </h3>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '24px' }}>
+              {area.items.map((item, i) => (
+                <span key={i} style={{
+                  padding: '6px 14px', background: '#fff1f0',
+                  color: '#e53935', fontSize: '12px', fontWeight: 500,
+                  borderRadius: '999px', border: '1px solid #fecaca',
+                }}>
+                  {item}
+                </span>
+              ))}
+            </div>
+
+            <Link
+              to="/contact"
+              onClick={onClose}
+              style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                gap: '8px', width: '100%', padding: '15px',
+                background: '#e53935', color: 'white', fontWeight: 700,
+                fontSize: '15px', borderRadius: '12px', textDecoration: 'none',
+                boxShadow: '0 4px 16px rgba(229,57,53,0.35)',
+              }}
+            >
+              Get Compliant Today <ArrowRight size={16} />
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
+
+  return createPortal(modalContent, document.body);
 }
 
 /* ───────── Compliance Card ───────── */
@@ -285,21 +389,14 @@ function ComplianceCard({ area, index, onClick }: { area: typeof areas[0]; index
         (e.currentTarget as HTMLDivElement).style.borderColor = '#f3f4f6';
       }}
     >
-      {/* Badge */}
       <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold mb-4 ${area.badgeColor}`}>
         {area.badge}
       </span>
-
-      {/* Icon */}
       <div className="w-14 h-14 rounded-xl bg-red-50 flex items-center justify-center mb-4 group-hover:bg-brand-red transition-colors duration-300">
         <area.icon size={28} className="text-brand-red group-hover:text-white transition-colors duration-300" />
       </div>
-
-      {/* Content */}
       <h3 className="text-base font-bold text-brand-black mb-2 group-hover:text-brand-red transition-colors">{area.title}</h3>
       <p className="text-gray-500 text-xs leading-relaxed mb-4 line-clamp-2">{area.desc}</p>
-
-      {/* Items */}
       <div className="flex flex-wrap gap-1.5 mb-4">
         {area.items.slice(0, 3).map((item, i) => (
           <span key={i} className="px-2 py-1 bg-gray-100 text-gray-500 text-[10px] font-medium rounded-full">{item}</span>
@@ -308,8 +405,6 @@ function ComplianceCard({ area, index, onClick }: { area: typeof areas[0]; index
           <span className="px-2 py-1 bg-red-50 text-brand-red text-[10px] font-medium rounded-full">+{area.items.length - 3} more</span>
         )}
       </div>
-
-      {/* Footer */}
       <div className="flex items-center justify-between">
         <span className="text-brand-red text-xs font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
           View Details <ArrowRight size={12} />
@@ -333,7 +428,6 @@ function FAQSection() {
     { q: 'Do you conduct verification for government and PSU sectors?', a: 'Yes, we conduct verifications for government, PSU, defence sector, and private companies with special protocols including RTI Act 2005 based public records access and security clearance procedures.' },
   ];
   const { ref, isRevealed } = useScrollReveal();
-
   return (
     <section ref={ref} className="py-20 bg-gray-50">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -399,16 +493,12 @@ export default function Compliance() {
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
                 className={`shrink-0 px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
-                  activeCategory === cat
-                    ? 'bg-brand-red text-white shadow-md'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  activeCategory === cat ? 'bg-brand-red text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
                 {cat}
                 {cat !== 'All' && (
-                  <span className="ml-1.5 text-[10px] opacity-70">
-                    ({areas.filter(a => a.category === cat).length})
-                  </span>
+                  <span className="ml-1.5 text-[10px] opacity-70">({areas.filter(a => a.category === cat).length})</span>
                 )}
               </button>
             ))}
@@ -442,7 +532,6 @@ export default function Compliance() {
       <FAQSection />
       <CTASection />
 
-      {/* Modal */}
       {selectedArea && (
         <ComplianceModal
           area={selectedArea}
