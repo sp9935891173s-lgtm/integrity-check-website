@@ -7,7 +7,7 @@ const accreditations = [
     name: 'Crown Commercial Service',
     title: 'Supplier',
     desc: 'Government procurement framework supplier.',
-    icon: Building2,
+    image: '/accreditations/ccs.png',
     color: 'bg-slate-100 text-slate-700',
     borderColor: 'border-slate-200'
   },
@@ -16,7 +16,7 @@ const accreditations = [
     name: 'HM Government G-Cloud',
     title: 'Supplier',
     desc: 'Approved cloud services provider for public sector.',
-    icon: Globe,
+    image: '/accreditations/gcloud.png',
     color: 'bg-blue-50 text-blue-700',
     borderColor: 'border-blue-100'
   },
@@ -25,7 +25,7 @@ const accreditations = [
     name: 'Cyber Essentials',
     title: 'Certified',
     desc: 'Verified protection against cyber threats.',
-    icon: ShieldCheck,
+    image: '/accreditations/cyber-essentials.png',
     color: 'bg-cyan-50 text-cyan-700',
     borderColor: 'border-cyan-100'
   },
@@ -34,7 +34,7 @@ const accreditations = [
     name: 'ISO 9001:2015',
     title: 'Quality Assured',
     desc: 'International standard for quality management.',
-    icon: Award,
+    image: '/accreditations/iso-9001.png',
     color: 'bg-amber-50 text-amber-700',
     borderColor: 'border-amber-100'
   },
@@ -43,7 +43,7 @@ const accreditations = [
     name: 'ISO 14001:2015',
     title: 'Green Business',
     desc: 'Environmental management system standard.',
-    icon: Zap,
+    image: '/accreditations/iso-14001.png',
     color: 'bg-emerald-50 text-emerald-700',
     borderColor: 'border-emerald-100'
   },
@@ -52,7 +52,7 @@ const accreditations = [
     name: 'ISO 27001',
     title: 'Information Security',
     desc: 'Highest standard for data security management.',
-    icon: Lock,
+    image: '/accreditations/iso-27001.png',
     color: 'bg-indigo-50 text-indigo-700',
     borderColor: 'border-indigo-100'
   },
@@ -61,7 +61,7 @@ const accreditations = [
     name: 'nidirect',
     title: 'Government Services',
     desc: 'Official government services partner.',
-    icon: Landmark,
+    image: '/accreditations/nidirect.png',
     color: 'bg-sky-50 text-sky-700',
     borderColor: 'border-sky-100'
   },
@@ -70,7 +70,7 @@ const accreditations = [
     name: 'Disclosure Scotland',
     title: 'Registered Body',
     desc: 'Official provider for Scottish criminal records.',
-    icon: FileCheck,
+    image: '/accreditations/disclosure-scotland.png',
     color: 'bg-teal-50 text-teal-700',
     borderColor: 'border-teal-100'
   },
@@ -79,7 +79,7 @@ const accreditations = [
     name: 'Disclosure & Barring Service',
     title: 'DBS Registered',
     desc: 'Helping employers make safer recruitment decisions.',
-    icon: UserCheck,
+    image: '/accreditations/dbs.png',
     color: 'bg-purple-50 text-purple-700',
     borderColor: 'border-purple-100'
   },
@@ -88,7 +88,7 @@ const accreditations = [
     name: 'Cifas',
     title: 'READY',
     desc: 'UK\'s leading fraud prevention service.',
-    icon: Shield,
+    image: '/accreditations/cifas.png',
     color: 'bg-rose-50 text-rose-700',
     borderColor: 'border-rose-100'
   },
@@ -97,7 +97,7 @@ const accreditations = [
     name: 'PBSA',
     title: 'Professional Member',
     desc: 'Professional Background Screening Association.',
-    icon: CheckCircle,
+    image: '/accreditations/pbsa.png',
     color: 'bg-blue-100 text-blue-900',
     borderColor: 'border-blue-200'
   }
@@ -149,16 +149,20 @@ export default function Accreditations({
               }`}
               style={{ transitionDelay: `${i * 50}ms` }}
             >
-              <div className={`w-12 h-12 rounded-xl ${acc.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                <acc.icon size={24} />
+              <div className={`w-full h-16 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                <img 
+                  src={acc.image} 
+                  alt={acc.name} 
+                  className="max-w-full max-h-full object-contain"
+                />
               </div>
-              <h3 className={`text-sm font-bold leading-tight mb-1 ${isDark ? 'text-white' : 'text-brand-black'}`}>
+              <h3 className={`text-[11px] font-bold leading-tight mb-1 ${isDark ? 'text-white' : 'text-brand-black'}`}>
                 {acc.name}
               </h3>
-              <p className="text-brand-red text-[10px] font-bold uppercase tracking-wider mb-2">
+              <p className="text-brand-red text-[9px] font-bold uppercase tracking-wider mb-2">
                 {acc.title}
               </p>
-              <p className={`text-[10px] leading-relaxed line-clamp-2 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+              <p className={`text-[9px] leading-relaxed line-clamp-2 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
                 {acc.desc}
               </p>
               

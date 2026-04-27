@@ -106,6 +106,19 @@
   }
 }
 
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-50% - 24px));
+  }
+}
+
+.animate-scroll {
+  animation: scroll 40s linear infinite;
+}
+
 .animate-fade-in-up {
   animation: fadeInUp 0.6s ease-out forwards;
 }
