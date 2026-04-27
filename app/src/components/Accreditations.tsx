@@ -1,5 +1,4 @@
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-import { Shield, Award, CheckCircle, Globe, Lock, FileCheck, Landmark, Building2, UserCheck, ShieldCheck, Zap } from 'lucide-react';
 
 const accreditations = [
   {

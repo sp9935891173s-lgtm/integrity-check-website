@@ -144,15 +144,12 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
-
-          </div>
-
         </div>
       </div>
+    </div>
 
       {/* Accreditations Bar */}
-      <div className="bg-white/5 border-t border-white/10 py-8 overflow-hidden">
+      <div className="bg-white/5 border-t border-white/10 py-12 md:py-16 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-6">
           <p className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em]">Our Accreditations & Partnerships</p>
         </div>
@@ -177,7 +174,7 @@ export default function Footer() {
                     key={`${i}-${index}`}
                     src={logo.src} 
                     alt={logo.alt} 
-                    className="h-8 md:h-10 w-auto object-contain brightness-0 invert opacity-50 hover:opacity-100 hover:brightness-100 transition-all duration-300"
+                    className="h-12 md:h-16 w-auto object-contain brightness-110 opacity-90 hover:opacity-100 hover:scale-110 transition-all duration-300 mx-4"
                   />
                 ))}
               </div>
