@@ -42,12 +42,12 @@ function HeroSection() {
             </div>
             <div className="flex items-center gap-4 mt-8 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
               <div className="flex -space-x-2">
-                {['RS','PK','AK','MM'].map((i,idx) => (
+                {['RS', 'PK', 'AK', 'MM'].map((i, idx) => (
                   <div key={idx} className="w-8 h-8 rounded-full bg-gradient-to-br from-red-500 to-red-700 border-2 border-[#060612] flex items-center justify-center text-[10px] text-white font-bold">{i}</div>
                 ))}
               </div>
               <div>
-                <div className="flex gap-0.5">{[...Array(5)].map((_,i) => <Star key={i} size={12} className="text-yellow-400 fill-yellow-400" />)}</div>
+                <div className="flex gap-0.5">{[...Array(5)].map((_, i) => <Star key={i} size={12} className="text-yellow-400 fill-yellow-400" />)}</div>
                 <span className="text-gray-500 text-xs">4.9/5 from 2000+ reviews</span>
               </div>
             </div>

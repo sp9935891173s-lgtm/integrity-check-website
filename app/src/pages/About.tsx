@@ -166,7 +166,7 @@ export default function About() {
       <HeroSection />
       <StorySection />
       <MissionVisionSection />
-    
+
       <CertificationsSection />
       <CTASection />
     </>
