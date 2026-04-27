@@ -2,7 +2,6 @@ import { Routes, Route } from 'react-router'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import FloatingButtons from './components/FloatingButtons'
-import CookieConsent from './components/CookieConsent'
 import PageTransition from './components/PageTransition'
 import Home from './pages/Home'
 import Services from './pages/Services'
@@ -20,7 +19,6 @@ function Layout({ children }: { children: React.ReactNode }) {
       </main>
       <Footer />
       <FloatingButtons />
-      <CookieConsent />
     </div>
   )
 }
