@@ -1,8 +1,9 @@
 import { Link } from 'react-router';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import {
-  Target, Eye, Award, Shield, ArrowRight, Star, CheckCircle
+  Target, Eye, ArrowRight
 } from 'lucide-react';
+import Accreditations from '@/components/Accreditations';
 
 /* ───────── Hero ───────── */
 function HeroSection() {
@@ -89,51 +90,6 @@ function MissionVisionSection() {
   );
 }
 
-/* ───────── Certifications Section ───────── */
-function CertificationsSection() {
-  const certs = [
-    { icon: Shield, title: 'ISO 27001:2013', desc: 'Information Security Management' },
-    { icon: Award, title: 'ISO 9001:2015', desc: 'Quality Management System' },
-    { icon: CheckCircle, title: 'SOC 2 Type II', desc: 'Service Organization Control' },
-    { icon: Star, title: 'NASSCOM Member', desc: 'Industry Association' },
-  ];
-
-  const { ref, isRevealed } = useScrollReveal();
-
-  return (
-    <section ref={ref} className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`text-center mb-14 transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <span className="inline-block px-4 py-1.5 bg-red-100 text-brand-red text-sm font-semibold rounded-full mb-4">
-            Trust & Credentials
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-brand-black mb-4">
-            Certifications & Accreditations
-          </h2>
-          <p className="text-gray-500 max-w-2xl mx-auto">
-            Globally recognized standards that validate our commitment to security, quality, and excellence.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {certs.map((cert, i) => (
-            <div
-              key={i}
-              className={`text-center p-8 rounded-xl bg-white shadow-card hover:shadow-card-hover transition-all duration-300 scroll-reveal ${isRevealed ? 'revealed' : ''}`}
-              style={{ transitionDelay: `${i * 100}ms` }}
-            >
-              <div className="w-16 h-16 mx-auto mb-5 rounded-full bg-red-50 flex items-center justify-center">
-                <cert.icon size={28} className="text-brand-red" />
-              </div>
-              <h3 className="text-lg font-semibold text-brand-black mb-1">{cert.title}</h3>
-              <p className="text-gray-500 text-sm">{cert.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ───────── CTA ───────── */
 function CTASection() {
@@ -167,7 +123,7 @@ export default function About() {
       <StorySection />
       <MissionVisionSection />
 
-      <CertificationsSection />
+      <Accreditations />
       <CTASection />
     </>
   );
