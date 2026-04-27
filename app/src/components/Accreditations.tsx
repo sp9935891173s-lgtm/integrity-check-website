@@ -53,7 +53,8 @@ const accreditations = [
     desc: 'Highest standard for data security management.',
     image: '/accreditations/iso-27001.png',
     color: 'bg-indigo-50 text-indigo-700',
-    borderColor: 'border-indigo-100'
+    borderColor: 'border-indigo-100',
+    link: '/certificates/ISO-27001.pdf'
   },
   {
     id: 'nidirect',
@@ -136,39 +137,56 @@ export default function Accreditations({
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 sm:gap-6">
-          {accreditations.map((acc, i) => (
-            <div
-              key={acc.id}
-              className={`group relative p-6 rounded-2xl border transition-all duration-300 scroll-reveal ${
-                isRevealed ? 'revealed' : ''
-              } ${
-                isDark 
-                  ? 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20' 
-                  : 'bg-white border-gray-100 hover:shadow-xl hover:border-brand-red/20'
-              }`}
-              style={{ transitionDelay: `${i * 50}ms` }}
-            >
-              <div className={`w-full h-16 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                <img 
-                  src={acc.image} 
-                  alt={acc.name} 
-                  className="max-w-full max-h-full object-contain"
-                />
+          {accreditations.map((acc, i) => {
+            const content = (
+              <div
+                className={`group relative p-6 rounded-2xl border transition-all duration-300 h-full ${
+                  isRevealed ? 'revealed' : ''
+                } ${
+                  isDark 
+                    ? 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20' 
+                    : 'bg-white border-gray-100 hover:shadow-xl hover:border-brand-red/20'
+                }`}
+                style={{ transitionDelay: `${i * 50}ms` }}
+              >
+                <div className={`w-full h-16 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                  <img 
+                    src={acc.image} 
+                    alt={acc.name} 
+                    className="max-w-full max-h-full object-contain"
+                  />
+                </div>
+                <h3 className={`text-[11px] font-bold leading-tight mb-1 ${isDark ? 'text-white' : 'text-brand-black'}`}>
+                  {acc.name}
+                </h3>
+                <p className="text-brand-red text-[9px] font-bold uppercase tracking-wider mb-2">
+                  {acc.title}
+                </p>
+                <p className={`text-[9px] leading-relaxed line-clamp-2 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                  {acc.desc}
+                </p>
+                
+                {/* Subtle accent hover */}
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-1 bg-brand-red group-hover:w-1/2 transition-all duration-300 rounded-t-full" />
               </div>
-              <h3 className={`text-[11px] font-bold leading-tight mb-1 ${isDark ? 'text-white' : 'text-brand-black'}`}>
-                {acc.name}
-              </h3>
-              <p className="text-brand-red text-[9px] font-bold uppercase tracking-wider mb-2">
-                {acc.title}
-              </p>
-              <p className={`text-[9px] leading-relaxed line-clamp-2 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-                {acc.desc}
-              </p>
-              
-              {/* Subtle accent hover */}
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-1 bg-brand-red group-hover:w-1/2 transition-all duration-300 rounded-t-full" />
-            </div>
-          ))}
+            );
+
+            return acc.link ? (
+              <a 
+                key={acc.id} 
+                href={acc.link} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="block h-full cursor-pointer"
+              >
+                {content}
+              </a>
+            ) : (
+              <div key={acc.id} className="h-full">
+                {content}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
