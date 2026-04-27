@@ -6,7 +6,7 @@ import {
   Stethoscope, Laptop, Landmark, Factory,
   ShoppingCart, School, UserSearch, Building2, ArrowRight,
   Home, Truck, Hotel, Wallet, FlaskConical, Scale, Heart, ShieldCheck,
-  X, CheckCircle, Users, Clock, Award, Shield
+  X, CheckCircle
 } from 'lucide-react';
 
 const categories = ['All', 'Healthcare', 'Technology', 'Finance', 'Government', 'Retail', 'Legal', 'Other'];
