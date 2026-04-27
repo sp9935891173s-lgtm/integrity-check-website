@@ -122,10 +122,10 @@ const popularServices = [
   { icon: Scale, title: 'Criminal Record Check', desc: 'Court & police records' },
   { icon: GraduationCap, title: 'Education Verification', desc: 'Degree & certificate validation' },
   { icon: Briefcase, title: 'Employment History', desc: 'Past experience & tenure' },
+  { icon: FileText, title: 'Passport Verification', desc: 'Ministry of External Affairs check' },
+  { icon: Shield, title: 'Police Clearance Certificate', desc: 'Official PCC verification' },
   { icon: FlaskRound, title: 'Drug Testing', desc: 'Pre-employment screening' },
-  { icon: UserSearch, title: 'Identity Verification', desc: 'Aadhaar, PAN & Voter ID' },
-  { icon: CheckCircle, title: 'Reference Check', desc: 'Professional & personal' },
-  { icon: FileText, title: 'Court Record Check', desc: 'Civil & criminal cases' }
+  { icon: UserSearch, title: 'Identity Verification', desc: 'Aadhaar, PAN & Voter ID' }
 ];
 
 function PopularServicesSection() {
