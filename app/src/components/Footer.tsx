@@ -151,7 +151,7 @@ export default function Footer() {
       {/* Accreditations Bar */}
       <div className="bg-white/5 border-t border-white/10 py-12 md:py-16 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-6">
-          <p className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em]">Our Accreditations & Partnerships</p>
+          <p className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em]">Accreditations & Certifications</p>
         </div>
         <div className="relative group">
           <div className="flex animate-scroll hover:[animation-play-state:paused] gap-12 items-center w-max px-6">
@@ -201,7 +201,7 @@ export default function Footer() {
             </span>
             <span className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-green-400 inline-block"></span>
-            
+              <span className="text-green-400 font-medium">Open 24/7</span>
             </span>
           </div>
         </div>
