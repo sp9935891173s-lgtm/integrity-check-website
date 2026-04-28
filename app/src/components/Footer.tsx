@@ -2,12 +2,12 @@ import { Link } from 'react-router';
 import { MapPin, Phone, Mail, Facebook, Twitter, Linkedin, Youtube } from 'lucide-react';
 
 const ourSolutions = [
-  { path: '/services', label: 'Criminal Background Check' },
-  { path: '/services', label: 'Employment Verification' },
-  { path: '/services', label: 'Education Verification' },
-  { path: '/services', label: 'Address Verification' },
-  { path: '/services', label: 'Identity Verification' },
-  { path: '/services', label: 'Drug & Alcohol Testing' },
+  { path: '/services/criminal-background-check', label: 'Criminal Background Check' },
+  { path: '/services/employment-verification', label: 'Employment Verification' },
+  { path: '/services/education-verification', label: 'Education Verification' },
+  { path: '/services/address-verification', label: 'Address Verification' },
+  { path: '/services/identity-verification', label: 'Identity Verification' },
+  { path: '/services/drug-alcohol-testing', label: 'Drug & Alcohol Testing' },
 ];
 
 const resources = [
@@ -29,12 +29,12 @@ const screeningPackages = [
 ];
 
 const industries = [
-  { path: '/industries', label: 'HR & Staffing' },
-  { path: '/industries', label: 'IT & Technology' },
-  { path: '/industries', label: 'Banking & Finance' },
-  { path: '/industries', label: 'Healthcare' },
-  { path: '/industries', label: 'Real Estate' },
-  { path: '/industries', label: 'Logistics' },
+  { path: '/industries/staffing-recruitment', label: 'HR & Staffing' },
+  { path: '/industries/it-technology', label: 'IT & Technology' },
+  { path: '/industries/banking-finance', label: 'Banking & Finance' },
+  { path: '/industries/healthcare-hospitals', label: 'Healthcare' },
+  { path: '/industries/real-estate', label: 'Real Estate' },
+  { path: '/industries/logistics-transportation', label: 'Logistics' },
 ];
 
 

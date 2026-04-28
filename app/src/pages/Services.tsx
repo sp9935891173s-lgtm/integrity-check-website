@@ -1,45 +1,10 @@
-import { useState, useEffect } from 'react';
-import { createPortal } from 'react-dom';
-import { Link } from 'react-router';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { services } from '@/data/services';
 import {
-  Shield, Briefcase, GraduationCap, MapPin, FlaskConical, Users,
-  CreditCard, Fingerprint, Globe, Award, Monitor, Database, ArrowRight, CheckCircle,
-  FileText, Building2, Search, Landmark, IndianRupee, UserCheck, Wallet, X,
-  History, Stethoscope, UserCog, Gavel, ShieldAlert, BookOpen
+  ArrowRight, CheckCircle
 } from 'lucide-react';
-
-const services = [
-  { icon: MapPin, title: 'Address Verification', desc: 'Current aur permanent address ki physical aur digital verification field agents aur database ke through.', features: ['Physical Verification', 'Digital Address Check', 'Residence Duration', 'Neighborhood Check'], category: 'Identity' },
-  { icon: Fingerprint, title: 'Aadhaar Verification', desc: 'UIDAI database se Aadhaar card ki authenticity aur details verify karna.', features: ['UIDAI Database Check', 'Name & DOB Match', 'Address Confirmation', 'Biometric Link'], category: 'Identity' },
-  { icon: BookOpen, title: 'Passport Verification', desc: 'Passport details ki authentication aur validity check Ministry of External Affairs records ke through.', features: ['Passport Number Match', 'Validity Status', 'Issue Place Check', 'Database Verification'], category: 'Identity' },
-  { icon: Wallet, title: 'Bank Account Verification', desc: 'Bank account details aur ownership verify karna — fraud prevention ke liye.', features: ['Account Existence Check', 'Owner Name Match', 'IFSC Verification', 'Active Status'], category: 'Financial' },
-  { icon: Landmark, title: 'Civil Court Record Check', desc: 'Civil cases, disputes, litigations aur pending court matters ki comprehensive check.', features: ['Civil Case Search', 'Dispute Records', 'Litigation History', 'Pending Cases'], category: 'Criminal' },
-  { icon: CreditCard, title: 'Credit Check / CIBIL Check', desc: 'Financial background verification including credit score, loan history, defaults, aur liabilities.', features: ['CIBIL Score Check', 'Loan History', 'Default Verification', 'Financial Liabilities'], category: 'Financial' },
-  { icon: Shield, title: 'Criminal Record Check', desc: 'Comprehensive court records search, FIR verification, aur criminal history screening across India.', features: ['Court Record Search', 'FIR Verification', 'Pending Cases Check', 'Warrant Search'], category: 'Criminal' },
-  { icon: Gavel, title: 'Police Clearance Certificate', desc: 'Police department se character certificate aur criminal record clearance ki verification.', features: ['PCC Validation', 'Local Police Records', 'Clearance Status', 'Authenticity Check'], category: 'Criminal' },
-  { icon: Database, title: 'Database & Watchlist Check', desc: 'Global terror watchlists, sanctions lists, PEP databases, aur criminal registries ke against screening.', features: ['Terror Watchlist', 'Sanctions Screening', 'PEP Database', 'Criminal Registry'], category: 'Criminal' },
-  { icon: Globe, title: 'Global Database Check', desc: 'International sanctions, watchlists aur criminal databases ke across candidate screening.', features: ['Sanctions Lists', 'Global Watchlists', 'Anti-Money Laundering', 'International Records'], category: 'Global' },
-  { icon: FlaskConical, title: 'Drug & Alcohol Testing', desc: 'Pre-employment aur periodic drug screening NABL-certified laboratories mein chain-of-custody compliance ke saath.', features: ['5-Panel Drug Test', '10-Panel Drug Test', 'Alcohol Screening', 'Lab Reports'], category: 'Health' },
-  { icon: Stethoscope, title: 'Pre-Employment Medical Test', desc: 'Candidate ki physical fitness aur health screening job requirement ke according.', features: ['General Checkup', 'Blood Tests', 'Visual/Hearing Test', 'Fitness Certificate'], category: 'Health' },
-  { icon: GraduationCap, title: 'Education Verification', desc: 'Universities, colleges aur boards se direct verification — degrees, certificates aur academic credentials confirm karna.', features: ['University Verification', 'Degree Authentication', 'Certificate Check', 'Accreditation Status'], category: 'Employment' },
-  { icon: Users, title: 'Alumni Verification', desc: 'Educational institutions se alumni status aur graduation details confirm karna.', features: ['Alumni Status Check', 'Batch Confirmation', 'Major/Degree Match', 'Network Validation'], category: 'Employment' },
-  { icon: History, title: 'Employment Gap Check', desc: 'Work history mein periods of unemployment ya gaps ki thorough investigation aur justification.', features: ['Timeline Analysis', 'Gap Identification', 'Reason Verification', 'Supporting Documents'], category: 'Employment' },
-  { icon: Briefcase, title: 'Employment History Verification', desc: 'Past employment ki thorough confirmation — designation, tenure, salary, reason for leaving aur rehire eligibility.', features: ['Tenure Confirmation', 'Designation Check', 'Performance Review', 'Exit Formalities'], category: 'Employment' },
-  { icon: FileText, title: 'Form 26AS / ITR Verification', desc: 'Income tax return filing aur Form 26AS ke through financial compliance aur income verification.', features: ['ITR Filing Check', 'Form 26AS Verification', 'Income Confirmation', 'Tax Compliance'], category: 'Financial' },
-  { icon: UserCog, title: 'Directorship Check', desc: 'MCA records ke through company directorships aur business involvements ki verification.', features: ['Current Directorships', 'Past Appointments', 'Company Status', 'MCA Database'], category: 'Financial' },
-  { icon: FileText, title: 'DIN Verification', desc: 'Director Identification Number (DIN) ki authenticity aur associated details check karna.', features: ['DIN Authentication', 'MCA Records Match', 'Director Details', 'Active/Inactive Status'], category: 'Financial' },
-  { icon: ShieldAlert, title: 'Economic Default Check', desc: 'Willful defaulters, loan defaults aur major financial liabilities ki comprehensive screening.', features: ['Defaulter List Search', 'Loan Default Check', 'Financial Disputes', 'RBI Watchlist'], category: 'Financial' },
-  { icon: Globe, title: 'Global / International Screening', desc: 'Overseas background checks for candidates with international education or work experience in 150+ countries.', features: ['150+ Countries', 'International Courts', 'Global Education', 'Work History Abroad'], category: 'Global' },
-  { icon: Fingerprint, title: 'Identity Verification', desc: 'Government-issued IDs ki authentication — Aadhaar, PAN, Passport, Voter ID aur Driving License.', features: ['Aadhaar Verification', 'PAN Check', 'Passport Validation', 'DL Verification'], category: 'Identity' },
-  { icon: Search, title: 'Media & Internet Check', desc: 'News articles, online reputation aur internet presence screening to identify red flags.', features: ['News Article Search', 'Online Reputation', 'Red Flag Detection', 'Digital Footprint'], category: 'Digital' },
-  { icon: Award, title: 'Professional License Verification', desc: 'CA, Doctor, Lawyer, Engineer jaise professional certifications aur licenses ki issuing authority se validation.', features: ['License Validation', 'Certification Check', 'Membership Status', 'Expiry Verification'], category: 'Employment' },
-  { icon: Users, title: 'Reference Check', desc: 'Structured professional reference interviews with former supervisors, colleagues, aur reporting managers.', features: ['Professional References', 'Peer Feedback', 'Manager Review', 'Character Assessment'], category: 'Employment' },
-  { icon: UserCheck, title: 'Sex Offender Check', desc: 'Registered sex offender database aur POCSO related records ki comprehensive check.', features: ['Sex Offender Registry', 'POCSO Check', 'National Database', 'Court Records'], category: 'Criminal' },
-  { icon: Monitor, title: 'Social Media Check', desc: 'Facebook, LinkedIn, Twitter aur other platforms pe online reputation screening aur content analysis.', features: ['Profile Analysis', 'Content Screening', 'Red Flag Detection', 'Professional Conduct'], category: 'Digital' },
-  { icon: IndianRupee, title: 'UAN / PF Verification', desc: 'Employee PF account aur UAN number ki EPFO database se authentic verification.', features: ['UAN Verification', 'PF Account Check', 'EPFO Database', 'Employer History'], category: 'Employment' },
-  { icon: Building2, title: 'Vendor / Supplier Verification', desc: 'Business partners, vendors aur suppliers ki comprehensive background check aur due diligence.', features: ['Business Registration', 'GST Verification', 'Director Background', 'Financial Health'], category: 'Financial' },
-];
 
 const categories = ['All', 'Identity', 'Criminal', 'Employment', 'Financial', 'Digital', 'Health', 'Global'];
 
@@ -66,15 +31,17 @@ function HeroSection() {
 }
 
 /* ───────── Service Card ───────── */
-function ServiceCard({ service, index, onClick }: { service: typeof services[0]; index: number; onClick: () => void }) {
+function ServiceCard({ service, index }: { service: typeof services[0]; index: number }) {
   const { ref, isRevealed } = useScrollReveal();
+  const navigate = useNavigate();
+
   return (
     <div
       ref={ref}
-      onClick={onClick}
+      onClick={() => navigate(`/services/${service.id}`)}
       className={`group bg-white rounded-2xl p-6 border border-gray-100 hover:border-brand-red cursor-pointer scroll-reveal ${isRevealed ? 'revealed' : ''}`}
       style={{
-        transitionDelay: `${index * 60}ms`,
+        transitionDelay: `${(index % 4) * 60}ms`,
         transition: 'transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease',
       }}
       onMouseEnter={e => {
@@ -107,151 +74,6 @@ function ServiceCard({ service, index, onClick }: { service: typeof services[0];
   );
 }
 
-/* ───────── Modal — React Portal se directly body mein render ───────── */
-function ServiceModal({ service, onClose }: { service: typeof services[0]; onClose: () => void }) {
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
-    window.addEventListener('keydown', onKey);
-    document.body.style.overflow = 'hidden';
-    return () => {
-      window.removeEventListener('keydown', onKey);
-      document.body.style.overflow = '';
-    };
-  }, [onClose]);
-
-  const modalContent = (
-    <>
-      <style>{`
-        @keyframes svcModalPop {
-          0%   { opacity: 0; transform: scale(0.92); }
-          100% { opacity: 1; transform: scale(1); }
-        }
-      `}</style>
-
-      {/* Full screen overlay — directly on body */}
-      <div
-        style={{
-          position: 'fixed',
-          inset: 0,
-          zIndex: 99999,
-          background: 'rgba(0,0,0,0.72)',
-          backdropFilter: 'blur(6px)',
-          WebkitBackdropFilter: 'blur(6px)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '16px',
-        }}
-        onClick={onClose}
-      >
-        {/* Modal box — stopPropagation so clicks inside don't close */}
-        <div
-          onClick={e => e.stopPropagation()}
-          style={{
-            background: '#fff',
-            borderRadius: '20px',
-            width: '100%',
-            maxWidth: '520px',
-            maxHeight: '88vh',
-            overflowY: 'auto',
-            boxShadow: '0 40px 100px rgba(0,0,0,0.45)',
-            animation: 'svcModalPop 0.18s cubic-bezier(0.34,1.4,0.64,1) both',
-            position: 'relative',
-          }}
-        >
-          {/* Header */}
-          <div style={{ padding: '28px 28px 0' }}>
-            <button
-              onClick={onClose}
-              style={{
-                position: 'absolute', top: '14px', right: '14px',
-                width: '32px', height: '32px', borderRadius: '50%',
-                background: '#f3f4f6', border: 'none', cursor: 'pointer',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}
-            >
-              <X size={16} color="#6b7280" />
-            </button>
-
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px' }}>
-              <div style={{
-                width: '60px', height: '60px', borderRadius: '16px',
-                background: '#e53935', display: 'flex', alignItems: 'center',
-                justifyContent: 'center', flexShrink: 0,
-                boxShadow: '0 8px 24px rgba(229,57,53,0.3)',
-              }}>
-                <service.icon size={30} color="white" />
-              </div>
-              <div>
-                <span style={{
-                  display: 'inline-block', fontSize: '11px', fontWeight: 600,
-                  padding: '3px 10px', background: '#fff1f0', color: '#e53935',
-                  borderRadius: '999px', marginBottom: '6px',
-                }}>
-                  {service.category}
-                </span>
-                <h3 style={{ fontSize: '19px', fontWeight: 700, color: '#111827', margin: 0 }}>
-                  {service.title}
-                </h3>
-              </div>
-            </div>
-
-            <p style={{ color: '#6b7280', fontSize: '14px', lineHeight: 1.7, marginBottom: '20px' }}>
-              {service.desc}
-            </p>
-          </div>
-
-          {/* Body */}
-          <div style={{ padding: '0 28px 28px' }}>
-            <h4 style={{
-              fontSize: '11px', fontWeight: 700, color: '#111827',
-              letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '12px',
-            }}>
-              What's Included
-            </h4>
-
-            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px' }}>
-              {service.features.map((feature, i) => (
-                <li key={i} style={{
-                  display: 'flex', alignItems: 'center', gap: '12px',
-                  padding: '10px 0',
-                  borderBottom: i < service.features.length - 1 ? '1px solid #f3f4f6' : 'none',
-                }}>
-                  <div style={{
-                    width: '22px', height: '22px', borderRadius: '50%',
-                    background: '#fff1f0', display: 'flex', alignItems: 'center',
-                    justifyContent: 'center', flexShrink: 0,
-                  }}>
-                    <CheckCircle size={13} color="#e53935" />
-                  </div>
-                  <span style={{ color: '#374151', fontSize: '14px' }}>{feature}</span>
-                </li>
-              ))}
-            </ul>
-
-            <Link
-              to="/contact"
-              onClick={onClose}
-              style={{
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                gap: '8px', width: '100%', padding: '15px',
-                background: '#e53935', color: 'white', fontWeight: 700,
-                fontSize: '15px', borderRadius: '12px', textDecoration: 'none',
-                boxShadow: '0 4px 16px rgba(229,57,53,0.35)',
-              }}
-            >
-              Get Started with {service.title} <ArrowRight size={16} />
-            </Link>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-
-  // Portal — renders directly into document.body, bypasses ALL parent transforms
-  return createPortal(modalContent, document.body);
-}
-
 /* ───────── CTA ───────── */
 function CTASection() {
   const { ref, isRevealed } = useScrollReveal();
@@ -277,7 +99,6 @@ function CTASection() {
 /* ───────── Main ───────── */
 export default function Services() {
   const [activeCategory, setActiveCategory] = useState('All');
-  const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
   const filtered = activeCategory === 'All' ? services : services.filter(s => s.category === activeCategory);
 
   return (
@@ -318,17 +139,16 @@ export default function Services() {
                 Showing <span className="font-semibold text-brand-black">{filtered.length}</span> services
                 {activeCategory !== 'All' && <> in <span className="text-brand-red font-semibold">{activeCategory}</span></>}
               </p>
-              <p className="text-xs text-gray-400 mt-1">Click any card for details</p>
+              <p className="text-xs text-gray-400 mt-1">Click any card for full details</p>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {filtered.map((service, i) => (
               <ServiceCard
-                key={service.title}
+                key={service.id}
                 service={service}
                 index={i}
-                onClick={() => setSelectedService(service)}
               />
             ))}
           </div>
@@ -336,13 +156,6 @@ export default function Services() {
       </section>
 
       <CTASection />
-
-      {selectedService && (
-        <ServiceModal
-          service={selectedService}
-          onClose={() => setSelectedService(null)}
-        />
-      )}
     </>
   );
-}
+}
