@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { complianceAreas } from '@/data/compliance';
-import ContactForm from '@/components/ContactForm';
 import ContactModal from '@/components/ContactModal';
 import {
   Shield, ChevronDown, ArrowRight
@@ -198,7 +197,7 @@ export default function Compliance() {
 
       <FAQSection />
       <CTASection />
-      <ContactForm />
+
     </>
   );
 }

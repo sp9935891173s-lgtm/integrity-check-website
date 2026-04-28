@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { industries } from '@/data/industries';
-import ContactForm from '@/components/ContactForm';
 import ContactModal from '@/components/ContactModal';
 import {
   ArrowRight
@@ -156,7 +155,7 @@ export default function Industries() {
       </section>
 
       <CTASection />
-      <ContactForm />
+
     </>
   );
 }

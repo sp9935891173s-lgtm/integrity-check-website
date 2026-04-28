@@ -1,7 +1,6 @@
 import { useParams, Link } from 'react-router';
 import { complianceAreas } from '@/data/compliance';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-import ContactForm from '@/components/ContactForm';
 import ContactModal from '@/components/ContactModal';
 import { 
   ArrowLeft, CheckCircle, Shield, 
@@ -190,7 +189,7 @@ export default function ComplianceDetail() {
       </section>
 
       {/* Direct Message Section */}
-      <ContactForm />
+
     </div>
   );
 }

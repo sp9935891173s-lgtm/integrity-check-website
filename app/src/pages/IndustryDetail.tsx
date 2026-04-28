@@ -1,7 +1,6 @@
 import { useParams, Link } from 'react-router';
 import { industries } from '@/data/industries';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-import ContactForm from '@/components/ContactForm';
 import ContactModal from '@/components/ContactModal';
 import { 
   ArrowLeft, CheckCircle, Clock, ShieldCheck, 
@@ -224,7 +223,7 @@ export default function IndustryDetail() {
       </section>
 
       {/* Direct Message Section */}
-      <ContactForm />
+
     </div>
   );
 }

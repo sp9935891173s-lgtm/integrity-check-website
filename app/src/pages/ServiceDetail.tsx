@@ -1,7 +1,6 @@
 import { useParams, Link } from 'react-router';
 import { services } from '@/data/services';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-import ContactForm from '@/components/ContactForm';
 import ContactModal from '@/components/ContactModal';
 import { 
   ArrowLeft, CheckCircle, Clock, FileText, 
@@ -238,7 +237,7 @@ export default function ServiceDetail() {
       </section>
 
       {/* Direct Message Section */}
-      <ContactForm />
+
     </div>
   );
 }
