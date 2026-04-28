@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-import { Send, CheckCircle } from 'lucide-react';
+import { Send, CheckCircle, X } from 'lucide-react';
+import { services } from '@/data/services';
+import { DialogClose } from '@/components/ui/dialog';
 
 export default function ContactForm({ isModal = false }: { isModal?: boolean }) {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -25,7 +27,12 @@ export default function ContactForm({ isModal = false }: { isModal?: boolean }) 
   const { ref, isRevealed } = useScrollReveal();
 
   const formContent = (
-    <div className={`bg-white rounded-xl border border-gray-200 p-8 shadow-card max-w-4xl mx-auto transition-all duration-700 ${isModal ? 'opacity-100 translate-y-0' : (isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8')}`}>
+    <div className={`relative bg-white rounded-xl border border-gray-200 p-8 shadow-card max-w-4xl mx-auto transition-all duration-700 ${isModal ? 'opacity-100 translate-y-0' : (isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8')}`}>
+      {isModal && (
+        <DialogClose className="absolute top-4 right-4 p-2 text-gray-400 hover:text-brand-red transition-colors rounded-full hover:bg-gray-100">
+          <X size={24} />
+        </DialogClose>
+      )}
       <h2 className="text-2xl font-bold text-brand-black mb-6">Send Us a Message</h2>
       {isSubmitted ? (
         <div className="flex flex-col items-center justify-center py-16 text-center">
@@ -61,18 +68,9 @@ export default function ContactForm({ isModal = false }: { isModal?: boolean }) 
             <label className="block text-sm font-medium text-brand-black mb-2">Service Required *</label>
             <select name="service" value={formData.service} onChange={handleChange} required className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red focus:border-transparent transition-all text-sm bg-white">
               <option value="">Select a service</option>
-              <option value="criminal">Criminal Background Check</option>
-              <option value="employment">Employment Verification</option>
-              <option value="education">Education Verification</option>
-              <option value="address">Address Verification</option>
-              <option value="drug">Drug Testing</option>
-              <option value="reference">Reference Check</option>
-              <option value="credit">Credit History Check</option>
-              <option value="identity">Identity Verification</option>
-              <option value="global">Global / International Screening</option>
-              <option value="license">Professional License Verification</option>
-              <option value="social">Social Media Check</option>
-              <option value="database">Database &amp; Watchlist Check</option>
+              {services.map(service => (
+                <option key={service.id} value={service.id}>{service.title}</option>
+              ))}
               <option value="custom">Custom Package</option>
             </select>
           </div>

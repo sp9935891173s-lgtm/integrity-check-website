@@ -4,6 +4,7 @@ import { useScrollReveal } from '@/hooks/useScrollReveal';
 import {
   MapPin, Phone, Mail, Clock, Send, CheckCircle
 } from 'lucide-react';
+import { services } from '@/data/services';
 
 function HeroSection() {
   return (
@@ -87,18 +88,9 @@ function ContactForm(): import("react/jsx-runtime").JSX.Element {
                     <label className="block text-sm font-medium text-brand-black mb-2">Service Required *</label>
                     <select name="service" value={formData.service} onChange={handleChange} required className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red focus:border-transparent transition-all text-sm bg-white">
                       <option value="">Select a service</option>
-                      <option value="criminal">Criminal Background Check</option>
-                      <option value="employment">Employment Verification</option>
-                      <option value="education">Education Verification</option>
-                      <option value="address">Address Verification</option>
-                      <option value="drug">Drug Testing</option>
-                      <option value="reference">Reference Check</option>
-                      <option value="credit">Credit History Check</option>
-                      <option value="identity">Identity Verification</option>
-                      <option value="global">Global / International Screening</option>
-                      <option value="license">Professional License Verification</option>
-                      <option value="social">Social Media Check</option>
-                      <option value="database">Database &amp; Watchlist Check</option>
+                      {services.map(service => (
+                        <option key={service.id} value={service.id}>{service.title}</option>
+                      ))}
                       <option value="custom">Custom Package</option>
                     </select>
                   </div>
