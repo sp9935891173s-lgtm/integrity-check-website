@@ -87,7 +87,7 @@ function CTASection() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <ContactModal>
             <button className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-red text-white font-semibold rounded-xl hover:bg-brand-red-dark transition-all duration-200 hover:shadow-lg">
-              Contact Us <ArrowRight size={18} />
+              Get Started <ArrowRight size={18} />
             </button>
           </ContactModal>
           <Link to="/industries" className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-200">

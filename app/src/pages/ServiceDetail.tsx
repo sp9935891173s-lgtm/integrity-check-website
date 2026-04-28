@@ -172,7 +172,7 @@ export default function ServiceDetail() {
 
               {/* Get Started Card */}
               <div className="bg-brand-red rounded-3xl p-8 text-white shadow-xl shadow-brand-red/20">
-                <h3 className="text-2xl font-bold mb-4">Start Verification</h3>
+                <h3 className="text-2xl font-bold mb-4">Get Started</h3>
                 <p className="text-white/80 mb-8 text-sm leading-relaxed">
                   Ready to verify your candidates with the most reliable background check platform?
                 </p>

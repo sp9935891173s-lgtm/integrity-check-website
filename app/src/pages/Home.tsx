@@ -42,7 +42,7 @@ function HeroSection() {
                 <button className="home-cta-primary">Get Started <ArrowRight size={18} /></button>
               </ContactModal>
               <ContactModal>
-                <button className="home-cta-secondary">Request Free Demo</button>
+                <button className="home-cta-secondary">Get Started</button>
               </ContactModal>
             </div>
             <div className="flex items-center gap-4 mt-8 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
@@ -277,7 +277,7 @@ function CTABanner() {
         <p className={`text-white/80 text-lg mb-8 transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '100ms' }}>Get a free demo and see how we can help you hire with confidence.</p>
         <div className={`flex flex-col sm:flex-row gap-4 justify-center transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '200ms' }}>
           <ContactModal>
-            <button className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-brand-red font-semibold rounded-lg hover:bg-gray-100 transition-all hover:shadow-xl">Get a Free Demo <ArrowRight size={18} /></button>
+            <button className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-brand-red font-semibold rounded-lg hover:bg-gray-100 transition-all hover:shadow-xl">Get Started <ArrowRight size={18} /></button>
           </ContactModal>
           <Link to="/services" className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/40 text-white font-semibold rounded-lg hover:bg-white/10 transition-all">Explore Services</Link>
         </div>

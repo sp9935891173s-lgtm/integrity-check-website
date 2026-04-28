@@ -170,7 +170,7 @@ export default function IndustryDetail() {
 
               {/* Get Started Card */}
               <div className="bg-brand-red rounded-3xl p-8 text-white shadow-xl shadow-brand-red/20">
-                <h3 className="text-2xl font-bold mb-4">Start Screening</h3>
+                <h3 className="text-2xl font-bold mb-4">Get Started</h3>
                 <p className="text-white/80 mb-8 text-sm leading-relaxed">
                   Get a customized background verification package tailored for your industry needs.
                 </p>
@@ -178,7 +178,7 @@ export default function IndustryDetail() {
                   <button 
                     className="w-full flex items-center justify-center gap-2 py-4 bg-white text-brand-red font-bold rounded-xl hover:bg-gray-100 transition-colors shadow-lg"
                   >
-                    Contact Our Experts <ArrowRight size={18} />
+                    Get Started <ArrowRight size={18} />
                   </button>
                 </ContactModal>
               </div>

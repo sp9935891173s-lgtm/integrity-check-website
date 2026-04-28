@@ -108,7 +108,7 @@ function CTASection() {
           <button
             className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-brand-red font-semibold rounded-lg hover:bg-gray-100 transition-all duration-200 hover:shadow-xl"
           >
-            Get Started Today
+            Get Started
             <ArrowRight size={18} />
           </button>
         </ContactModal>

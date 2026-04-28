@@ -132,7 +132,7 @@ function CTASection() {
         <p className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">Partner with us to maintain the highest standards of Indian legal compliance in your hiring process.</p>
         <ContactModal>
           <button className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-red text-white font-semibold rounded-xl hover:bg-brand-red-dark transition-all shadow-lg hover:shadow-xl">
-            Schedule a Consultation <ArrowRight size={18} />
+            Get Started <ArrowRight size={18} />
           </button>
         </ContactModal>
       </div>

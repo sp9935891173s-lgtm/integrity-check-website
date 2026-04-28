@@ -100,7 +100,7 @@ function ContactForm(): import("react/jsx-runtime").JSX.Element {
                   </div>
                   <button type="submit" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-red text-white font-semibold rounded-lg hover:bg-brand-red-dark transition-all duration-200 hover:shadow-lg">
                     <Send size={18} />
-                    Submit Inquiry
+                    Get Started
                   </button>
                 </form>
               )}
