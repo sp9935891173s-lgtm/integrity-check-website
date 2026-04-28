@@ -101,6 +101,3 @@ export default function ContactForm({ isModal = false }: { isModal?: boolean }) 
     </section>
   );
 }
-
-  );
-}
