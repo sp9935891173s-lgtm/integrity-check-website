@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { industries } from '@/data/industries';
+import ContactForm from '@/components/ContactForm';
+import ContactModal from '@/components/ContactModal';
 import {
   ArrowRight
 } from 'lucide-react';
@@ -90,9 +92,11 @@ function CTASection() {
       <div className={`max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
         <h2 className="text-3xl sm:text-4xl font-bold text-brand-black mb-4">Don't See Your Industry?</h2>
         <p className="text-gray-500 text-lg mb-8">We provide customized background screening solutions for all industries. Contact us to discuss your specific requirements.</p>
-        <Link to="/contact" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-red text-white font-semibold rounded-xl hover:bg-brand-red-dark transition-all shadow-lg hover:shadow-xl">
-          Contact Our Team <ArrowRight size={18} />
-        </Link>
+        <ContactModal>
+          <button className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-red text-white font-semibold rounded-xl hover:bg-brand-red-dark transition-all shadow-lg hover:shadow-xl">
+            Contact Our Team <ArrowRight size={18} />
+          </button>
+        </ContactModal>
       </div>
     </section>
   );
@@ -152,6 +156,7 @@ export default function Industries() {
       </section>
 
       <CTASection />
+      <ContactForm />
     </>
   );
 }

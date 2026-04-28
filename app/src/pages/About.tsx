@@ -1,4 +1,4 @@
-import { Link } from 'react-router';
+import ContactModal from '@/components/ContactModal';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import {
   Target, Eye, ArrowRight
@@ -104,13 +104,14 @@ function CTASection() {
         <p className="text-white/80 text-lg mb-8">
           Experience the most reliable background verification services in India.
         </p>
-        <Link
-          to="/contact"
-          className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-brand-red font-semibold rounded-lg hover:bg-gray-100 transition-all duration-200 hover:shadow-xl"
-        >
-          Get Started Today
-          <ArrowRight size={18} />
-        </Link>
+        <ContactModal>
+          <button
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-brand-red font-semibold rounded-lg hover:bg-gray-100 transition-all duration-200 hover:shadow-xl"
+          >
+            Get Started Today
+            <ArrowRight size={18} />
+          </button>
+        </ContactModal>
       </div>
     </section>
   );

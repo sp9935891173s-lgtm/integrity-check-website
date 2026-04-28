@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router';
 import { Menu, X, Phone, Mail, MapPin, Facebook, Instagram, Send } from 'lucide-react';
+import ContactModal from './ContactModal';
 
 const navLinks = [
   { path: '/', label: 'Home' },
@@ -159,15 +160,16 @@ export default function Navbar() {
 
                 {/* CTA Button + Mobile Menu Toggle */}
                 <div className="flex items-center gap-3">
-                  <Link
-                    to="/contact"
-                    className={`hidden sm:inline-flex items-center text-sm font-semibold transition-all duration-500 hover:shadow-lg hover:-translate-y-0.5 ${isScrolled
-                      ? 'px-4 py-1.5 bg-brand-red text-white rounded-full hover:bg-brand-red-dark cta-pop'
-                      : 'px-5 py-2.5 bg-brand-red text-white rounded-lg hover:bg-brand-red-dark'
-                      }`}
-                  >
-                    Get Started
-                  </Link>
+                  <ContactModal>
+                    <button
+                      className={`hidden sm:inline-flex items-center text-sm font-semibold transition-all duration-500 hover:shadow-lg hover:-translate-y-0.5 ${isScrolled
+                        ? 'px-4 py-1.5 bg-brand-red text-white rounded-full hover:bg-brand-red-dark cta-pop'
+                        : 'px-5 py-2.5 bg-brand-red text-white rounded-lg hover:bg-brand-red-dark'
+                        }`}
+                    >
+                      Get Started
+                    </button>
+                  </ContactModal>
                   <button
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     className="lg:hidden p-2 rounded-full text-brand-black hover:bg-gray-100 transition-colors"
@@ -207,12 +209,13 @@ export default function Navbar() {
                 </Link>
               ))}
               <div className="pt-4 mt-3 border-t border-gray-100">
-                <Link
-                  to="/contact"
-                  className="block w-full text-center px-5 py-3 bg-brand-red text-white font-semibold rounded-xl hover:bg-brand-red-dark transition-colors"
-                >
-                  Get Started
-                </Link>
+                <ContactModal>
+                  <button
+                    className="block w-full text-center px-5 py-3 bg-brand-red text-white font-semibold rounded-xl hover:bg-brand-red-dark transition-colors"
+                  >
+                    Get Started
+                  </button>
+                </ContactModal>
               </div>
             </div>
           </div>

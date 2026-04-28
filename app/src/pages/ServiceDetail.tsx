@@ -1,6 +1,8 @@
 import { useParams, Link } from 'react-router';
 import { services } from '@/data/services';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import ContactForm from '@/components/ContactForm';
+import ContactModal from '@/components/ContactModal';
 import { 
   ArrowLeft, CheckCircle, Clock, FileText, 
   ShieldCheck, ArrowRight, MessageSquare 
@@ -175,12 +177,13 @@ export default function ServiceDetail() {
                 <p className="text-white/80 mb-8 text-sm leading-relaxed">
                   Ready to verify your candidates with the most reliable background check platform?
                 </p>
-                <Link 
-                  to="/contact" 
-                  className="w-full flex items-center justify-center gap-2 py-4 bg-white text-brand-red font-bold rounded-xl hover:bg-gray-100 transition-colors shadow-lg"
-                >
-                  Get Started <ArrowRight size={18} />
-                </Link>
+                <ContactModal>
+                  <button 
+                    className="w-full flex items-center justify-center gap-2 py-4 bg-white text-brand-red font-bold rounded-xl hover:bg-gray-100 transition-colors shadow-lg"
+                  >
+                    Get Started <ArrowRight size={18} />
+                  </button>
+                </ContactModal>
               </div>
 
               {/* Need Help? */}
@@ -233,6 +236,9 @@ export default function ServiceDetail() {
           </div>
         </div>
       </section>
+
+      {/* Direct Message Section */}
+      <ContactForm />
     </div>
   );
 }

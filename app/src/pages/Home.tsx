@@ -1,4 +1,5 @@
 import { Link } from 'react-router';
+import ContactModal from '@/components/ContactModal';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import {
   Shield, Zap, Lock, Headphones, Star, ArrowRight, CheckCircle,
@@ -37,8 +38,12 @@ function HeroSection() {
               Helping businesses hire smarter with accurate, fast, and legally compliant background checks.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-              <Link to="/contact" className="home-cta-primary">Get Started <ArrowRight size={18} /></Link>
-              <Link to="/contact" className="home-cta-secondary">Request Free Demo</Link>
+              <ContactModal>
+                <button className="home-cta-primary">Get Started <ArrowRight size={18} /></button>
+              </ContactModal>
+              <ContactModal>
+                <button className="home-cta-secondary">Request Free Demo</button>
+              </ContactModal>
             </div>
             <div className="flex items-center gap-4 mt-8 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
               <div className="flex -space-x-2">
@@ -271,7 +276,9 @@ function CTABanner() {
         <h2 className={`text-3xl sm:text-4xl font-bold text-white mb-6 transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>Start Background Verification Today</h2>
         <p className={`text-white/80 text-lg mb-8 transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '100ms' }}>Get a free demo and see how we can help you hire with confidence.</p>
         <div className={`flex flex-col sm:flex-row gap-4 justify-center transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '200ms' }}>
-          <Link to="/contact" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-brand-red font-semibold rounded-lg hover:bg-gray-100 transition-all hover:shadow-xl">Get a Free Demo <ArrowRight size={18} /></Link>
+          <ContactModal>
+            <button className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-brand-red font-semibold rounded-lg hover:bg-gray-100 transition-all hover:shadow-xl">Get a Free Demo <ArrowRight size={18} /></button>
+          </ContactModal>
           <Link to="/services" className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/40 text-white font-semibold rounded-lg hover:bg-white/10 transition-all">Explore Services</Link>
         </div>
       </div>

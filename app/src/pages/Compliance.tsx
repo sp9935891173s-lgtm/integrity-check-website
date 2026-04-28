@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { complianceAreas } from '@/data/compliance';
+import ContactForm from '@/components/ContactForm';
+import ContactModal from '@/components/ContactModal';
 import {
   Shield, ChevronDown, ArrowRight
 } from 'lucide-react';
@@ -129,9 +131,11 @@ function CTASection() {
         <Shield size={48} className="text-brand-red mx-auto mb-6" />
         <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Ensure Compliance with Every Hire</h2>
         <p className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">Partner with us to maintain the highest standards of Indian legal compliance in your hiring process.</p>
-        <Link to="/contact" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-red text-white font-semibold rounded-xl hover:bg-brand-red-dark transition-all shadow-lg hover:shadow-xl">
-          Schedule a Consultation <ArrowRight size={18} />
-        </Link>
+        <ContactModal>
+          <button className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-red text-white font-semibold rounded-xl hover:bg-brand-red-dark transition-all shadow-lg hover:shadow-xl">
+            Schedule a Consultation <ArrowRight size={18} />
+          </button>
+        </ContactModal>
       </div>
     </section>
   );
@@ -194,6 +198,7 @@ export default function Compliance() {
 
       <FAQSection />
       <CTASection />
+      <ContactForm />
     </>
   );
 }

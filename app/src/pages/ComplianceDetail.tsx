@@ -1,6 +1,8 @@
 import { useParams, Link } from 'react-router';
 import { complianceAreas } from '@/data/compliance';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import ContactForm from '@/components/ContactForm';
+import ContactModal from '@/components/ContactModal';
 import { 
   ArrowLeft, CheckCircle, Shield, 
   ArrowRight, Landmark, Scale, FileText, Lock
@@ -173,18 +175,22 @@ export default function ComplianceDetail() {
                 <p className="text-white/80 mb-8 text-sm leading-relaxed">
                   Ensure your hiring process is fully compliant with the latest Indian and International laws.
                 </p>
-                <Link 
-                  to="/contact" 
-                  className="w-full flex items-center justify-center gap-2 py-4 bg-white text-brand-red font-bold rounded-xl hover:bg-gray-100 transition-colors shadow-lg"
-                >
-                  Consult Our Legal Team <ArrowRight size={18} />
-                </Link>
+                <ContactModal>
+                  <button 
+                    className="w-full flex items-center justify-center gap-2 py-4 bg-white text-brand-red font-bold rounded-xl hover:bg-gray-100 transition-colors shadow-lg"
+                  >
+                    Consult Our Legal Team <ArrowRight size={18} />
+                  </button>
+                </ContactModal>
               </div>
             </div>
 
           </div>
         </div>
       </section>
+
+      {/* Direct Message Section */}
+      <ContactForm />
     </div>
   );
 }
