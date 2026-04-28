@@ -217,7 +217,7 @@ export default function ServiceDetail() {
             {services
               .filter(s => s.id !== service.id && s.category === service.category)
               .slice(0, 3)
-              .map((s, i) => (
+              .map((s) => (
                 <Link 
                   key={s.id} 
                   to={`/services/${s.id}`}

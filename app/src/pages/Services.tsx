@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { services } from '@/data/services';
 import {
-  ArrowRight, CheckCircle
+  ArrowRight
 } from 'lucide-react';
 
 const categories = ['All', 'Identity', 'Criminal', 'Employment', 'Financial', 'Digital', 'Health', 'Global'];
