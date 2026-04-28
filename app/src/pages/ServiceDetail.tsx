@@ -192,8 +192,8 @@ export default function ServiceDetail() {
                 </div>
                 <h4 className="font-bold text-brand-black mb-2">Need Help?</h4>
                 <p className="text-gray-500 text-sm mb-6">Have questions about this service or custom requirements?</p>
-                <a href="tel:+911234567890" className="text-brand-red font-bold text-lg hover:underline">
-                  +91 12345 67890
+                <a href="tel:+919350283562" className="text-brand-red font-bold text-lg hover:underline">
+                  +91-9350283562
                 </a>
               </div>
             </div>

@@ -61,7 +61,7 @@ export default function Navbar() {
               {/* Contact Info */}
               <div className="hidden sm:flex items-center gap-6 text-xs">
                 <a
-                  href="tel:91-9350283562"
+                  href="tel:+919350283562"
                   className="flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors duration-200 group"
                 >
                   <Phone size={13} className="text-brand-red group-hover:scale-110 transition-transform" />
@@ -97,7 +97,7 @@ export default function Navbar() {
 
               {/* Mobile — just phone & email */}
               <div className="sm:hidden flex items-center gap-4 w-full justify-center text-xs">
-                <a href="tel:91-9350283562" className="flex items-center gap-1.5 text-gray-300">
+                <a href="tel:+919350283562" className="flex items-center gap-1.5 text-gray-300">
                   <Phone size={12} className="text-brand-red" />
                   <span>+91-9350283562 </span>
                 </a>

@@ -81,7 +81,7 @@ function ContactForm(): import("react/jsx-runtime").JSX.Element {
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-brand-black mb-2">Phone Number *</label>
-                      <input type="tel" name="phone" value={formData.phone} onChange={handleChange} required className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red focus:border-transparent transition-all text-sm" placeholder="+91-XXXXXXXXXX" />
+                      <input type="tel" name="phone" value={formData.phone} onChange={handleChange} required className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red focus:border-transparent transition-all text-sm" placeholder="+91-9350283562" />
                     </div>
                   </div>
                   <div>
@@ -129,9 +129,9 @@ function ContactForm(): import("react/jsx-runtime").JSX.Element {
               </div>
               <div className="mt-8 pt-6 border-t border-white/10">
                 <p className="text-gray-400 text-sm mb-4">Need urgent assistance?</p>
-                <a href="tel:+91-XXXXXXXXXX" className="inline-flex items-center gap-2 px-6 py-3 bg-brand-red text-white font-semibold rounded-lg hover:bg-brand-red-dark transition-all duration-200 text-sm">
+                <a href="tel:+919350283562" className="inline-flex items-center gap-2 px-6 py-3 bg-brand-red text-white font-semibold rounded-lg hover:bg-brand-red-dark transition-all duration-200 text-sm">
                   <Phone size={16} />
-                  Call Us Now
+                  Call +91-9350283562
                 </a>
               </div>
             </div>
