@@ -41,9 +41,6 @@ function HeroSection() {
               <ContactModal>
                 <button className="home-cta-primary">Get Started <ArrowRight size={18} /></button>
               </ContactModal>
-              <ContactModal>
-                <button className="home-cta-secondary">Get Started</button>
-              </ContactModal>
             </div>
             <div className="flex items-center gap-4 mt-8 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
               <div className="flex -space-x-2">

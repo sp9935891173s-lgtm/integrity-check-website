@@ -50,9 +50,17 @@ export default function Footer() {
 
           {/* Logo + About */}
           <div className="lg:col-span-1 space-y-5">
-            <Link to="/" className="block">
-              <img src="/logo.png" alt="Integrity Check Services" className="h-12 w-auto" />
-            </Link>
+            <div className="space-y-3">
+              <p className="text-white text-[10px] font-bold uppercase tracking-wider opacity-70">Powered by</p>
+              <a href="https://www.complygate.co.uk/" target="_blank" rel="noopener noreferrer" className="block">
+                <img
+                  src="/logo2.png"
+                  alt="ComplyGate"
+                  className="h-14 w-auto rounded-md p-2"
+                  style={{ background: 'rgba(255,255,255,0.95)' }}
+                />
+              </a>
+            </div>
             <p className="text-gray-400 text-sm leading-relaxed">
               India's most trusted background screening and verification services company. Helping businesses hire smarter since 2024.
             </p>
@@ -73,17 +81,7 @@ export default function Footer() {
                 </a>
               ))}
             </div>
-            <div className="pt-2">
-              <p className="text-white text-sm font-bold mb-2 uppercase tracking-wider">Powered by</p>
-              <a href="https://www.complygate.co.uk/" target="_blank" rel="noopener noreferrer">
-                <img
-                  src="/logo2.png"
-                  alt="ComplyGate"
-                  className="h-14 w-auto rounded-md p-2"
-                  style={{ background: 'rgba(255,255,255,0.95)' }}
-                />
-              </a>
-            </div>
+
           </div>
 
           {/* Our Solutions */}

@@ -131,12 +131,15 @@ export default function Navbar() {
               >
                 {/* Logo */}
                 <Link to="/" className="flex items-center gap-0 shrink-0">
-                  <img
-                    src="/logo.png"
-                    alt="Integrity Check Services"
-                    className={`w-auto transition-all duration-500 ${isScrolled ? 'h-9' : 'h-14'
-                      }`}
-                  />
+                  <div className="flex flex-col">
+                    <span className="text-[8px] font-bold uppercase tracking-wider text-brand-red opacity-80 leading-none mb-1">Powered by</span>
+                    <img
+                      src="/logo2.png"
+                      alt="ComplyGate"
+                      className={`w-auto transition-all duration-500 bg-white/10 rounded p-1 ${isScrolled ? 'h-9' : 'h-12'
+                        }`}
+                    />
+                  </div>
                 </Link>
 
                 {/* Desktop Navigation */}
