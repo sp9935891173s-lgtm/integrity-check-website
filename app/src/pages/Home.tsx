@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router';
 import ContactModal from '@/components/ContactModal';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
@@ -6,12 +7,58 @@ import {
   Stethoscope, Laptop, Landmark, Factory, ShoppingCart,
   School, UserSearch, Building2, Home as HomeIcon, Truck, Hotel, Wallet,
   FlaskRound, Scale, Heart, ShieldCheck,
-  FileText, MapPin, Briefcase, GraduationCap, Search
+  FileText, MapPin, Briefcase, GraduationCap, Search, Fingerprint, User, Check, Activity, FileCheck
 } from 'lucide-react';
 
 function HeroSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const requestRef = useRef<number>(0);
+  const targetRotation = useRef({ x: 0, y: 0 });
+  const currentRotation = useRef({ x: 0, y: 0 });
+
+  const animate = () => {
+    // Smooth interpolation (lerp)
+    currentRotation.current.x += (targetRotation.current.x - currentRotation.current.x) * 0.08;
+    currentRotation.current.y += (targetRotation.current.y - currentRotation.current.y) * 0.08;
+
+    if (containerRef.current) {
+      containerRef.current.style.transform = `rotateX(${currentRotation.current.x}deg) rotateY(${currentRotation.current.y}deg)`;
+    }
+    requestRef.current = requestAnimationFrame(animate);
+  };
+
+  useEffect(() => {
+    requestRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(requestRef.current);
+  }, []);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    if (!containerRef.current) return;
+    
+    // Use window dimensions to safely clamp rotation between -1 and 1
+    const normalizedX = (e.clientX / window.innerWidth) * 2 - 1;
+    const normalizedY = (e.clientY / window.innerHeight) * 2 - 1;
+    
+    const maxRotation = 15; // Max tilt set to 15deg for a clean, non-distorted perspective
+    
+    // Y-axis rotation maps to X-mouse (left/right)
+    // X-axis rotation maps to Y-mouse (up/down, inverted)
+    targetRotation.current = { 
+      x: normalizedY * -maxRotation, 
+      y: normalizedX * maxRotation 
+    };
+  };
+
+  const handleMouseLeave = () => {
+    targetRotation.current = { x: 0, y: 0 }; // reset to center
+  };
+
   return (
-    <section className="relative min-h-[92vh] home-hero overflow-hidden flex items-center">
+    <section 
+      className="relative min-h-[92vh] home-hero overflow-hidden flex items-center"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
       <div className="absolute inset-0 home-hero-bg" />
       <div className="absolute inset-0 home-hero-grid" />
       <div className="home-orb home-orb-1" />
@@ -55,51 +102,120 @@ function HeroSection() {
             </div>
           </div>
 
-          {/* ===== Custom 3D Verification Animation ===== */}
+          {/* ===== Custom 3D Verification Animation (Pro Level) ===== */}
           <div
             className="hidden lg:block relative w-full h-[650px] animate-fade-in-up"
             style={{ animationDelay: '0.3s' }}
           >
+            {/* Ambient Background Glow for the 3D area */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-brand-red/10 blur-[80px] rounded-full pointer-events-none" />
+
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full flex items-center justify-center perspective-2000 pointer-events-none">
               
-              {/* The 3D Container */}
-              <div className="relative w-80 h-80 transform-style-3d animate-spin-slow-3d mt-10">
+              {/* The 3D Container - Cursor Follow */}
+              <div 
+                ref={containerRef}
+                className="relative w-[240px] h-[240px] sm:w-[280px] sm:h-[280px] lg:w-[320px] lg:h-[320px] transform-style-3d mt-10"
+              >
                 
-                {/* Core Shield/Globe */}
-                <div className="absolute inset-0 rounded-full border border-brand-red/30 bg-brand-red/5 backdrop-blur-sm flex items-center justify-center shadow-[0_0_60px_rgba(204,0,0,0.25)]">
-                  <Shield className="w-32 h-32 text-brand-red opacity-80" strokeWidth={1.5} />
-                </div>
-
-                {/* Orbiting Rings */}
-                <div className="absolute inset-[-20%] rounded-full border-2 border-dashed border-gray-500/30 animate-spin-slow" style={{ animationDirection: 'reverse' }}></div>
-                <div className="absolute inset-[-40%] rounded-full border border-gray-600/20 animate-spin-slow" style={{ animationDuration: '15s' }}></div>
-
-                {/* Floating ID Card */}
-                <div className="absolute top-[-10%] right-[-15%] w-48 h-32 glass-panel-3d rounded-xl p-4 transform-style-3d rotate-12 animate-float-3d overflow-hidden">
-                  <div className="flex gap-3 items-center mb-3">
-                    <div className="w-8 h-8 rounded-full bg-gray-400/50"></div>
-                    <div className="w-20 h-2 bg-gray-400/50 rounded"></div>
-                  </div>
-                  <div className="w-full h-1.5 bg-gray-400/30 rounded mb-2"></div>
-                  <div className="w-3/4 h-1.5 bg-gray-400/30 rounded mb-2"></div>
-                  <div className="w-1/2 h-1.5 bg-brand-red/50 rounded"></div>
+                {/* Core Shield */}
+                <div 
+                  className="absolute inset-0 rounded-full border border-red-500/30 bg-gradient-to-br from-[#120a20] to-[#0c0c24] backdrop-blur-xl flex items-center justify-center shadow-[0_0_80px_rgba(204,0,0,0.3)] transform-style-3d z-10"
+                  style={{ transform: 'translateZ(30px)' }}
+                >
+                  <div className="absolute inset-2 rounded-full border border-brand-red/20 border-dashed animate-spin-slow" />
+                  <ShieldCheck className="w-24 h-24 sm:w-28 sm:h-28 text-brand-red drop-shadow-[0_0_25px_rgba(204,0,0,0.8)] opacity-90" strokeWidth={1.2} />
                   
-                  {/* Scanning Laser */}
-                  <div className="absolute top-0 left-0 w-full h-[2px] bg-red-500 shadow-[0_0_12px_red] animate-scan-laser"></div>
+                  {/* Dynamic Glare Effect */}
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/5 to-transparent overflow-hidden" />
                 </div>
 
-                {/* Verified Badge */}
-                <div className="absolute bottom-[-15%] left-[-15%] w-32 h-32 glass-panel-3d bg-green-500/10 border-green-500/30 rounded-full flex items-center justify-center transform-style-3d -rotate-12 animate-float-3d-reverse" style={{ animationDelay: '1s' }}>
-                  <CheckCircle className="w-14 h-14 text-green-400 drop-shadow-[0_0_15px_rgba(74,222,128,0.5)]" />
+                {/* Cyber/Tech Orbiting Rings */}
+                <div className="absolute inset-[-25%] rounded-full border-[1px] border-gray-500/20 animate-spin-slow" style={{ animationDirection: 'reverse', animationDuration: '25s', transform: 'translateZ(10px)' }}>
+                  <div className="absolute top-0 left-1/2 w-3 h-3 bg-brand-red rounded-full -translate-x-1/2 -translate-y-1/2 shadow-[0_0_15px_red]" />
+                </div>
+                <div className="absolute inset-[-50%] rounded-full border-[1.5px] border-dashed border-gray-600/20 animate-spin-slow" style={{ animationDuration: '40s', transform: 'translateZ(-20px)' }}>
+                   <div className="absolute bottom-0 left-1/2 w-2 h-2 bg-blue-500 rounded-full -translate-x-1/2 translate-y-1/2 shadow-[0_0_15px_blue]" />
                 </div>
 
-                {/* Connecting Nodes */}
-                <div className="absolute top-[10%] left-[-25%] w-12 h-12 glass-panel-3d rounded-full flex items-center justify-center animate-float-3d" style={{ animationDelay: '2s' }}>
-                  <Lock className="w-5 h-5 text-blue-400" />
+                {/* Floating ID Card - Highly detailed */}
+                <div 
+                  className="absolute top-[-10%] right-[-10%] lg:right-[-15%] transform-style-3d z-20"
+                  style={{ transform: 'translateZ(90px) rotate(12deg)' }}
+                >
+                  <div className="w-48 sm:w-56 h-32 sm:h-36 pro-glass-panel rounded-2xl p-3 sm:p-4 transform-style-3d animate-float-3d overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-red to-transparent opacity-50" />
+                    <div className="flex gap-3 sm:gap-4 items-start mb-3 sm:mb-4">
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gray-500/20 flex items-center justify-center border border-gray-500/30">
+                        <User className="w-5 h-5 sm:w-6 sm:h-6 text-gray-300" />
+                      </div>
+                      <div className="flex-1 mt-1">
+                        <div className="w-20 sm:w-24 h-1.5 sm:h-2 bg-gray-300/60 rounded mb-2" />
+                        <div className="w-12 sm:w-16 h-1 sm:h-1.5 bg-gray-400/40 rounded" />
+                      </div>
+                      <Fingerprint className="w-5 h-5 sm:w-6 sm:h-6 text-brand-red/60" />
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex gap-2">
+                        <div className="w-10 sm:w-12 h-1 sm:h-1.5 bg-gray-400/30 rounded" />
+                        <div className="w-full h-1 sm:h-1.5 bg-gray-400/20 rounded" />
+                      </div>
+                      <div className="flex gap-2">
+                        <div className="w-6 sm:w-8 h-1 sm:h-1.5 bg-gray-400/30 rounded" />
+                        <div className="w-2/3 h-1 sm:h-1.5 bg-gray-400/20 rounded" />
+                      </div>
+                    </div>
+                    
+                    {/* Scanning Laser (Broad cyber scanner) */}
+                    <div className="absolute top-0 left-0 w-full h-[30px] bg-gradient-to-b from-transparent to-brand-red/20 border-b border-brand-red animate-scan-laser shadow-[0_10px_20px_rgba(204,0,0,0.15)]" />
+                  </div>
+                </div>
+
+                {/* Verified Popup Badge - Enterprise style */}
+                <div 
+                  className="absolute bottom-[-5%] lg:bottom-[-10%] left-[-10%] lg:left-[-15%] transform-style-3d z-30" 
+                  style={{ transform: 'translateZ(130px) rotate(-6deg)' }}
+                >
+                  <div className="w-auto px-4 sm:px-5 py-2 sm:py-3 pro-glass-panel bg-green-500/5 border border-green-500/30 rounded-xl flex items-center gap-2 sm:gap-3 animate-float-3d-reverse" style={{ animationDelay: '1s' }}>
+                    <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-green-500/20 flex items-center justify-center">
+                      <Check className="w-4 h-4 sm:w-5 sm:h-5 text-green-400 drop-shadow-[0_0_8px_rgba(74,222,128,0.8)]" />
+                    </div>
+                    <div>
+                      <div className="text-white font-semibold text-xs sm:text-sm tracking-wide">VERIFIED</div>
+                      <div className="text-green-400/80 text-[8px] sm:text-[10px] uppercase font-mono tracking-wider">KYC MATCH 99.9%</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Enterprise Data Nodes */}
+                <div 
+                  className="absolute top-[5%] left-[-15%] lg:left-[-20%] transform-style-3d z-20" 
+                  style={{ transform: 'translateZ(60px) rotate(-10deg)' }}
+                >
+                  <div className="w-auto px-3 sm:px-4 py-1.5 sm:py-2 pro-glass-panel rounded-lg flex items-center gap-2 animate-float-3d" style={{ animationDelay: '2s' }}>
+                    <Lock className="w-3 h-3 sm:w-4 sm:h-4 text-blue-400" />
+                    <span className="text-gray-300 text-[10px] sm:text-xs font-mono">AES-256</span>
+                  </div>
                 </div>
                 
-                <div className="absolute bottom-[20%] right-[-25%] w-14 h-14 glass-panel-3d rounded-full flex items-center justify-center animate-float-3d-reverse" style={{ animationDelay: '0.5s' }}>
-                  <Search className="w-6 h-6 text-purple-400" />
+                <div 
+                  className="absolute bottom-[20%] lg:bottom-[25%] right-[-15%] lg:right-[-20%] transform-style-3d z-20" 
+                  style={{ transform: 'translateZ(75px) rotate(8deg)' }}
+                >
+                  <div className="w-auto px-3 sm:px-4 py-1.5 sm:py-2 pro-glass-panel rounded-lg flex items-center gap-2 animate-float-3d-reverse" style={{ animationDelay: '0.5s' }}>
+                    <Activity className="w-3 h-3 sm:w-4 sm:h-4 text-purple-400" />
+                    <span className="text-gray-300 text-[10px] sm:text-xs font-mono">LIVE SYNC</span>
+                  </div>
+                </div>
+
+                <div 
+                  className="absolute top-[-20%] lg:top-[-30%] left-[5%] lg:left-[10%] transform-style-3d z-20" 
+                  style={{ transform: 'translateZ(40px) rotate(5deg)' }}
+                >
+                  <div className="w-auto px-3 sm:px-4 py-1.5 sm:py-2 pro-glass-panel rounded-lg flex items-center gap-2 animate-float-3d" style={{ animationDelay: '1.5s' }}>
+                    <FileCheck className="w-3 h-3 sm:w-4 sm:h-4 text-brand-red" />
+                    <span className="text-gray-300 text-[10px] sm:text-xs font-mono">CRIMINAL DB</span>
+                  </div>
                 </div>
                 
               </div>
