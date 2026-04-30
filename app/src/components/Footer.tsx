@@ -146,51 +146,7 @@ export default function Footer() {
       </div>
     </div>
 
-      {/* Accreditations Bar */}
-      <div className="bg-white/5 border-t border-white/10 py-12 md:py-16 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-6">
-          <p className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em]">Accreditations & Certifications</p>
-        </div>
-        <div className="relative group">
-          <div className="flex animate-scroll hover:[animation-play-state:paused] gap-12 items-center w-max px-6">
-            {[...Array(2)].map((_, i) => (
-              <div key={i} className="flex gap-12 items-center">
-                {[
-                  { src: '/accreditations/ccs.png', alt: 'CCS' },
-                  { src: '/accreditations/gcloud.png', alt: 'G-Cloud' },
-                  { src: '/accreditations/cyber-essentials.png', alt: 'Cyber Essentials' },
-                  { src: '/accreditations/iso-9001.png', alt: 'ISO 9001' },
-                  { src: '/accreditations/iso-14001.png', alt: 'ISO 14001' },
-                  { src: '/accreditations/iso-27001.png', alt: 'ISO 27001', link: '/certificates/ISO-27001.pdf' },
-                  { src: '/accreditations/nidirect.png', alt: 'nidirect' },
-                  { src: '/accreditations/disclosure-scotland.png', alt: 'Disclosure Scotland' },
-                  { src: '/accreditations/dbs.png', alt: 'DBS' },
-                  { src: '/accreditations/cifas.png', alt: 'Cifas' },
-                  { src: '/accreditations/pbsa.png', alt: 'PBSA' },
-                ].map((logo, index) => {
-                  const img = (
-                    <img 
-                      key={`${i}-${index}`}
-                      src={logo.src} 
-                      alt={logo.alt} 
-                      className="h-12 md:h-16 w-auto object-contain brightness-110 opacity-90 hover:opacity-100 hover:scale-110 transition-all duration-300 mx-4"
-                    />
-                  );
 
-                  if ('link' in logo) {
-                    return (
-                      <a key={`${i}-${index}`} href={logo.link} target="_blank" rel="noopener noreferrer">
-                        {img}
-                      </a>
-                    );
-                  }
-                  return img;
-                })}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
 
       {/* Contact Bar */}
       <div className="border-t border-b border-white/10">

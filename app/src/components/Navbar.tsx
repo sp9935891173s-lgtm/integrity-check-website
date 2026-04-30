@@ -132,7 +132,7 @@ export default function Navbar() {
                 {/* Logo */}
                 <Link to="/" className="flex items-center shrink-0">
                   <img
-                    src="/ics-new-logo.jpg"
+                    src="/logo3.png"
                     alt="Integrity Check Services Pvt. Ltd."
                     className={`w-auto object-contain transition-all duration-500 ${
                       isScrolled ? 'h-9' : 'h-14'
