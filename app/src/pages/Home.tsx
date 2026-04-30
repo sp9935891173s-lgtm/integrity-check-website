@@ -6,7 +6,7 @@ import {
   Stethoscope, Laptop, Landmark, Factory, ShoppingCart,
   School, UserSearch, Building2, Home as HomeIcon, Truck, Hotel, Wallet,
   FlaskRound, Scale, Heart, ShieldCheck,
-  FileText, MapPin, Briefcase, GraduationCap
+  FileText, MapPin, Briefcase, GraduationCap, Search
 } from 'lucide-react';
 
 function HeroSection() {
@@ -55,33 +55,54 @@ function HeroSection() {
             </div>
           </div>
 
-          {/* ===== 3D Spline Robot ===== */}
+          {/* ===== Custom 3D Verification Animation ===== */}
           <div
             className="hidden lg:block relative w-full h-[650px] animate-fade-in-up"
             style={{ animationDelay: '0.3s' }}
           >
-            <div className="absolute top-1/2 left-1/2 w-[160%] h-[160%] -translate-x-1/2 -translate-y-1/2 pointer-events-auto flex justify-center items-center">
-              <iframe
-                src="https://my.spline.design/genkubgreetingrobot-mxQGdsyCKCaVTkcprNOsvIVZ/"
-                frameBorder="0"
-                className="w-full h-full scale-[0.6] origin-center"
-                style={{ background: 'transparent' }}
-                title="Spline 3D Robot"
-              />
-              {/* Watermark hider */}
-              <div
-                style={{
-                  position: 'absolute',
-                  bottom: '18%',
-                  right: '4%',
-                  width: '260px',
-                  height: '55px',
-                  background: '#07071a',
-                  zIndex: 30,
-                  borderRadius: '10px',
-                  pointerEvents: 'none',
-                }}
-              />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full flex items-center justify-center perspective-2000 pointer-events-none">
+              
+              {/* The 3D Container */}
+              <div className="relative w-80 h-80 transform-style-3d animate-spin-slow-3d mt-10">
+                
+                {/* Core Shield/Globe */}
+                <div className="absolute inset-0 rounded-full border border-brand-red/30 bg-brand-red/5 backdrop-blur-sm flex items-center justify-center shadow-[0_0_60px_rgba(204,0,0,0.25)]">
+                  <Shield className="w-32 h-32 text-brand-red opacity-80" strokeWidth={1.5} />
+                </div>
+
+                {/* Orbiting Rings */}
+                <div className="absolute inset-[-20%] rounded-full border-2 border-dashed border-gray-500/30 animate-spin-slow" style={{ animationDirection: 'reverse' }}></div>
+                <div className="absolute inset-[-40%] rounded-full border border-gray-600/20 animate-spin-slow" style={{ animationDuration: '15s' }}></div>
+
+                {/* Floating ID Card */}
+                <div className="absolute top-[-10%] right-[-15%] w-48 h-32 glass-panel-3d rounded-xl p-4 transform-style-3d rotate-12 animate-float-3d overflow-hidden">
+                  <div className="flex gap-3 items-center mb-3">
+                    <div className="w-8 h-8 rounded-full bg-gray-400/50"></div>
+                    <div className="w-20 h-2 bg-gray-400/50 rounded"></div>
+                  </div>
+                  <div className="w-full h-1.5 bg-gray-400/30 rounded mb-2"></div>
+                  <div className="w-3/4 h-1.5 bg-gray-400/30 rounded mb-2"></div>
+                  <div className="w-1/2 h-1.5 bg-brand-red/50 rounded"></div>
+                  
+                  {/* Scanning Laser */}
+                  <div className="absolute top-0 left-0 w-full h-[2px] bg-red-500 shadow-[0_0_12px_red] animate-scan-laser"></div>
+                </div>
+
+                {/* Verified Badge */}
+                <div className="absolute bottom-[-15%] left-[-15%] w-32 h-32 glass-panel-3d bg-green-500/10 border-green-500/30 rounded-full flex items-center justify-center transform-style-3d -rotate-12 animate-float-3d-reverse" style={{ animationDelay: '1s' }}>
+                  <CheckCircle className="w-14 h-14 text-green-400 drop-shadow-[0_0_15px_rgba(74,222,128,0.5)]" />
+                </div>
+
+                {/* Connecting Nodes */}
+                <div className="absolute top-[10%] left-[-25%] w-12 h-12 glass-panel-3d rounded-full flex items-center justify-center animate-float-3d" style={{ animationDelay: '2s' }}>
+                  <Lock className="w-5 h-5 text-blue-400" />
+                </div>
+                
+                <div className="absolute bottom-[20%] right-[-25%] w-14 h-14 glass-panel-3d rounded-full flex items-center justify-center animate-float-3d-reverse" style={{ animationDelay: '0.5s' }}>
+                  <Search className="w-6 h-6 text-purple-400" />
+                </div>
+                
+              </div>
             </div>
 
             {/* Verified badge - top LEFT */}
