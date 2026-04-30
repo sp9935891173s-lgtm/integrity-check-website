@@ -1,12 +1,24 @@
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
+import ccsImg from '@/assets/accreditations/ccs.png';
+import gcloudImg from '@/assets/accreditations/gcloud.png';
+import cyberEssentialsImg from '@/assets/accreditations/cyber-essentials.png';
+import iso9001Img from '@/assets/accreditations/iso-9001.png';
+import iso14001Img from '@/assets/accreditations/iso-14001.png';
+import iso27001Img from '@/assets/accreditations/iso-27001.png';
+import nidirectImg from '@/assets/accreditations/nidirect.png';
+import disclosureScotlandImg from '@/assets/accreditations/disclosure-scotland.png';
+import dbsImg from '@/assets/accreditations/dbs.png';
+import cifasImg from '@/assets/accreditations/cifas.png';
+import pbsaImg from '@/assets/accreditations/pbsa.png';
+
 const accreditations = [
   {
     id: 'ccs',
     name: 'Crown Commercial Service',
     title: 'Supplier',
     desc: 'Government procurement framework supplier.',
-    image: '/accreditations/ccs.png',
+    image: ccsImg,
     color: 'bg-slate-100 text-slate-700',
     borderColor: 'border-slate-200'
   },
@@ -15,7 +27,7 @@ const accreditations = [
     name: 'HM Government G-Cloud',
     title: 'Supplier',
     desc: 'Approved cloud services provider for public sector.',
-    image: '/accreditations/gcloud.png',
+    image: gcloudImg,
     color: 'bg-blue-50 text-blue-700',
     borderColor: 'border-blue-100'
   },
@@ -24,7 +36,7 @@ const accreditations = [
     name: 'Cyber Essentials',
     title: 'Certified',
     desc: 'Verified protection against cyber threats.',
-    image: '/accreditations/cyber-essentials.png',
+    image: cyberEssentialsImg,
     color: 'bg-cyan-50 text-cyan-700',
     borderColor: 'border-cyan-100'
   },
@@ -33,7 +45,7 @@ const accreditations = [
     name: 'ISO 9001:2015',
     title: 'Quality Assured',
     desc: 'International standard for quality management.',
-    image: '/accreditations/iso-9001.png',
+    image: iso9001Img,
     color: 'bg-amber-50 text-amber-700',
     borderColor: 'border-amber-100'
   },
@@ -42,7 +54,7 @@ const accreditations = [
     name: 'ISO 14001:2015',
     title: 'Green Business',
     desc: 'Environmental management system standard.',
-    image: '/accreditations/iso-14001.png',
+    image: iso14001Img,
     color: 'bg-emerald-50 text-emerald-700',
     borderColor: 'border-emerald-100'
   },
@@ -51,7 +63,7 @@ const accreditations = [
     name: 'ISO 27001',
     title: 'Information Security',
     desc: 'Highest standard for data security management.',
-    image: '/accreditations/iso-27001.png',
+    image: iso27001Img,
     color: 'bg-indigo-50 text-indigo-700',
     borderColor: 'border-indigo-100',
     link: '/certificates/ISO-27001.pdf'
@@ -61,7 +73,7 @@ const accreditations = [
     name: 'nidirect',
     title: 'Government Services',
     desc: 'Official government services partner.',
-    image: '/accreditations/nidirect.png',
+    image: nidirectImg,
     color: 'bg-sky-50 text-sky-700',
     borderColor: 'border-sky-100'
   },
@@ -70,7 +82,7 @@ const accreditations = [
     name: 'Disclosure Scotland',
     title: 'Registered Body',
     desc: 'Official provider for Scottish criminal records.',
-    image: '/accreditations/disclosure-scotland.png',
+    image: disclosureScotlandImg,
     color: 'bg-teal-50 text-teal-700',
     borderColor: 'border-teal-100'
   },
@@ -79,7 +91,7 @@ const accreditations = [
     name: 'Disclosure & Barring Service',
     title: 'DBS Registered',
     desc: 'Helping employers make safer recruitment decisions.',
-    image: '/accreditations/dbs.png',
+    image: dbsImg,
     color: 'bg-purple-50 text-purple-700',
     borderColor: 'border-purple-100'
   },
@@ -88,7 +100,7 @@ const accreditations = [
     name: 'Cifas',
     title: 'READY',
     desc: 'UK\'s leading fraud prevention service.',
-    image: '/accreditations/cifas.png',
+    image: cifasImg,
     color: 'bg-rose-50 text-rose-700',
     borderColor: 'border-rose-100'
   },
@@ -97,7 +109,7 @@ const accreditations = [
     name: 'PBSA',
     title: 'Professional Member',
     desc: 'Professional Background Screening Association.',
-    image: '/accreditations/pbsa.png',
+    image: pbsaImg,
     color: 'bg-blue-100 text-blue-900',
     borderColor: 'border-blue-200'
   }
