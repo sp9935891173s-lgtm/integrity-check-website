@@ -166,7 +166,7 @@ export default function Footer() {
             </span>
             <span className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-green-400 inline-block"></span>
-              <span className="text-green-400 font-medium">Open 24/7</span>
+              <span className="text-green-400 font-medium"></span>
             </span>
           </div>
         </div>
