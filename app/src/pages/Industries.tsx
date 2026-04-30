@@ -91,7 +91,7 @@ function CTASection() {
       <div className={`max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center transition-all duration-700 ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
         <h2 className="text-3xl sm:text-4xl font-bold text-brand-black mb-4">Don't See Your Industry?</h2>
         <p className="text-gray-500 text-lg mb-8">We provide customized background screening solutions for all industries. Contact us to discuss your specific requirements.</p>
-        <ContactModal>
+        <ContactModal category="industries">
           <button className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-red text-white font-semibold rounded-xl hover:bg-brand-red-dark transition-all shadow-lg hover:shadow-xl">
             Get Started <ArrowRight size={18} />
           </button>
@@ -114,13 +114,21 @@ export default function Industries() {
       <HeroSection />
 
       {/* Category Filter */}
+      <div id="filter-anchor"></div>
       <div className="sticky top-16 z-30 bg-white border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex gap-2 overflow-x-auto pb-1">
             {categories.map(cat => (
               <button
                 key={cat}
-                onClick={() => setActiveCategory(cat)}
+                onClick={() => {
+                  setActiveCategory(cat);
+                  const anchor = document.getElementById('filter-anchor');
+                  if (anchor) {
+                    const y = anchor.getBoundingClientRect().top + window.scrollY - 64;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                  }
+                }}
                 className={`shrink-0 px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
                   activeCategory === cat ? 'bg-brand-red text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}

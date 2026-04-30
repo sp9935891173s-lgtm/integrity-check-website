@@ -105,13 +105,15 @@ function FAQSection() {
         </div>
         <div className="space-y-3">
           {faqs.map((faq, i) => (
-            <div key={i} className={`bg-white rounded-xl border border-gray-200 overflow-hidden transition-all duration-300 scroll-reveal ${isRevealed ? 'revealed' : ''}`} style={{ transitionDelay: `${i * 80}ms` }}>
-              <button onClick={() => setOpenIndex(openIndex === i ? null : i)} className="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-gray-50 transition-colors">
-                <span className="font-semibold text-brand-black pr-4 text-sm">{faq.q}</span>
-                <ChevronDown size={18} className={`text-brand-red shrink-0 transition-transform duration-300 ${openIndex === i ? 'rotate-180' : ''}`} />
+            <div key={i} className={`bg-white rounded-2xl border transition-all duration-300 scroll-reveal ${isRevealed ? 'revealed' : ''} ${openIndex === i ? 'border-brand-red/30 shadow-lg shadow-brand-red/5' : 'border-gray-200 hover:border-gray-300 hover:shadow-md'}`} style={{ transitionDelay: `${i * 80}ms` }}>
+              <button onClick={() => setOpenIndex(openIndex === i ? null : i)} className={`w-full flex items-center justify-between px-6 py-5 text-left transition-colors ${openIndex === i ? 'bg-red-50/50 rounded-t-2xl' : 'hover:bg-gray-50/50 rounded-2xl'}`}>
+                <span className={`font-semibold pr-4 text-base transition-colors ${openIndex === i ? 'text-brand-red' : 'text-brand-black'}`}>{faq.q}</span>
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ${openIndex === i ? 'bg-brand-red text-white rotate-180 shadow-md' : 'bg-gray-100 text-gray-500'}`}>
+                  <ChevronDown size={18} className="shrink-0" />
+                </div>
               </button>
-              <div className={`overflow-hidden transition-all duration-300 ${openIndex === i ? 'max-h-96' : 'max-h-0'}`}>
-                <div className="px-6 pb-5 text-gray-500 text-sm leading-relaxed border-t border-gray-100 pt-4">{faq.a}</div>
+              <div className={`overflow-hidden transition-all duration-300 ease-in-out ${openIndex === i ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+                <div className="px-6 pb-6 text-gray-600 text-sm leading-relaxed pt-2 bg-red-50/50 rounded-b-2xl">{faq.a}</div>
               </div>
             </div>
           ))}
@@ -130,7 +132,7 @@ function CTASection() {
         <Shield size={48} className="text-brand-red mx-auto mb-6" />
         <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Ensure Compliance with Every Hire</h2>
         <p className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">Partner with us to maintain the highest standards of Indian legal compliance in your hiring process.</p>
-        <ContactModal>
+        <ContactModal category="compliance">
           <button className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-red text-white font-semibold rounded-xl hover:bg-brand-red-dark transition-all shadow-lg hover:shadow-xl">
             Get Started <ArrowRight size={18} />
           </button>
@@ -153,13 +155,21 @@ export default function Compliance() {
       <HeroSection />
 
       {/* Category Filter */}
+      <div id="filter-anchor"></div>
       <div className="sticky top-16 z-30 bg-white border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex gap-2 overflow-x-auto pb-1">
             {complianceCategories.map(cat => (
               <button
                 key={cat}
-                onClick={() => setActiveCategory(cat)}
+                onClick={() => {
+                  setActiveCategory(cat);
+                  const anchor = document.getElementById('filter-anchor');
+                  if (anchor) {
+                    const y = anchor.getBoundingClientRect().top + window.scrollY - 64;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                  }
+                }}
                 className={`shrink-0 px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${activeCategory === cat ? 'bg-brand-red text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   }`}
               >

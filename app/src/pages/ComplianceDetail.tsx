@@ -174,7 +174,7 @@ export default function ComplianceDetail() {
                 <p className="text-white/80 mb-8 text-sm leading-relaxed">
                   Ensure your hiring process is fully compliant with the latest Indian and International laws.
                 </p>
-                <ContactModal>
+                <ContactModal category="compliance">
                   <button 
                     className="w-full flex items-center justify-center gap-2 py-4 bg-white text-brand-red font-bold rounded-xl hover:bg-gray-100 transition-colors shadow-lg"
                   >

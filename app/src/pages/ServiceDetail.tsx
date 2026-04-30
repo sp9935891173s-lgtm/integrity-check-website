@@ -176,7 +176,7 @@ export default function ServiceDetail() {
                 <p className="text-white/80 mb-8 text-sm leading-relaxed">
                   Ready to verify your candidates with the most reliable background check platform?
                 </p>
-                <ContactModal>
+                <ContactModal category="services">
                   <button 
                     className="w-full flex items-center justify-center gap-2 py-4 bg-white text-brand-red font-bold rounded-xl hover:bg-gray-100 transition-colors shadow-lg"
                   >
