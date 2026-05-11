@@ -46,7 +46,7 @@ function StorySection() {
             Founded in 2024, Integrity Check Services Pvt. Ltd. emerged from a simple yet powerful vision: to help Indian businesses make informed hiring decisions based on verified facts rather than trust alone. In an era where resume fraud and credential misrepresentation were becoming increasingly common, we set out to create a verification ecosystem that would bring transparency and accountability to the hiring process.
           </p>
           <p>
-            What started as a small team of dedicated verification specialists in Mumbai has grown into one of India's leading background screening companies. Today, we serve over 5,000 clients across industries, processing thousands of verifications daily with a 99.9% accuracy rate that sets the industry benchmark.
+            What started as a small team of dedicated verification specialists in Noida has grown into one of India's leading background screening companies. Today, we serve over 5,000 clients across industries, processing thousands of verifications daily with a 99.9% accuracy rate that sets the industry benchmark.
           </p>
           <p>
             Our commitment to technology innovation, legal compliance, and customer excellence has earned us the trust of Fortune 500 companies, startups, government organizations, and educational institutions alike. We continue to invest in AI-powered verification tools and expand our field network to deliver faster, more accurate results to our clients.

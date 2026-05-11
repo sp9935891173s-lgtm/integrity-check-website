@@ -103,7 +103,7 @@ export default function Navbar() {
                 </a>
                 <a href="mailto:info@integritycheckservices.com" className="flex items-center gap-1.5 text-gray-300">
                   <Mail size={12} className="text-brand-red" />
-                  <span>info@ics.com</span>
+                  <span>info@integritycheckservices.com</span>
                 </a>
               </div>
             </div>
