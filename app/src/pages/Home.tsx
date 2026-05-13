@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import ContactModal from '@/components/ContactModal';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import {
-  Shield, Zap, Lock, Headphones, ArrowRight, CheckCircle,
+  Shield, Zap, Lock, Headphones, Star, ArrowRight, CheckCircle,
   Stethoscope, Laptop, Landmark, Factory, ShoppingCart,
   School, UserSearch, Building2, Home as HomeIcon, Truck, Hotel, Wallet,
   FlaskRound, Scale, Heart, ShieldCheck,
@@ -89,8 +89,17 @@ function HeroSection() {
                 <button className="home-cta-primary">Get Started <ArrowRight size={18} /></button>
               </ContactModal>
             </div>
-
-
+            <div className="flex items-center gap-4 mt-8 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+              <div className="flex -space-x-2">
+                {['RS', 'PK', 'AK', 'MM'].map((i, idx) => (
+                  <div key={idx} className="w-8 h-8 rounded-full bg-gradient-to-br from-red-500 to-red-700 border-2 border-[#060612] flex items-center justify-center text-[10px] text-white font-bold">{i}</div>
+                ))}
+              </div>
+              <div>
+                <div className="flex gap-0.5">{[...Array(5)].map((_, i) => <Star key={i} size={12} className="text-yellow-400 fill-yellow-400" />)}</div>
+                <span className="text-gray-500 text-xs">4.9/5 from 2000+ reviews</span>
+              </div>
+            </div>
           </div>
 
           {/* ===== Custom 3D Verification Animation (Pro Level) ===== */}
@@ -246,35 +255,17 @@ function HeroSection() {
 }
 
 const popularServices = [
-  { id: 'employment-history-verification', icon: ShieldCheck, title: 'Comprehensive Background Check', desc: 'Full profile verification' },
-  { id: 'address-verification',            icon: MapPin,      title: 'Address Verification',           desc: 'Physical & digital checks' },
-  { id: 'credit-check',                    icon: Landmark,    title: 'CIBIL & Financial Check',        desc: 'Credit history analysis' },
-  { id: 'criminal-record-check',           icon: Scale,       title: 'Criminal Record Check',          desc: 'Court & police records' },
-  { id: 'education-verification',          icon: GraduationCap, title: 'Education Verification',       desc: 'Degree & certificate validation' },
-  { id: 'employment-history-verification', icon: Briefcase,   title: 'Employment History',             desc: 'Past experience & tenure' },
-  { id: 'passport-verification',           icon: FileText,    title: 'Passport Verification',          desc: 'Ministry of External Affairs check' },
-  { id: 'pcc-verification',                icon: Shield,      title: 'Police Clearance Certificate',   desc: 'Official PCC verification' },
-  { id: 'drug-alcohol-testing',            icon: FlaskRound,  title: 'Drug Testing',                   desc: 'Pre-employment screening' },
-  { id: 'identity-verification',           icon: UserSearch,  title: 'Identity Verification',          desc: 'Aadhaar, PAN & Voter ID' },
+  { icon: ShieldCheck, title: 'Comprehensive Background Check', desc: 'Full profile verification' },
+  { icon: MapPin, title: 'Address Verification', desc: 'Physical & digital checks' },
+  { icon: Landmark, title: 'CIBIL & Financial Check', desc: 'Credit history analysis' },
+  { icon: Scale, title: 'Criminal Record Check', desc: 'Court & police records' },
+  { icon: GraduationCap, title: 'Education Verification', desc: 'Degree & certificate validation' },
+  { icon: Briefcase, title: 'Employment History', desc: 'Past experience & tenure' },
+  { icon: FileText, title: 'Passport Verification', desc: 'Ministry of External Affairs check' },
+  { icon: Shield, title: 'Police Clearance Certificate', desc: 'Official PCC verification' },
+  { icon: FlaskRound, title: 'Drug Testing', desc: 'Pre-employment screening' },
+  { icon: UserSearch, title: 'Identity Verification', desc: 'Aadhaar, PAN & Voter ID' }
 ];
-
-function MarqueeCard({ service, keyId }: { service: typeof popularServices[0]; keyId: string }) {
-  return (
-    <Link
-      key={keyId}
-      to={`/services/${service.id}`}
-      className="marquee-card group/card"
-    >
-      <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center shrink-0 border border-red-100 group-hover/card:bg-brand-red transition-colors duration-300">
-        <service.icon size={22} className="text-brand-red group-hover/card:text-white transition-colors duration-300" />
-      </div>
-      <div>
-        <h3 className="font-semibold text-brand-black group-hover/card:text-brand-red transition-colors">{service.title}</h3>
-        <p className="text-xs text-gray-500">{service.desc}</p>
-      </div>
-    </Link>
-  );
-}
 
 function PopularServicesSection() {
   const { ref, isRevealed } = useScrollReveal();
@@ -291,34 +282,33 @@ function PopularServicesSection() {
         </div>
       </div>
 
-      {/* Row 1 — Left to Right */}
-      <div className="relative w-full flex overflow-hidden group py-3 mb-3">
+      <div className="relative w-full flex overflow-hidden group py-4">
         <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
         <div className="marquee-content group-hover:pause">
           {popularServices.map((service, idx) => (
-            <MarqueeCard key={`row1-a-${idx}`} service={service} keyId={`row1-a-${idx}`} />
+            <div key={`marquee-1-${idx}`} className="marquee-card">
+              <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center shrink-0 border border-red-100">
+                <service.icon size={22} className="text-brand-red" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-brand-black">{service.title}</h3>
+                <p className="text-xs text-gray-500">{service.desc}</p>
+              </div>
+            </div>
           ))}
         </div>
         <div className="marquee-content group-hover:pause" aria-hidden="true">
           {popularServices.map((service, idx) => (
-            <MarqueeCard key={`row1-b-${idx}`} service={service} keyId={`row1-b-${idx}`} />
-          ))}
-        </div>
-      </div>
-
-      {/* Row 2 — Right to Left (reverse direction) */}
-      <div className="relative w-full flex overflow-hidden group py-3">
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
-        <div className="marquee-content-reverse group-hover:pause">
-          {[...popularServices].reverse().map((service, idx) => (
-            <MarqueeCard key={`row2-a-${idx}`} service={service} keyId={`row2-a-${idx}`} />
-          ))}
-        </div>
-        <div className="marquee-content-reverse group-hover:pause" aria-hidden="true">
-          {[...popularServices].reverse().map((service, idx) => (
-            <MarqueeCard key={`row2-b-${idx}`} service={service} keyId={`row2-b-${idx}`} />
+            <div key={`marquee-2-${idx}`} className="marquee-card">
+              <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center shrink-0 border border-red-100">
+                <service.icon size={22} className="text-brand-red" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-brand-black">{service.title}</h3>
+                <p className="text-xs text-gray-500">{service.desc}</p>
+              </div>
+            </div>
           ))}
         </div>
       </div>

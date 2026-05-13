@@ -872,24 +872,6 @@
   box-shadow: 0 10px 30px rgba(204, 0, 0, 0.08);
   transform: translateY(-3px);
 }
-
-/* Reverse marquee — Right to Left */
-.marquee-content-reverse {
-  display: flex;
-  min-width: max-content;
-  animation: marquee-reverse 35s linear infinite;
-  padding-right: 1.5rem;
-  gap: 1.5rem;
-}
-
-.group:hover .marquee-content-reverse {
-  animation-play-state: paused;
-}
-
-@keyframes marquee-reverse {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(0); }
-}
 /* Modal fix */
 body.modal-open {
   overflow: hidden;
