@@ -7,7 +7,7 @@ import {
   Stethoscope, Laptop, Landmark, Factory, ShoppingCart,
   School, UserSearch, Building2, Home as HomeIcon, Truck, Hotel, Wallet,
   FlaskRound, Scale, Heart, ShieldCheck,
-  FileText, MapPin, Briefcase, GraduationCap, Search, Fingerprint, User, Check, Activity, FileCheck
+  FileText, MapPin, Briefcase, GraduationCap, Fingerprint, User, Check, Activity, FileCheck
 } from 'lucide-react';
 
 function HeroSection() {
