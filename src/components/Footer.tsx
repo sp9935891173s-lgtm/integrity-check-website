@@ -37,9 +37,6 @@ const industries = [
   { path: '/industries/logistics-transportation', label: 'Logistics' },
 ];
 
-
-
-
 export default function Footer() {
   return (
     <footer style={{ background: '#0d1117' }} className="text-white">
@@ -48,17 +45,51 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
 
-          {/* Logo + About */}
-          <div className="lg:col-span-1 space-y-5">
-            <div className="space-y-3">
-              <p className="text-white text-[10px] font-bold uppercase tracking-wider opacity-70">Powered by</p>
-              <span className="block text-xl font-bold text-white tracking-wide">
-                Integrity Check Services
-              </span>
+          {/* Logo + About — Left Column */}
+          <div className="lg:col-span-1 space-y-4">
+
+            {/* POWERED BY (bada, bold) — ICS logo ke upar */}
+            <div>
+              <p style={{
+                fontSize: '13px',
+                fontWeight: 800,
+                letterSpacing: '0.2em',
+                textTransform: 'uppercase',
+                color: 'rgba(255,255,255,0.65)',
+                margin: '0 0 10px 0',
+              }}>
+                Powered by
+              </p>
+              <img
+                src="/logo3.png"
+                alt="Integrity Check Services"
+                style={{ height: '48px', width: 'auto', objectFit: 'contain' }}
+              />
             </div>
+
+            {/* Description */}
             <p className="text-gray-400 text-sm leading-relaxed">
               India's most trusted background screening and verification services company. Helping businesses hire smarter since 2024.
             </p>
+
+            {/* Complygate logo — white background card */}
+            <div style={{
+              background: '#ffffff',
+              borderRadius: '10px',
+              padding: '10px 16px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 2px 12px rgba(0,0,0,0.3)',
+            }}>
+              <img
+                src="/complygate-logo.png"
+                alt="Complygate"
+                style={{ height: '40px', width: 'auto', objectFit: 'contain' }}
+              />
+            </div>
+
+            {/* Social Icons */}
             <div className="flex gap-3">
               {[
                 { Icon: Facebook, label: 'Facebook' },
@@ -137,11 +168,10 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
+          </div>
+
         </div>
       </div>
-    </div>
-
-
 
       {/* Contact Bar */}
       <div className="border-t border-b border-white/10">
@@ -167,7 +197,6 @@ export default function Footer() {
         </div>
       </div>
 
-      
       {/* Bottom Bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col md:flex-row items-center justify-between gap-3">
         <p className="text-gray-500 text-sm">
