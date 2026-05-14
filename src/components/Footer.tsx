@@ -76,7 +76,8 @@ export default function Footer() {
 
             {/* Description */}
             <p className="text-gray-400 text-sm leading-relaxed">
-              India's most trusted background screening and verification services company. Helping businesses hire smarter since 2024.
+              UK's award-winning HR compliance and background screening platform.
+Trusted by businesses across 200+ countries since 2018.
             </p>
 
 

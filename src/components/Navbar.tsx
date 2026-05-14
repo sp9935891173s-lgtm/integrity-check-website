@@ -9,7 +9,6 @@ const navLinks = [
   { path: '/industries', label: 'Industries' },
   { path: '/compliance', label: 'Compliance' },
   { path: '/packages', label: 'Packages' },
-  { path: '/about', label: 'About Us' },
   { path: '/contact', label: 'Contact' },
 ];
 

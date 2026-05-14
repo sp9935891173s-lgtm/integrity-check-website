@@ -342,7 +342,7 @@ function WhyChooseUsSection() {
             <span className="inline-block px-4 py-1.5 bg-red-100 text-brand-red text-sm font-semibold rounded-full mb-4">Why Choose Us</span>
             <h2 className="text-3xl sm:text-4xl font-bold text-brand-black mb-4">The Integrity Check Advantage</h2>
             <p className="text-gray-500 mb-8 leading-relaxed">Cutting-edge technology with rigorous processes for the most reliable verification services.</p>
-            <Link to="/about" className="inline-flex items-center gap-2 text-brand-red font-semibold hover:gap-3 transition-all">Learn More About Us <ArrowRight size={16} /></Link>
+
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {features.map((f, i) => (
