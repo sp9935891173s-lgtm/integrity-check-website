@@ -60,11 +60,18 @@ export default function Footer() {
               }}>
                 Powered by
               </p>
-              <img
-                src="/logo3.png"
-                alt="Integrity Check Services"
-                style={{ height: '48px', width: 'auto', objectFit: 'contain' }}
-              />
+              <div style={{
+                background: '#ffffff',
+                display: 'inline-block',
+                padding: '10px 16px',
+                borderRadius: '8px',
+              }}>
+                <img
+                  src="/logo2.png"
+                  alt="Powered By Complygate"
+                  style={{ height: '48px', width: 'auto', objectFit: 'contain' }}
+                />
+              </div>
             </div>
 
             {/* Description */}
@@ -72,22 +79,7 @@ export default function Footer() {
               India's most trusted background screening and verification services company. Helping businesses hire smarter since 2024.
             </p>
 
-            {/* Complygate logo — white background card */}
-            <div style={{
-              background: '#ffffff',
-              borderRadius: '10px',
-              padding: '10px 16px',
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: '0 2px 12px rgba(0,0,0,0.3)',
-            }}>
-              <img
-                src="/complygate-logo.png"
-                alt="Complygate"
-                style={{ height: '40px', width: 'auto', objectFit: 'contain' }}
-              />
-            </div>
+
 
             {/* Social Icons */}
             <div className="flex gap-3">

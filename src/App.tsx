@@ -12,6 +12,7 @@ import IndustryDetail from './pages/IndustryDetail'
 import Compliance from './pages/Compliance'
 import ComplianceDetail from './pages/ComplianceDetail'
 import About from './pages/About'
+import Packages from './pages/Packages'
 import Contact from './pages/Contact'
 
 function Layout({ children }: { children: React.ReactNode }) {
@@ -38,6 +39,7 @@ export default function App() {
       <Route path="/industries/:id" element={<Layout><IndustryDetail /></Layout>} />
       <Route path="/compliance" element={<Layout><Compliance /></Layout>} />
       <Route path="/compliance/:id" element={<Layout><ComplianceDetail /></Layout>} />
+      <Route path="/packages" element={<Layout><Packages /></Layout>} />
       <Route path="/about" element={<Layout><About /></Layout>} />
       <Route path="/contact" element={<Layout><Contact /></Layout>} />
     </Routes>

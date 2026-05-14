@@ -8,6 +8,7 @@ const navLinks = [
   { path: '/services', label: 'Services' },
   { path: '/industries', label: 'Industries' },
   { path: '/compliance', label: 'Compliance' },
+  { path: '/packages', label: 'Packages' },
   { path: '/about', label: 'About Us' },
   { path: '/contact', label: 'Contact' },
 ];
@@ -169,7 +170,7 @@ export default function Navbar() {
                         : 'px-5 py-2.5 bg-brand-red text-white rounded-lg hover:bg-brand-red-dark'
                         }`}
                     >
-                      Get Started
+                      Book Demo
                     </button>
                   </ContactModal>
                   <button
@@ -215,7 +216,7 @@ export default function Navbar() {
                   <button
                     className="block w-full text-center px-5 py-3 bg-brand-red text-white font-semibold rounded-xl hover:bg-brand-red-dark transition-colors"
                   >
-                    Get Started
+                    Book Demo
                   </button>
                 </ContactModal>
               </div>
