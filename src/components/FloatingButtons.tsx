@@ -19,13 +19,13 @@ export default function FloatingButtons() {
 
   return (
     <>
-      {/* Get a Quote Button */}
+      {/* Get Started Button */}
       <Link
         to="/contact"
         className="fixed bottom-6 right-6 z-40 flex items-center gap-2 px-5 py-3 bg-brand-red text-white font-semibold text-sm rounded-full shadow-lg hover:bg-brand-red-dark transition-all duration-300 hover:shadow-xl hover:-translate-y-1 animate-pulse-glow"
       >
         <MessageCircle size={18} />
-        <span className="hidden sm:inline">Get a Quote</span>
+        <span className="hidden sm:inline">Get Started</span>
       </Link>
 
       {/* Back to Top Button */}
