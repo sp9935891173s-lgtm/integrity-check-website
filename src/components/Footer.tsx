@@ -60,18 +60,24 @@ export default function Footer() {
               }}>
                 Powered by
               </p>
-              <div style={{
-                background: '#ffffff',
-                display: 'inline-block',
-                padding: '10px 16px',
-                borderRadius: '8px',
-              }}>
+              <a 
+                href="https://www.complygate.co.uk/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{
+                  background: '#ffffff',
+                  display: 'inline-block',
+                  padding: '10px 16px',
+                  borderRadius: '8px',
+                }}
+                className="hover:opacity-90 transition-opacity"
+              >
                 <img
                   src="/logo2.png"
                   alt="Powered By Complygate"
                   style={{ height: '48px', width: 'auto', objectFit: 'contain' }}
                 />
-              </div>
+              </a>
             </div>
 
             {/* Description */}
