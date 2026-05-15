@@ -145,6 +145,7 @@ export default function Packages() {
             {generalPackages.map((pkg, index) => (
               <div
                 key={pkg.name}
+                id={pkg.name.toLowerCase()}
                 className={`scroll-reveal relative flex flex-col w-full md:w-[calc(50%-2rem)] lg:w-[calc(33.333%-2rem)] max-w-[400px] rounded-3xl p-8 transition-all duration-500 hover:-translate-y-3 ${
                   pkg.featured
                     ? 'bg-brand-black text-white shadow-2xl scale-105 lg:-mt-8 z-10 border border-brand-red/30'

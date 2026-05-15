@@ -168,9 +168,9 @@ export default function ComplianceDetail() {
                 </div>
               </div>
 
-              {/* Get Started Card */}
+              {/* Get a Quote Card */}
               <div className="bg-brand-red rounded-3xl p-8 text-white shadow-xl shadow-brand-red/20">
-                <h3 className="text-2xl font-bold mb-4">Get Started</h3>
+                <h3 className="text-2xl font-bold mb-4">Get a Quote</h3>
                 <p className="text-white/80 mb-8 text-sm leading-relaxed">
                   Ensure your hiring process is fully compliant with the latest Indian and International laws.
                 </p>
@@ -178,7 +178,7 @@ export default function ComplianceDetail() {
                   <button 
                     className="w-full flex items-center justify-center gap-2 py-4 bg-white text-brand-red font-bold rounded-xl hover:bg-gray-100 transition-colors shadow-lg"
                   >
-                    Get Started <ArrowRight size={18} />
+                    Get a Quote <ArrowRight size={18} />
                   </button>
                 </ContactModal>
               </div>

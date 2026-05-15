@@ -2,8 +2,8 @@ import { Link } from 'react-router';
 import { MapPin, Phone, Mail, Facebook, Twitter, Linkedin, Youtube } from 'lucide-react';
 
 const ourSolutions = [
-  { path: '/services/criminal-background-check', label: 'Criminal Background Check' },
-  { path: '/services/employment-verification', label: 'Employment Verification' },
+  { path: '/services/criminal-record-check', label: 'Criminal Background Check' },
+  { path: '/services/employment-history-verification', label: 'Employment Verification' },
   { path: '/services/education-verification', label: 'Education Verification' },
   { path: '/services/address-verification', label: 'Address Verification' },
   { path: '/services/identity-verification', label: 'Identity Verification' },
@@ -11,21 +11,21 @@ const ourSolutions = [
 ];
 
 const resources = [
-  { path: '/', label: 'Blog' },
-  { path: '/', label: 'Case Studies' },
-  { path: '/', label: 'Product Updates' },
-  { path: '/', label: 'Help Center' },
+  { path: '/blog', label: 'Blog' },
+  { path: '/case-studies', label: 'Case Studies' },
+  { path: '/product-updates', label: 'Product Updates' },
+  { path: '/help-center', label: 'Help Center' },
   { path: '/compliance', label: 'Compliance' },
   { path: '/contact', label: 'Contact Us' },
 ];
 
 const screeningPackages = [
-  { path: '/services', label: 'Basic Screening' },
-  { path: '/services', label: 'Standard Screening' },
-  { path: '/services', label: 'Advanced Screening' },
-  { path: '/services', label: 'Executive Screening' },
-  { path: '/services', label: 'High Risk Screening' },
-  { path: '/services', label: 'Vendor Screening' },
+  { path: '/packages#basic', label: 'Basic Screening' },
+  { path: '/packages#standard', label: 'Standard Screening' },
+  { path: '/packages#professional', label: 'Advanced Screening' },
+  { path: '/packages#executive', label: 'Executive Screening' },
+  { path: '/packages#comprehensive', label: 'High Risk Screening' },
+  { path: '/services/vendor-verification', label: 'Vendor Screening' },
 ];
 
 const industries = [

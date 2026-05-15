@@ -13,6 +13,7 @@ import Compliance from './pages/Compliance'
 import ComplianceDetail from './pages/ComplianceDetail'
 import Packages from './pages/Packages'
 import Contact from './pages/Contact'
+import ComingSoon from './pages/ComingSoon'
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -40,6 +41,10 @@ export default function App() {
       <Route path="/compliance/:id" element={<Layout><ComplianceDetail /></Layout>} />
       <Route path="/packages" element={<Layout><Packages /></Layout>} />
       <Route path="/contact" element={<Layout><Contact /></Layout>} />
+      <Route path="/blog" element={<Layout><ComingSoon /></Layout>} />
+      <Route path="/case-studies" element={<Layout><ComingSoon /></Layout>} />
+      <Route path="/product-updates" element={<Layout><ComingSoon /></Layout>} />
+      <Route path="/help-center" element={<Layout><ComingSoon /></Layout>} />
     </Routes>
   )
 }

@@ -93,7 +93,7 @@ function CTASection() {
         <p className="text-gray-500 text-lg mb-8">We provide customized background screening solutions for all industries. Contact us to discuss your specific requirements.</p>
         <ContactModal category="industries">
           <button className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-red text-white font-semibold rounded-xl hover:bg-brand-red-dark transition-all shadow-lg hover:shadow-xl">
-            Get Started <ArrowRight size={18} />
+            Get a Quote <ArrowRight size={18} />
           </button>
         </ContactModal>
       </div>
